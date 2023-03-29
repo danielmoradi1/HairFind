@@ -2,6 +2,39 @@ body {
     margin: 0 auto;
 }
 
+header {
+    border: 1px solid red;
+    display: flex;
+    justify-content:space-between
+}
+
+header h1 {
+    border: 1px solid blue;
+    margin: 0;
+    margin: 1rem 0;
+}
+
+#login {
+    margin: 1rem;
+}
+
+#login a {
+    text-decoration: none;
+    color: darkblue;
+    background-color: lightskyblue;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+#login a:hover {
+    background-color: lightcoral;
+}
+
+#searchBox {
+    margin-top: 1rem;
+    text-align: center;
+}
+
 #listFilter ul {
     padding: 0;
     list-style: none;
@@ -13,7 +46,6 @@ body {
     margin: 0.25rem;
     border: 1px solid red;
 }
-
 
 
 #listBox ul {
