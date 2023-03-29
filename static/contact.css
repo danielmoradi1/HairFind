@@ -48,13 +48,14 @@ body {
     display: flex;
     flex: 1;
     max-height: 700px;
-    width: 50px;
+    width: 50%;
     justify-content: center;
     align-items: center;
 }
 
 .left-container img {
     height: 810px;
+    margin-left: 150px;
 }
 
 
@@ -100,18 +101,10 @@ button:hover {
     .left-container {
         display: none;
     }
-
-    .lg-view {
-        display: none;
-    }
 }
 
 @media only screen and (min-width: 600px) {
     .sm-view {
         display: none;
     }
-}
-
-form p {
-    text-align: left;
 }
