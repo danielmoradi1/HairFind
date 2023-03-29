@@ -2,6 +2,7 @@ body {
     margin: 0 auto;
 }
 
+/* Header inkluderar "hairfind" h1 och login */
 header {
     border: 1px solid red;
     display: flex;
@@ -13,6 +14,8 @@ header h1 {
     margin: 0;
     margin: 1rem 0;
 }
+
+
 
 #login {
     margin: 1rem;
@@ -35,6 +38,10 @@ header h1 {
     text-align: center;
 }
 
+#listFilter {
+    white-space: nowrap;
+}
+
 #listFilter ul {
     padding: 0;
     list-style: none;
@@ -52,6 +59,7 @@ header h1 {
     border: 1px solid red;
     padding: 0;
     list-style: none;
+    width: 50vw;
 }
 
 #listBox li {
@@ -62,7 +70,8 @@ header h1 {
 
 #listBox a {
     display: block;
-    background-color: grey;
+    text-decoration: none;
+    background-color: lightgoldenrodyellow;
     padding: 1rem;
     width: 100%;
     height: 100%;
@@ -70,4 +79,9 @@ header h1 {
 
 #listBox a:hover {
     background-color: lightblue;
+}
+
+footer {
+    border-top: 1px solid black;
+    text-align: center;
 }
