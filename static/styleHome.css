@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+body {
+    margin: 0 auto;
+}
+
+/* Header inkluderar "hairfind" h1 och login */
+header {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between
+}
+
+header h1 {
+    border: 1px solid blue;
+    margin: 0;
+    margin: 1rem 0;
+}
+
+
+#login {
+    margin: 1rem;
+}
+
+#login a {
+    text-decoration: none;
+    color: darkblue;
+    background-color: lightskyblue;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+#login a:hover {
+    background-color: lightcoral;
+}
+
+#searchBox {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+#listFilter {
+    white-space: nowrap;
+}
+
+#listFilter ul {
+    padding: 0;
+    list-style: none;
+}
+
+#listFilter li {
+    display: inline-block;
+    padding: 0.5rem;
+    margin: 0.25rem;
+    border: 1px solid red;
+}
+
+
+#listBox ul {
+    border: 1px solid red;
+    padding: 0;
+    list-style: none;
+    width: 50vw;
+}
+
+#listBox li {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+#listBox a {
+    display: block;
+    text-decoration: none;
+    background-color: lightgoldenrodyellow;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+#listBox a:hover {
+    background-color: lightblue;
+}
+
+footer {
+    border-top: 1px solid black;
+    text-align: center;
+}

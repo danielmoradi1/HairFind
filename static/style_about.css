@@ -1,62 +1,65 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-*{
+
+* {
     margin: 0;
     padding: 0;
-    font-family: "Open Sans",sans-serif;
+    font-family: "Open Sans", sans-serif;
     box-sizing: border-box;
 }
 
-body{
+body {
     min-height: 100vh;
     display: block;
     align-items: center;
     justify-content: center;
 
 }
-.header{
+
+.header {
     width: 15%;
     text-align: center;
     margin: 5%;
     margin-left: 45%;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.2), 0 4px 0 0 rgba(0, 0, 0, 0.19);
 }
-    
-    
 
 
-.about-section{
+
+
+.about-section {
     display: flex;
     background-size: 50%;
     background-color: #fdfdfd;
     overflow: hidden;
-    
+
 }
 
-.inner-container{
+.inner-container {
     width: 50%;
     float: right;
     background-color: #fdfdfd;
     padding-left: 20%;
 }
 
-.right-container{
-   margin-left: 8%;
+.right-container {
+    margin-left: 8%;
 }
-.right-container > img{
-    
+
+.right-container>img {
+
     border-radius: 1%;
     box-shadow: 3rem lightslategray;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 
-.inner-container h1{
+.inner-container h1 {
     margin-bottom: 30px;
     font-size: 30px;
     font-weight: 900;
 }
 
-.text{
+.text {
     font-size: 13px;
     color: #545454;
     line-height: 30px;
@@ -64,35 +67,36 @@ body{
     margin-bottom: 40px;
 }
 
-.skills{
+.skills {
     display: flex;
     justify-content: space-between;
     font-weight: 700;
     font-size: 13px;
 }
 
-@media screen and (max-width:1200px){
-    .inner-container{
+@media screen and (max-width:1200px) {
+    .inner-container {
         padding: 80px;
     }
 }
 
-@media screen and (max-width:1000px){
-    .about-section{
+@media screen and (max-width:1000px) {
+    .about-section {
         background-size: 100%;
         padding: 100px 40px;
     }
-    .inner-container{
+
+    .inner-container {
         width: 100%;
     }
 }
 
-@media screen and (max-width:600px){
-    .about-section{
+@media screen and (max-width:600px) {
+    .about-section {
         padding: 0;
     }
-    .inner-container{
+
+    .inner-container {
         padding: 60px;
     }
 }
-
