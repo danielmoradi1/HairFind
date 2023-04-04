@@ -1,64 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styleHome.css" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <title>Hairfind</title>
-</head>
-<body>
-    <header>
-        <div id="logo">
-            <h1>Hairfind</h1>
-        </div>
-        <div id="login">
-            <a class="btn btn-outline-success" href="singIn.html">Logga in</a>
-        </div>
-    </header>
-    
-    <nav>
-        <div id="searchBox">
-            <form action="#">
-                <input type="text" placeholder="Search salon">
-                <input type="text" placeholder="Search location">
-                <button class="btn btn-outline-success">Search</button>
-            </form>
-        </div>
-    </nav>
-    <div id="listFilter">
-        <ul>
-            <li>Klippning</li>
-            <li>Färgning</li>
-            <li>Skägg</li>
-            <li>Långt hår</li>
-            <li>Lockar</li>
-            <li>Afro</li>
-            <li>Shampo</li>
-            <li>Fade</li>
-            <li>tagg1</li>
-            <li>tagg2</li>
-            <li>tagg3</li>
-            <li>tagg4</li>
-            <li>tagg5</li>
-            <li>tagg6</li>
-        </ul>
-        <div id="filterDrop">
 
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/styleHome.css" type="text/css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <title>Hairfind</title>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <header class="home-header">
+                <div class="title">
+                    <a href="Home.html">
+                        <h1>HairFind</h1>
+                    </a>
+                </div>
+
+                <div>
+                    <a class="btn btn-success" href="singIn.html">Logga in</a>
+                </div>
+
+            </header>
+
+            <div class="listFilter">
+                <ul>
+                    <li><button type="button" class="btn btn-secondary">Klippning</button></li>
+                    <li><button type="button" class="btn btn-secondary">Färgning</button></li>
+                    <li><button type="button" class="btn btn-secondary">Skägg</button></li>
+                    <li><button type="button" class="btn btn-secondary">Långt hår</button></li>
+                    <li><button type="button" class="btn btn-secondary">Lockar</button></li>
+                    <li><button type="button" class="btn btn-secondary">Afro</button></li>
+                </ul>
+            </div>
+
+            <div class="cardbox">
+
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://images.pexels.com/photos/3993142/pexels-photo-3993142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary">Välj</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://images.pexels.com/photos/11333874/pexels-photo-11333874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary">Välj</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://images.pexels.com/photos/2040189/pexels-photo-2040189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary">Välj</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary">Välj</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://images.pexels.com/photos/3993442/pexels-photo-3993442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary">Välj</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 600px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://images.pexels.com/photos/3998427/pexels-photo-3998427.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural
+                                    lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-primary">Välj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <footer class="footer-distributed">
+                <div class="footer-right">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+
+                <div class="footer-left">
+                    <ul class="footer-links">
+                        <li><a href="Home.html">Start sidan</a></li>
+                        <li><a href="about.html">Om oss</a></li>
+                        <li><a href="contactUs.html">Kontakta oss</a></li>
+                    </ul>
+                </div>
+                <p>HairFind &copy; 2023</p>
+            </footer>
         </div>
-    </div>
-    <div id="listBox">
-        <ul>
-            <li><a href="#">Frisör 1</a></li>
-            <li><a href="#">Frisör 2</a></li>
-            <li><a href="#">Frisör 3</a></li>
-            <li><a href="#">Frisör 4</a></li>
-        </ul>
-    </div>
-    <footer>
-        <p>Hairfind (C)</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+            crossorigin="anonymous"></script>
+    </body>
+
 </html>
