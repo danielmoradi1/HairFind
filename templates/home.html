@@ -20,13 +20,13 @@
 
             <header class="home-header">
                 <div class="title">
-                    <a href="Home.html">
+                    <a href="{{url_for ('home')}}">
                         <h1>HairFind</h1>
                     </a>
                 </div>
 
                 <div>
-                    <a class="btn btn-success" href="singIn.html">Logga in</a>
+                    <a class="btn btn-success" href="{{url_for('login')}}" >Logga in</a>
                 </div>
 
             </header>
@@ -167,9 +167,9 @@
 
                 <div class="footer-left">
                     <ul class="footer-links">
-                        <li><a href="Home.html">Start sidan</a></li>
-                        <li><a href="about.html">Om oss</a></li>
-                        <li><a href="contactUs.html">Kontakta oss</a></li>
+                        <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                        <li><a href="{{url_for('about')}}">Om oss</a></li>
+                        <li><a href="{{url_for('contactUs')}}">Kontakta oss</a></li>
                     </ul>
                 </div>
                 <p>HairFind &copy; 2023</p>
