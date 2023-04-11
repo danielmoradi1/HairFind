@@ -3,7 +3,8 @@ from flask import Flask, redirect, url_for, render_template, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask import templating
 
-# Database connection function
+# Database connection function 
+
 def database_connection():
     # Information about the MAU database
     hostname = 'pgserver.mau.se'
@@ -46,4 +47,4 @@ def hello():
     return render_template('home.html')
 
 if __name__ == "__main__":
-    webApp.run()
+    webApp.run(debug=True)
