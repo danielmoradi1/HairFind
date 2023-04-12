@@ -1,0 +1,39 @@
+CREATE TABLE IF NOT EXISTS User_table (
+	User_id SERIAL PRIMARY KEY,
+    First_name VARCHAR(50) NOT NULL,
+    Last_name VARCHAR(50) NOT NULL,
+    Telephone VARCHAR(50) NOT NULL,
+    Email_id VARCHAR(100) UNIQUE not null,
+    password VARCHAR(50) NOT NULL
+    );
+					
+					
+CREATE TABLE IF NOT EXISTS Salon_user(
+	Org_number int PRIMARY KEY, 
+	SALON_NAME VARCHAR(50) NOT NULL,
+	Email_id VARCHAR(100) UNIQUE,
+	Telephone VARCHAR(50) NOT NULL,
+	Address VARCHAR(200) NOT NULL,
+	password VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE IF NOT EXISTS SERVICE(
+	Service_id SERIAL PRIMARY KEY,
+    Salon_number int,
+	Service_name VARCHAR(100) NOT NULL, 
+	Pris INT NOT NULL,
+	DESCRIPTION VARCHAR(400) NOT NULL,
+	Image bytea,
+	FOREIGN KEY(Salon_number) REFERENCES Salon_user(Org_number)
+);
+
+CREATE TABLE IF NOT EXISTS BOOKING(
+    User_id serial NOT NULL,
+    Service_id serial NOT NULL,
+    order_date DATE,
+    order_time DATE,
+
+	FOREIGN KEY(User_id) REFERENCES User_table(User_id),
+	FOREIGN KEY(Service_id) REFERENCES SERVICE(Service_id)
+);

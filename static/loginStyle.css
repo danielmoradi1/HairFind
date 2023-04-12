@@ -1,5 +1,6 @@
-body {
+body,html {
     line-height: 1.5;
+    height: 100%;
     /**background-image: url("/static/img/Shiny\ Overlay.svg");**/
     /**background: linear-gradient(123deg, #71b8e7, #9b59b6);**/
 
@@ -13,10 +14,10 @@ body {
 }
 
 .from_container {
-    padding: 36px 48px 48px 48px;
+    padding: 40px;
     background-color: #f2efee82;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-    
+    margin-bottom: 20%;
 }
 
 .from_container .title {
@@ -36,7 +37,7 @@ form {
 
 .user_details {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap:wrap;
     justify-content: space-between;
 }
 
@@ -49,7 +50,10 @@ input {
     padding: 1.2rem;
     border-radius: 9px;
     border: none;
-    
+}
+
+label{
+    padding: 5px;
 }
 
 input:focus {
