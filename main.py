@@ -45,5 +45,22 @@ webApp.config['SQLALCHEMY_DATABASE_URi'] = 'postgresql://po'
 def hello():
     return render_template('home.html')
 
+@webApp.route('/signIn')
+def SignIn():
+    return render_template('signIn.html')
+
+@webApp.route('/contactUs')
+def contactUs():
+    return render_template ('contactUs.html')
+
+@webApp.route('/about')
+def about():
+    return render_template ('about.html')
+
+@webApp.route('/signIn', methods=['GET'])
+def signIn():
+    print('New page accessed.')
+    return render_template('SignIn.html')
+
 if __name__ == "__main__":
-    webApp.run()
+    webApp.run(debug=True)
