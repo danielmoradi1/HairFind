@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/loginStyle.css">
+        <title>Logga in</title>
+    </head>
+
+    <body>
+
+        <header>
+
+        </header>
+
+
+        <div class="container">
+            <h2 class="login-title">Logga in</h2>
+
+            <form class="login-form" action="#">
+                <div>
+                    <label for="email">Email </label>
+                    <input id="email" type="email" placeholder="Fyll i din e-postadress " name="email" required />
+                </div>
+
+                <div>
+                    <label for="password">Password </label>
+                    <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password" required />
+                </div>
+
+                <button class="btn btn--form" type="submit" value="Log in">Logga in</button>
+            </form>
+            <div>
+                <a value="Sing up" href="{{url_for('signUp')}}">Skapa ett konto</a>
+            </div>
+        </div>
+    </body>
+</html>
