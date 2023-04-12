@@ -19,9 +19,9 @@ def login():
     return render_template('login.html')
 
 #Sing Up page
-@webApp.route('/singUp')
-def signUp():
-    return render_template('singUp.html')
+@webApp.route('/login_salon')
+def login_salon():
+    return render_template('login_salon.html')
 
 
 #About page

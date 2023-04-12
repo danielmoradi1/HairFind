@@ -5,36 +5,103 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/main.css">
         <link rel="stylesheet" href="/static/loginStyle.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>Logga in</title>
     </head>
 
     <body>
-
-        <header>
-
+        <header class="home-header">
+            <div class="title">
+                <a href="{{url_for ('home')}}">
+                    <h1>HairFind</h1>
+                </a>
+            </div>
+            <div class="nav_btn">
+                <a class="btn btn-primary" href="{{url_for('login_salon')}}">Logga in som frisör</a>
+            </div>
         </header>
 
+        <main class="container" id="main_container">
+            <div class="from_container">
+                <h2 class="title">Logga in</h2>
+                <h4>Välkommen tillbaka!</h4>
+                <p>För att hålla kontakten med oss vänligen logga in med din personliga information</p>
+                <form class="login-form" action="#">
+                    <div>
+                        <label for="email">Email </label>
+                        <input id="email" type="email" placeholder="Fyll i din e-postadress " name="email" required />
+                    </div>
 
-        <div class="container">
-            <h2 class="login-title">Logga in</h2>
+                    <div>
+                        <label for="password">Password </label>
+                        <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password"
+                            required />
+                    </div>
 
-            <form class="login-form" action="#">
-                <div>
-                    <label for="email">Email </label>
-                    <input id="email" type="email" placeholder="Fyll i din e-postadress " name="email" required />
-                </div>
-
-                <div>
-                    <label for="password">Password </label>
-                    <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password" required />
-                </div>
-
-                <button class="btn btn--form" type="submit" value="Log in">Logga in</button>
-            </form>
-            <div>
-                <a value="Sing up" href="{{url_for('signUp')}}">Skapa ett konto</a>
+                    <button class="btn btn-primary" type="submit" value="Log in">Logga in</button>
+                </form>
             </div>
-        </div>
+
+
+            <div class="from_container">
+                <h2 class="title">Skapa ett konto</h2>
+                <p>Saknar du ett konto?<br>Ange dina personliga uppgifter och börja resan med oss</p>
+                <form action="#">
+                    <div class="user_details">
+                        <div class="input_pox">
+                            <label class="datails">Full Name</label>
+                            <input type="text" placeholder="enter your name" required>
+                        </div>
+
+                        <div class="input_pox">
+                            <label class="datails">Email</label>
+                            <input type="text" placeholder="enter your Email" required>
+                        </div>
+                        <div class="input_pox">
+                            <label class="datails">Phone Number</label>
+                            <input type="text" placeholder="enter your Phone" required>
+                        </div>
+                        <div class="input_pox">
+                            <label class="datails">Password</label>
+                            <input type="text" placeholder="enter your Password" required>
+                        </div>
+                        <div class="input_pox">
+                            <label class="datails">Confirm Password</label>
+                            <input type="text" placeholder="Confirm your Password" required>
+                        </div>
+                        <div>
+                            <button id="singIn_btn" class="btn btn-primary" type="submit" value="Log in">Skapa ett
+                                konto</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </main>
+        <footer class="footer-distributed">
+            <div class="footer-right">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <div class="footer-left">
+                <ul class="footer-links">
+                    <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                    <li><a href="{{url_for('about')}}">Om oss</a></li>
+                    <li><a href="{{url_for('contactUs')}}">Kontakta oss</a></li>
+                </ul>
+            </div>
+            <p>HairFind &copy; 2023</p>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+        crossorigin="anonymous"></script>
     </body>
+
 </html>
