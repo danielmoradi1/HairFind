@@ -1,96 +1,88 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
 body {
-    height: 100%;
+    line-height: 1.5;
+    /**background-image: url("/static/img/Shiny\ Overlay.svg");**/
+    /**background: linear-gradient(123deg, #71b8e7, #9b59b6);**/
+
 }
 
-html {
-    background-image: url("/static/img/Shiny\ Overlay.svg");
-    
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    background-attachment: fixed;
-}
 
-body {
-    font-family: sans-serif;
-    line-height: 1.4;
+#main_container {
     display: flex;
+    justify-content: center;
+    flex-direction: row;
 }
 
-.container {
-    width: 700px;
-    margin: auto;
+.from_container {
     padding: 36px 48px 48px 48px;
     background-color: #f2efee82;
-    border-radius: 11px;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+    
 }
 
-.login-title {
+.from_container .title {
     padding: 15px;
-    font-size: 22px;
-    font-weight: 600;
     text-align: center;
+    font-size: 34px;
+    font-weight: 600px;
 }
 
-.login-form {
+form {
     display: grid;
     grid-template-columns: 1fr;
     row-gap: 20px;
+    padding-left: 0px;
 }
 
-.login-form label {
-    display: block;
-    margin-bottom: 8px;
+
+.user_details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.login-form input {
+.user_details input {
+    padding-inline: 1em;
+}
+
+input {
     width: 100%;
     padding: 1.2rem;
     border-radius: 9px;
     border: none;
+    
 }
 
-.login-form input:focus {
+input:focus {
     outline: none;
-    box-shadow: 0 0 0 4px rgba(237, 236, 236, 0.792);
+    box-shadow: 0 0 0 1px rgba(249, 249, 249, 0.792);
 }
 
-.btn--form {
-    background-color: #408E91;
-    color: #ffffff;
-    align-self: end;
-    outline: none;;
-    padding: 10px;
+
+#singIn_btn {
+    margin-top: 40%;
 }
 
-.btn,
-.btn:link,
-.btn:visited {
-    display: inline-block;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
-    border-radius: 9px;
-    border: none;
-
-    cursor: pointer;
-    font-family: inherit;
-
-    transition: all 0.3s;
+form .user_details .input_pox {
+    margin-bottom: 15px;
+    margin: 20px 0px 12px 0;
+    width: calc(100% / 2 - 20px);
 }
 
-.btn--form:hover {
-    background-color: #2da8a5;
-    color:#fff;
+
+@media (max-width: 1000px) {
+    #main_container {
+        flex-direction: column;
+        row-gap: 0;
+    }
+
+
+    form .user_details .input_pox {
+        margin-bottom: 15px;
+        width: 100%;
+        padding-inline: 0em;
+    }
+
+    .user_details::-webkit-scrollber {
+        width: 0;
+    }
 }
