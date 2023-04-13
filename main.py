@@ -1,6 +1,7 @@
 import db_connection as db_connection
 from flask import Flask, redirect, url_for, render_template, request, flash, session,jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 
 webApp = Flask(__name__)
 

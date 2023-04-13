@@ -20,8 +20,8 @@ header a {
     text-decoration: none;
 }
 
-.nav_btn .btn{
-    background-color: #159895;
+h1 {
+    text-transform: uppercase;
 }
 
 
@@ -98,9 +98,10 @@ header a {
 /* Media Queries */
 
 @media (max-width: 600px) {
-    .footer-distributed{
+    .footer-distributed {
         width: 100%;
     }
+
     .footer-distributed .footer-left,
     .footer-distributed .footer-right {
         text-align: center;
