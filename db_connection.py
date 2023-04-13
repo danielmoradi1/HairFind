@@ -195,4 +195,17 @@ def delete_user(email_id):
                 cur.close()
 #delete_user('johndoe@example.se')
 
+"""
+def load_salon_from_db(org_number):
+    with engine.connect() as conn:
+        result = conn.execute(
+            text("Select * From salon WHERE org_number = : val"),
+            val = org_number
+        ) 
+        rows = result.all()
+        if len(rows) == 0:
+            return None
 
+        else:
+            return dict(rows[0])
+"""
