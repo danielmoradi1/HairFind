@@ -27,7 +27,7 @@ def database_connection():
             # Every transaction needs a commit to the database. If we use withClass no commit needed
             # connection.commit()
         print('connection successfully!')
-        return connection, cursor
+        return connection
     except Exception as error:
         print(error)
 
@@ -37,26 +37,35 @@ def database_connection():
 
 
 def register_salon(salonId, salonName, email, address, password):
-    connection = None
+    conn = None
+    cur = None
     try:
         # Read database configuration
-        connection, cursor = database_connection()
+        #connection, cursor = database_connection()
+        conn = database_connection()
+        cur = conn.cursor()
 
+
+        insert_script = 'INSERT INTO salon_user (org_number,name,email,telephone,address,password) VALUES(%s,%s,%s,%s,%s)'
+        insert_value =  (salonId, salonName, email, address, password)
+        cur.execute(insert_script,insert_value)
         # Execute the INSERT statement
+        """
         cursor.execute("INSERT INTO salon_user\
                     (org_number,name,email,telephone,address,password)" + 
                     "VALUES(%s,%s,%s,%s,%s)",
                     (salonId, salonName, email, address, password))
+                    """
         
             # Commit the changes to the database
-        connection.commit()
-
+        conn.commit()
+    
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while inserting data in the table", error)
     finally:
-        if connection is not None:
-            connection.close()
-        if cursor is not None:
-            cursor.close()
+        if conn is not None:
+            conn.close()
+        if cur is not None:
+            cur.close()
 
 register_salon(1223, 'MOMO', 'momo@malmo.se', 'Malmögatan1', '0000')
