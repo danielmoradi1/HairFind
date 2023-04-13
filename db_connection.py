@@ -22,45 +22,33 @@ def database_connection():
 
             # Open a cursor
             # with connection.cursor() as cursor:
-            with connection.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                pass
+            #cur = connection.cursor()
+            #with connection.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
             # Every transaction needs a commit to the database. If we use withClass no commit needed
             # connection.commit()
-        print('connection successfully!')
+            print('connection successfully!')
         return connection
     except Exception as error:
         print(error)
 
-    finally:
-        if connection is not None:
-            connection.close()
 
-
-
-
-def register_salon(salonId, salonName, email, address, password):
+#Function to register_salon
+def register_salon(org_number, name, email, telephone, address, password):
     conn = None
     cur = None
+    
     try:
         # Read database configuration
         #connection, cursor = database_connection()
         conn = database_connection()
         cur = conn.cursor()
         
-        insert_script = 'INSERT INTO salon_user (org_number,name,email,telephone,address,password) VALUES(%s,%s,%s,%s,%s)'
-        insert_value =  (salonId, salonName, email, address, password)
+        insert_script = "INSERT INTO salon_user (org_number, name, email, telephone, address, password) VALUES(%s, %s, %s, %s, %s, %s)"
+        insert_value =  (org_number, name, email, telephone, address, password)
         cur.execute(insert_script,insert_value)
-        # Execute the INSERT statement
-        """
-        cursor.execute("INSERT INTO salon_user\
-                    (org_number,name,email,telephone,address,password)" + 
-                    "VALUES(%s,%s,%s,%s,%s)",
-                    (salonId, salonName, email, address, password))
-                    """
-        
-            # Commit the changes to the database
-        conn.commit()
 
+        # Commit the changes to the database
+        conn.commit()
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while inserting data in the table", error)
     finally:
@@ -69,4 +57,4 @@ def register_salon(salonId, salonName, email, address, password):
         if cur is not None:
             cur.close()
 
-register_salon(1223, 'MOMO', 'momo@malmo.se', 'Malmögatan1', '0000')
+register_salon(123456, "John Doe", "johndoe@example.com", "123-456-7890", "123 Main St", "password123")
