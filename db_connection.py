@@ -130,7 +130,69 @@ def display_table_data(user_table):
             conn.close()
             print("Database connection is closed!")
 
-display_table_data ("user_table")
+#display_table_data ("user_table")
 
+
+#Function to edit user data
+def edit_user_data(user_id, new_first_name=None, new_last_name=None, new_telephone=None, new_email=None, new_password=None):
+    conn = None
+    cur = None
+    try:
+        conn = database_connection()
+        cur = conn.cursor()
+
+
+        update_script = 'Update user_table SET'
+        updates = []
+        if new_first_name:
+            updates.append(f"first_name = '{new_first_name}'")
+        if new_last_name: 
+            updates.append(f"last_name = '{new_last_name}'")
+        if new_telephone:
+            updates.append(f"telephone = '{new_telephone}'")
+        if new_email:
+            updates.append(f"email_id = '{new_email}'")
+        if new_password:
+            updates.append(f"password = ''{new_password}")
+        if not updates:
+            raise ValueError("At least one field must be updated")
+        update_script += ",".join(updates)
+        update_script += f"WHERE user_id = {user_id}"
+
+        cur.execute(update_script)
+        conn.commit()
+        print("User data updated sucessfully")
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("En error has occrured while updating user data in the user_table", error)
+    finally:
+        if conn is not None:
+            conn.close()
+        if cur is not None:
+            cur.close()
+
+
+#edit_user_data(156, 'Roma', 'Sheeran', '0739548372', 'roma.sheeran@outlook.com', 'Roma123')
+
+
+#Function to delete a user 
+def delete_user(email_id):
+    conn = None
+    cur = None
+    try:
+        conn = database_connection()
+        cur = conn.cursor()
+
+        delete_script = f"DELETE FROM user_table WHERE email_id = {email_id}"
+        cur.execute(delete_script)
+        conn.commit()
+        print("User deleted successfully")
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while deleting user form the table", error)
+    finally: 
+        if conn is not None:
+            conn.close()
+            if cur is not None:
+                cur.close()
+#delete_user('johndoe@example.se')
 
 
