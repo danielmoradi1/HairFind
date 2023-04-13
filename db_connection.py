@@ -36,6 +36,8 @@ def database_connection():
             connection.close()
 
 
+
+
 def register_salon(salonId, salonName, email, address, password):
     conn = None
     cur = None
@@ -44,8 +46,7 @@ def register_salon(salonId, salonName, email, address, password):
         #connection, cursor = database_connection()
         conn = database_connection()
         cur = conn.cursor()
-
-
+        
         insert_script = 'INSERT INTO salon_user (org_number,name,email,telephone,address,password) VALUES(%s,%s,%s,%s,%s)'
         insert_value =  (salonId, salonName, email, address, password)
         cur.execute(insert_script,insert_value)
@@ -59,7 +60,7 @@ def register_salon(salonId, salonName, email, address, password):
         
             # Commit the changes to the database
         conn.commit()
-    
+
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while inserting data in the table", error)
     finally:
