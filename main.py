@@ -2,8 +2,11 @@ import db_connection as db_connection
 from db_connection import create_connection
 from flask import Flask, redirect, url_for, render_template, request, flash, session,jsonify
 from flask_sqlalchemy import SQLAlchemy
+<<<<<<< Updated upstream
 from sqlalchemy import create_engine
 from db_connection import load_salon_from_db
+=======
+>>>>>>> Stashed changes
 
 webApp = Flask(__name__)
 
