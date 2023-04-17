@@ -25,31 +25,37 @@ def login_customer():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
+        print(password)
 
         try:
             cursor.execute(
-                "SELECT * FROM user_table WHERE username = %s AND password = %s", (username, password))
+                "SELECT * FROM user_table WHERE username = %s", (username,))
             user = cursor.fetchone()
 
             if user:
-                password_re = user['password']
-                if check_password_hash(password_re, request.form['password']):
+                hashed_password = user['password']
+                print(hashed_password)
+                if check_password_hash(hashed_password, password):
                     # set session variables
                     session['loggedin'] = True
                     session['fullname'] = user['fullname']
                     session['username'] = user['username']
                     print(f"{username} Login Successfully")
+
                     # redirect to user profile page
-                    return 'Welcome to the user profile'
+                    return redirect(url_for('user_profile'))
+                
+                else:
+                    flash('Felaktigt användarnamn eller lösenord. Försök igen!')
+                    return render_template('login_customer.html')
 
             else:
-                flash('Felaktigt användarnamn eller lösenord. Försök igen!')
+                flash('Please insert your email and password')
                 return render_template('login_customer.html')
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             return "Error occurred while logging in"
-
     else:
         return render_template('login_customer.html')
 
@@ -80,14 +86,17 @@ def signUp():
                 flash('Please fill out the form!')
                 return render_template('login_customer.html')
 
-            else:
+            elif len(password) >= 4:
                 hashed_password = generate_password_hash(
                     password, method='sha256')
                 register_user(full_name, phone_number,
                             username, hashed_password)
                 flash("Successfully created!")
                 return redirect(url_for('login_customer'))
-
+            else:
+                flash('Please insert 4 characters')
+                return render_template('login_customer.html')
+            
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             return "Error occurred while signing up"
