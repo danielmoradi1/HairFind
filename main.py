@@ -133,7 +133,7 @@ def contactUs():
     return render_template('contactUs.html')
 
 
-"""
+
 conn = create_connection()
 #Define  a dynamic route
 @webApp.route('/salon/<int:org_number>')
@@ -142,7 +142,7 @@ def display_salon(org_number):
     if not salon:
         return "Not Found", 404
     return render_template('salon.html', salon= salon)
-"""
+
 # @webApp.route('/singin', methods=['GET' , 'POST'])
 # def register():
 # pass
