@@ -189,16 +189,26 @@ def delete_user(username):
 
 
 
-def load_salon_from_db(org_number):
-    with engine.connect() as conn:
-        result = conn.execute(
-            text("Select * From salon WHERE org_number = : val"),
-            val = org_number
-        ) 
-        rows = result.all()
-        if len(rows) == 0:
-            return None
+def get_salon_data(org_number):
+    conn = None
+    cur = None
 
-        else:
-            return dict(rows[0])
+    try:
+        conn = database_connection()
+        cur = conn.cursor()
+        cur= conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        query = "SELECT * FROM salon_user WHERE id=%s"
+        cur.execute(query, (org_number))
+        row_data = cur.fetchone()
+        conn.close()
+        return row_data
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while loading a salon from the salon_user")
+    finally:
+        if conn is not None:
+            conn.close()
+            if cur is not None:
+                cur.close()
+
+
 

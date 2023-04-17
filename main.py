@@ -3,7 +3,7 @@ import psycopg2
 import secrets
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, redirect, url_for, render_template, request, flash, session, jsonify
-
+from db_connection import get_salon_data
 
 webApp = Flask(__name__)
 
@@ -134,14 +134,13 @@ def contactUs():
 
 
 
-conn = create_connection()
+
 #Define  a dynamic route
 @webApp.route('/salon/<int:org_number>')
 def display_salon(org_number):
-    salon = load_salon_from_db(org_number)
-    if not salon:
-        return "Not Found", 404
-    return render_template('salon.html', salon= salon)
+    row_data = get_salon_data(org_number)
+    return render_template('salon.html', row_data = row_data)
+ 
 
 # @webApp.route('/singin', methods=['GET' , 'POST'])
 # def register():
