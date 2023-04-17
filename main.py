@@ -41,9 +41,9 @@ def login_customer():
                     session['fullname'] = user['fullname']
                     session['username'] = user['username']
                     print(f"{username} Login Successfully")
-
                     # redirect to user profile page
-                    return redirect(url_for('user_profile'))
+                    flash("you are successfuly logged in")  
+                    return redirect(url_for('user_profile', username=username))
                 
                 else:
                     flash('Felaktigt användarnamn eller lösenord. Försök igen!')
@@ -107,8 +107,9 @@ def signUp():
 # Profile page
 @webApp.route('/user_profile')
 def user_profile():
+    username = request.args.get('username')
     if 'loggedin' in session:
-        return render_template('user_profile.html')
+        return render_template('user_profile.html', username=username)
     else:
         return render_template('login_customer.html')
 

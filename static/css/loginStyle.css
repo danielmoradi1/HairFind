@@ -11,13 +11,14 @@ body,html {
     display: flex;
     justify-content: center;
     flex-direction: row;
+    margin-top: 5%;
+    margin-bottom: 5%;
 }
 
 .from_container {
     padding: 40px;
     background-color: #f2efee82;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
-    margin-bottom: 20%;
 }
 
 .from_container .title {
@@ -63,7 +64,7 @@ input:focus {
 
 
 #singIn_btn {
-    margin-top: 40%;
+    margin-top: 8px;
 }
 
 form .user_details .input_pox {

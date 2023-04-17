@@ -5,13 +5,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=, initial-scale=1.0">
-        <link rel="stylesheet" href="/static/main.css">
-        <link rel="stylesheet" href="/static/loginStyle.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static//css/loginStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
             integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!--<script src="{{ url_for('static', filename='js/form.js') }}"></script> -->
         <title>Inloggning för kund</title>
     </head>
 
@@ -26,28 +28,26 @@
                 <a class="btn btn-primary" href="{{url_for('login_salon')}}">Frisör</a>
             </div>
         </header>
-
         <main class="container" id="main_container">
-
             <div class="from_container">
                 <h2 class="title">Logga in</h2>
                 <h4>Välkommen tillbaka!</h4>
                 <p>För att hålla kontakten med oss vänligen logga in med din personliga information</p>
-
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <p>{{ message }}</p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% endfor %}
-                {%endif%}
-                {%endwith%}
-
+                <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+                <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
                 <form class="login-form" id="login_customer" action="{{ url_for('login_customer') }}" method="post">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <p>{{ message }}</p>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
                     <div>
                         <label for="username">Användarnamn </label>
                         <input id="username" type="username" placeholder="Fyll i din e-postadress " name="username" />
@@ -64,23 +64,9 @@
 
             <div class="from_container">
                 <h2 class="title">Skapa ett konto</h2>
-                <p>Saknar du ett konto?<br>Ange dina personliga uppgifter och börja resan med oss</p>
-
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <p>{{ message }}</p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-
-                <form id="signUp" id="signUp" action="{{ url_for('signUp')}}" method="post">
+                <h4>Saknar du ett konto?</h4>
+                <p>Ange dina personliga uppgifter och börja resan med oss</p>
+                <form class="singup" id="signUp" action="{{ url_for('signUp')}}" method="post">
                     <div class="user_details">
                         <div class="input_pox">
                             <label class="datails" for="full_name">Fullständigt namn</label>
@@ -131,6 +117,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
+            
     </body>
 
 </html>
