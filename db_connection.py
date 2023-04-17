@@ -19,33 +19,25 @@ def database_connection():
             host=hostname,
             port=port_id
         ) as connection:
-
-            # Open a cursor
-            # with connection.cursor() as cursor:
-            #cur = connection.cursor()
-            #with connection.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-            # Every transaction needs a commit to the database. If we use withClass no commit needed
-            # connection.commit()
             print('connection successfully!')
         return connection
     except Exception as error:
         print(error)
 
 
-#Function to register_salon
+# Function to register_salon
 def register_salon(org_number, name, email, telephone, address, password):
     conn = None
     cur = None
-    
+
     try:
         # Read database configuration
-        #connection, cursor = database_connection()
         conn = database_connection()
         cur = conn.cursor()
-        
+
         insert_script = "INSERT INTO salon_user (org_number, name, email, telephone, address, password) VALUES(%s, %s, %s, %s, %s, %s)"
-        insert_value =  (org_number, name, email, telephone, address, password)
-        cur.execute(insert_script,insert_value)
+        insert_value = (org_number, name, email, telephone, address, password)
+        cur.execute(insert_script, insert_value)
 
         # Commit the changes to the database
         conn.commit()
@@ -57,44 +49,48 @@ def register_salon(org_number, name, email, telephone, address, password):
         if cur is not None:
             cur.close()
 
-#register_salon(123456, "John Doe", "johndoe@example.com", "123-456-7890", "123 Main St", "password123")
+# register_salon(123456, "John Doe", "johndoe@example.com", "123-456-7890", "123 Main St", "password123")
 
-#Reads data from the table salon_user in database
+# Reads data from the table salon_user in database
+
+
 def display_table_data(salon_user):
-    conn =None
+    conn = None
     cur = None
-    try: 
+    try:
         conn = database_connection()
         cur = conn.cursor()
-        cur.execute ("SELECT * FROM salon_user")
+        cur.execute("SELECT * FROM salon_user")
         rows = cur.fetchall()
         for row in rows:
             print(row)
-    except  (Exception, psycopg2.databaseError) as error:
+    except (Exception, psycopg2.databaseError) as error:
         print("Error while fetching data from the table salon_user", error)
-    finally: 
+    finally:
         if cur is not None:
             cur.close()
         if conn is not None:
             conn.close()
-            print("Database connection is closed!")
 
-display_table_data ("salon_user")
 
-#Registers users into the database table "user_table"
-def register_user(userId, firstName, lastName, telephone, emailId, password):
+#display_table_data("salon_user")
+# Registers users into the database table "user_table"
+
+
+def register_user(fullname, telephone, username, password):
     conn = None
     cur = None
-    
+
     try:
         # Read database configuration
-        #connection, cursor = database_connection()
+        # connection, cursor = database_connection()
         conn = database_connection()
         cur = conn.cursor()
-        
-        insert_script = "INSERT INTO user_table (user_id, First_name, Last_name, telephone, Email_id, password) VALUES(%s, %s, %s, %s, %s, %s)"
-        insert_value =  (userId, firstName, lastName, telephone, emailId, password)
-        cur.execute(insert_script,insert_value)
+
+        insert_script = "INSERT INTO user_table (fullname, telephone, username, password) VALUES(%s, %s, %s, %s)"
+        insert_value = (fullname, telephone, username, password)
+
+        cur.execute(insert_script, insert_value)
 
         # Commit the changes to the database
         conn.commit()
@@ -107,57 +103,53 @@ def register_user(userId, firstName, lastName, telephone, emailId, password):
         if cur is not None:
             cur.close()
 
-#register_user(145, "Alex","Dahlberg", "07294556621", "johndoe@example.se", "Alex223")
+# register_user(145, "Alex","Dahlberg", "07294556621", "johndoe@example.se", "Alex223")
 
 
-#Reads data from the table user_table in database
+# Reads data from the table user_table in database
 def display_table_data(user_table):
-    conn =None
+    conn = None
     cur = None
-    try: 
+    try:
         conn = database_connection()
         cur = conn.cursor()
-        cur.execute ("SELECT * FROM user_table")
+        cur.execute("SELECT * FROM user_table")
         rows = cur.fetchall()
         for row in rows:
             print(row)
-    except  (Exception, psycopg2.databaseError) as error:
+    except (Exception, psycopg2.databaseError) as error:
         print("Error while fetching data from user_table", error)
-    finally: 
+    finally:
         if cur is not None:
             cur.close()
         if conn is not None:
             conn.close()
-            print("Database connection is closed!")
 
-#display_table_data ("user_table")
+# display_table_data ("user_table")
 
 
-#Function to edit user data
-def edit_user_data(user_id, new_first_name=None, new_last_name=None, new_telephone=None, new_email=None, new_password=None):
+# Function to edit user data
+def edit_user_data(username, new_first_name=None, new_last_name=None, new_telephone=None, new_password=None):
     conn = None
     cur = None
     try:
         conn = database_connection()
         cur = conn.cursor()
 
-
         update_script = 'Update user_table SET'
         updates = []
         if new_first_name:
             updates.append(f"first_name = '{new_first_name}'")
-        if new_last_name: 
+        if new_last_name:
             updates.append(f"last_name = '{new_last_name}'")
         if new_telephone:
             updates.append(f"telephone = '{new_telephone}'")
-        if new_email:
-            updates.append(f"email_id = '{new_email}'")
         if new_password:
             updates.append(f"password = ''{new_password}")
         if not updates:
             raise ValueError("At least one field must be updated")
         update_script += ",".join(updates)
-        update_script += f"WHERE user_id = {user_id}"
+        update_script += f"WHERE username = {username}"
 
         cur.execute(update_script)
         conn.commit()
@@ -171,29 +163,30 @@ def edit_user_data(user_id, new_first_name=None, new_last_name=None, new_telepho
             cur.close()
 
 
-#edit_user_data(156, 'Roma', 'Sheeran', '0739548372', 'roma.sheeran@outlook.com', 'Roma123')
+# edit_user_data('Roma', 'Sheeran', '0739548372', 'roma.sheeran@outlook.com', 'Roma123')
 
 
-#Function to delete a user 
-def delete_user(email_id):
+# Function to delete a user
+def delete_user(username):
     conn = None
     cur = None
     try:
         conn = database_connection()
         cur = conn.cursor()
 
-        delete_script = f"DELETE FROM user_table WHERE email_id = {email_id}"
+        delete_script = f"DELETE FROM user_table WHERE username = {username}"
         cur.execute(delete_script)
         conn.commit()
         print("User deleted successfully")
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while deleting user form the table", error)
-    finally: 
+    finally:
         if conn is not None:
             conn.close()
             if cur is not None:
                 cur.close()
-#delete_user('johndoe@example.se')
+# delete_user('johndoe@example.se')
+
 
 """
 def load_salon_from_db(org_number):

@@ -5,10 +5,22 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=sing up, initial-scale=1.0">
-        <title>Skapa ett konto</title>
+        <title>Inloggning för frisör</title>
     </head>
 
     <body>
+
+        <header class="home-header">
+            <div class="title">
+                <a href="{{url_for ('home')}}">
+                    <h1>HairFind</h1>
+                </a>
+            </div>
+            <div class="nav_btn">
+                <a class="btn btn-primary" href="{{url_for('login_customer')}}">Logga in</a>
+            </div>
+        </header>
+
         <div class="container_singUp">
             <div class="title">Registation</div>
             <form action="#">
@@ -44,4 +56,5 @@
             </form>
         </div>
     </body>
+
 </html>

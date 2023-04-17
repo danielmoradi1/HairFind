@@ -1,9 +1,8 @@
 CREATE TABLE IF NOT EXISTS User_table (
-	User_id SERIAL PRIMARY KEY,
     First_name VARCHAR(50) NOT NULL,
     Last_name VARCHAR(50) NOT NULL,
     Telephone VARCHAR(50) NOT NULL,
-    Email_id VARCHAR(100) UNIQUE not null,
+    Email_id VARCHAR(100) PRIMARY KEY,
     password VARCHAR(50) NOT NULL
     );
 					

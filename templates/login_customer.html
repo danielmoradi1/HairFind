@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>Logga in</title>
+        <title>Inloggning för kund</title>
     </head>
 
     <body>
@@ -28,52 +28,80 @@
         </header>
 
         <main class="container" id="main_container">
+
             <div class="from_container">
                 <h2 class="title">Logga in</h2>
                 <h4>Välkommen tillbaka!</h4>
                 <p>För att hålla kontakten med oss vänligen logga in med din personliga information</p>
-                <form class="login-form" action="#">
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <p>{{ message }}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+                {%endif%}
+                {%endwith%}
+
+                <form class="login-form" id="login_customer" action="{{ url_for('login_customer') }}" method="post">
                     <div>
-                        <label for="email">Email </label>
-                        <input id="email" type="email" placeholder="Fyll i din e-postadress " name="email" required />
+                        <label for="username">Användarnamn </label>
+                        <input id="username" type="username" placeholder="Fyll i din e-postadress " name="username" />
                     </div>
 
                     <div>
                         <label for="password">Password </label>
-                        <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password"
-                            required />
+                        <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password" />
                     </div>
 
                     <button class="btn btn-primary" type="submit" value="Log in">Logga in</button>
                 </form>
             </div>
 
-
             <div class="from_container">
                 <h2 class="title">Skapa ett konto</h2>
                 <p>Saknar du ett konto?<br>Ange dina personliga uppgifter och börja resan med oss</p>
-                <form action="#">
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <p>{{ message }}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <form id="signUp" id="signUp" action="{{ url_for('signUp')}}" method="post">
                     <div class="user_details">
                         <div class="input_pox">
-                            <label class="datails">Fullständigt namn</label>
-                            <input type="text" placeholder="Fyll i ditt namn" required>
+                            <label class="datails" for="full_name">Fullständigt namn</label>
+                            <input type="text" id="full_name" name="full_name" placeholder="Fyll i ditt namn" required>
+                        </div>
+                        <div class="input_pox">
+                            <label class="datails" for="phone_number">Telefonnummer</label>
+                            <input type="text" id="phone_number" name="phone_number"
+                                placeholder="Fyll i din telefonnummer" required>
                         </div>
 
                         <div class="input_pox">
-                            <label class="datails">e-post</label>
-                            <input type="text" placeholder="Fyll i din e-postadress" required>
+                            <label class="datails" for="email">e-post</label>
+                            <input type="text" id="email" name="username" placeholder="Fyll i din e-postadress"
+                                required>
                         </div>
+
                         <div class="input_pox">
-                            <label class="datails">Telefonnummer</label>
-                            <input type="text" placeholder="Fyll i din telefonnummer" required>
-                        </div>
-                        <div class="input_pox">
-                            <label class="datails">Lösenord</label>
-                            <input type="text" placeholder="Välj ett lösenord" required>
-                        </div>
-                        <div class="input_pox">
-                            <label class="datails">Bekräfta lösenordet</label>
-                            <input type="text" placeholder="bekräfta ditt lösenord" required>
+                            <label class="datails" for="password">Lösenord</label>
+                            <input type="password" id="password" name="password" placeholder="Välj ett lösenord"
+                                required>
                         </div>
                         <div>
                             <button id="singIn_btn" class="btn btn-primary" type="submit" value="Log in">Skapa ett
@@ -83,7 +111,7 @@
                 </form>
             </div>
         </main>
-        
+
         <footer class="footer-distributed">
             <div class="footer-right">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -101,8 +129,8 @@
             <p>HairFind &copy; 2023</p>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-        crossorigin="anonymous"></script>
+            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+            crossorigin="anonymous"></script>
     </body>
 
 </html>
