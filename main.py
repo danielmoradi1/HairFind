@@ -1,20 +1,9 @@
-<<<<<<< Updated upstream
-import db_connection as db_connection
-from db_connection import create_connection
-from flask import Flask, redirect, url_for, render_template, request, flash, session,jsonify
-from flask_sqlalchemy import SQLAlchemy
-<<<<<<< Updated upstream
-from sqlalchemy import create_engine
-from db_connection import load_salon_from_db
-=======
->>>>>>> Stashed changes
-=======
 from db_connection import database_connection, register_user
 import psycopg2
+import secrets
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, redirect, url_for, render_template, request, flash, session, jsonify
 
->>>>>>> Stashed changes
 
 webApp = Flask(__name__)
 
@@ -44,14 +33,14 @@ def login_customer():
 
             if user:
                 password_re = user['password']
-                if check_password_hash(password_re, password):
+                if check_password_hash(password_re, request.form['password']):
                     # set session variables
                     session['loggedin'] = True
                     session['fullname'] = user['fullname']
                     session['username'] = user['username']
                     print(f"{username} Login Successfully")
                     # redirect to user profile page
-                    return redirect('/user_profile')
+                    return 'Welcome to the user profile'
 
             else:
                 flash('Felaktigt användarnamn eller lösenord. Försök igen!')
@@ -110,7 +99,7 @@ def signUp():
 @webApp.route('/user_profile')
 def user_profile():
     if 'loggedin' in session:
-        return redirect(url_for('user_profile'))
+        return render_template('user_profile.html')
     else:
         return render_template('login_customer.html')
 
@@ -159,5 +148,6 @@ def display_salon(org_number):
 # pass
 
 if __name__ == "__main__":
+    webApp.secret_key = secrets.token_hex(16)
     webApp.run(debug=True)
-    webApp.secret_key = 'aks4rzug'
+    

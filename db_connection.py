@@ -49,7 +49,7 @@ def register_salon(org_number, name, email, telephone, address, password):
         if cur is not None:
             cur.close()
 
-# register_salon(123456, "John Doe", "johndoe@example.com", "123-456-7890", "123 Main St", "password123")
+#register_salon(123456, "John Doe", "johndoe@example.com", "123-456-7890", "123 Main St", "password123")
 
 # Reads data from the table salon_user in database
 
