@@ -26,7 +26,7 @@ def database_connection():
 
 
 # Function to register_salon
-def register_salon(org_number, name, email, telephone, address, password):
+def register_salon_to_DB(org_number, name, username, telephone, address, password):
     conn = None
     cur = None
 
@@ -35,12 +35,13 @@ def register_salon(org_number, name, email, telephone, address, password):
         conn = database_connection()
         cur = conn.cursor()
 
-        insert_script = "INSERT INTO salon_user (org_number, name, email, telephone, address, password) VALUES(%s, %s, %s, %s, %s, %s)"
-        insert_value = (org_number, name, email, telephone, address, password)
+        insert_script = "INSERT INTO salon_user (org_number, name, username, telephone, address, password) VALUES(%s, %s, %s, %s, %s, %s)"
+        insert_value = (org_number, name, username, telephone, address, password)
         cur.execute(insert_script, insert_value)
 
         # Commit the changes to the database
         conn.commit()
+        print('user successfully registered')
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while inserting data in the table", error)
     finally:
@@ -49,7 +50,7 @@ def register_salon(org_number, name, email, telephone, address, password):
         if cur is not None:
             cur.close()
 
-#register_salon(123456, "John Doe", "johndoe@example.com", "123-456-7890", "123 Main St", "password123")
+#register_salon(12, "John Doe", "johndoe@example.se", "123-456-7890", "123 Main St", "password123")
 
 # Reads data from the table salon_user in database
 

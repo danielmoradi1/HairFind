@@ -1,5 +1,14 @@
 /* Header inkluderar "hairfind" h1 och login */
+body{
+    min-height: 100vh;
+    margin: 0;
+    
+}
 
+
+.wrapper{
+    min-height: 100%;
+}
 
 .listFilter {
     flex-wrap: wrap;

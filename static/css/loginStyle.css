@@ -1,22 +1,29 @@
-body,html {
+body {
     line-height: 1.5;
-    height: 100%;
-    /**background-image: url("/static/img/Shiny\ Overlay.svg");**/
-    /**background: linear-gradient(123deg, #71b8e7, #9b59b6);**/
-
+    min-height: 100vh;
 }
 
 
 #main_container {
+    padding-bottom: 2.5rem;
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin-top: 5%;
+    min-height: 100vh;
+}
+
+#salon_form{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: auto;
     margin-bottom: 5%;
 }
 
+
 .from_container {
     padding: 40px;
+    height: 800px;
     background-color: #f2efee82;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
 }
@@ -35,10 +42,9 @@ form {
     padding-left: 0px;
 }
 
-
 .user_details {
     display: flex;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     justify-content: space-between;
 }
 
@@ -53,7 +59,7 @@ input {
     border: none;
 }
 
-label{
+label {
     padding: 5px;
 }
 
@@ -74,12 +80,16 @@ form .user_details .input_pox {
 }
 
 
-@media (max-width: 1000px) {
+@media (max-width: 798px) {
     #main_container {
         flex-direction: column;
         row-gap: 0;
     }
 
+    #salon_form{
+        width: 100%;
+        min-height: 100vh;
+    }
 
     form .user_details .input_pox {
         margin-bottom: 15px;
