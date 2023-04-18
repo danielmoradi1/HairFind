@@ -33,21 +33,20 @@
                 <h2 class="title">Logga in</h2>
                 <h4>Välkommen tillbaka!</h4>
                 <p>För att hålla kontakten med oss vänligen logga in med din personliga information</p>
-                <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
-                <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+
                 <form class="login-form" id="login_customer" action="{{ url_for('login_customer') }}" method="post">
-                    {% with messages = get_flashed_messages() %}
+                    {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <p>{{ message }}</p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    {% endfor %}
+                    <ul class="flash-messages">
+                        {% for category, mes in messages %}
+                        <li class="{{ category }}">
+                            {{ mes }}
+                        </li>
+                        {% endfor %}
+                    </ul>
                     {% endif %}
                     {% endwith %}
+                    
                     <div>
                         <label for="username">Användarnamn </label>
                         <input id="username" type="username" placeholder="Fyll i din e-postadress " name="username" />
@@ -66,28 +65,49 @@
                 <h2 class="title">Skapa ett konto</h2>
                 <h4>Saknar du ett konto?</h4>
                 <p>Ange dina personliga uppgifter och börja resan med oss</p>
+
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                {% if category == 'success' %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+                {% elif category == 'info' %}
+                <div class="alert alert-info" role="alert">
+                    {{ message }}
+                </div>
+                {% elif category == 'warning' %}
+                <div class="alert alert-warning" role="alert">
+                    {{ message }}
+                </div>
+                {% elif category == 'error' %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% endwith %}
+
                 <form class="singup" id="signUp" action="{{ url_for('signUp')}}" method="post">
                     <div class="user_details">
                         <div class="input_pox">
                             <label class="datails" for="full_name">Fullständigt namn</label>
-                            <input type="text" id="full_name" name="full_name" placeholder="Fyll i ditt namn" required>
+                            <input type="text" id="full_name" name="full_name" placeholder="Fyll i ditt namn">
                         </div>
                         <div class="input_pox">
                             <label class="datails" for="phone_number">Telefonnummer</label>
                             <input type="text" id="phone_number" name="phone_number"
-                                placeholder="Fyll i din telefonnummer" required>
+                                placeholder="Fyll i din telefonnummer">
                         </div>
 
                         <div class="input_pox">
                             <label class="datails" for="email">e-post</label>
-                            <input type="text" id="email" name="username" placeholder="Fyll i din e-postadress"
-                                required>
+                            <input type="text" id="email" name="username" placeholder="Fyll i din e-postadress">
                         </div>
 
                         <div class="input_pox">
                             <label class="datails" for="password">Lösenord</label>
-                            <input type="password" id="password" name="password" placeholder="Välj ett lösenord"
-                                required>
+                            <input type="password" id="password" name="password" placeholder="Välj ett lösenord">
                         </div>
                         <div>
                             <button id="singIn_btn" class="btn btn-primary" type="submit" value="Log in">Skapa ett
@@ -117,7 +137,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
-            
+
     </body>
 
 </html>

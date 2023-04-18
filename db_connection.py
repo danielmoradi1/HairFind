@@ -7,7 +7,7 @@ def database_connection():
     hostname = 'pgserver.mau.se'
     database_name = 'hairfind_db'
     usernames = 'al0791'
-    password = 'aks4rzug'
+    password = 'os577w59'
     port_id = 5432
     connection = None
 

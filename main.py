@@ -46,11 +46,11 @@ def login_customer():
                     return redirect(url_for('user_profile', username=username))
                 
                 else:
-                    flash('Felaktigt användarnamn eller lösenord. Försök igen!')
+                    flash('Felaktigt användarnamn eller lösenord. Försök igen!', 'warning')
                     return render_template('login_customer.html')
 
             else:
-                flash('Please insert your email and password')
+                flash('Please insert your email and password', 'error')
                 return render_template('login_customer.html')
 
         except (Exception, psycopg2.DatabaseError) as error:
@@ -79,11 +79,11 @@ def signUp():
             user = cursor.fetchone()
 
             if user:
-                flash('Username already exists. Please try a different username!')
+                flash('Username already exists. Please try a different username!', 'info')
                 return render_template('login_customer.html')
 
             elif not full_name or not phone_number or not username or not password:
-                flash('Please fill out the form!')
+                flash('Please fill out the form!', 'info')
                 return render_template('login_customer.html')
 
             elif len(password) >= 4:
@@ -91,10 +91,10 @@ def signUp():
                     password, method='sha256')
                 register_user(full_name, phone_number,
                             username, hashed_password)
-                flash("Successfully created!")
+                flash('Your account has been created successfully!', 'success')
                 return redirect(url_for('login_customer'))
             else:
-                flash('Please insert 4 characters')
+                flash('Please insert 4 characters', 'info')
                 return render_template('login_customer.html')
             
         except (Exception, psycopg2.DatabaseError) as error:
@@ -150,7 +150,7 @@ def contactUs():
 def display_salon(org_number):
     row_data = get_salon_data(org_number)
     return render_template('salon.html', row_data = row_data)
- 
+
 
 # @webApp.route('/singin', methods=['GET' , 'POST'])
 # def register():
