@@ -119,7 +119,6 @@ def user_profile():
 
 
 
-
 # Log in salon account
 @webApp.route('/salon_login', methods=['GET', 'POST'])
 def salon_login():

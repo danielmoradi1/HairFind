@@ -46,7 +46,7 @@
                     </ul>
                     {% endif %}
                     {% endwith %}
-                    
+
                     <div>
                         <label for="username">Användarnamn </label>
                         <input id="username" type="username" placeholder="Fyll i din e-postadress " name="username" />
@@ -55,6 +55,10 @@
                     <div>
                         <label for="password">Password </label>
                         <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password" />
+                    </div>
+
+                    <div class="forgot_link">
+                        <a href="#">Glömt lösenord?</a>
                     </div>
 
                     <button class="btn btn-primary" type="submit" value="Log in">Logga in</button>
@@ -109,6 +113,7 @@
                             <label class="datails" for="password">Lösenord</label>
                             <input type="password" id="password" name="password" placeholder="Välj ett lösenord">
                         </div>
+
                         <div>
                             <button id="singIn_btn" class="btn btn-primary" type="submit" value="Log in">Skapa ett
                                 konto</button>

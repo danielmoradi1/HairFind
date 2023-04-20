@@ -17,7 +17,7 @@ body {
 }
 
 header a,
-.signup_link a {
+.signup_link a, .forgot_link a {
     text-decoration: none;
 }
 
