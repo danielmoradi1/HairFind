@@ -1,4 +1,4 @@
-* HairFind
+### HairFind
 "HairFind" is a web application that presents hair salons and their services.
 
 # Readme File for Code
@@ -22,14 +22,14 @@ To use the code, you need to follow the installation steps below:
     - Allow time for the installation to complete.
     
 3. Pipenv
-- sudo apt install pipenv
-- pip install pipenv --user
+    - sudo apt install pipenv
+    - pip install pipenv --user
 
 4. Psycopg2 (Database connection module)
-- pip install psycopg2
+    - pip install psycopg2
 
 5. Flask
-- pip install Flask
+    - pip install Flask
 
 
 ## Support
