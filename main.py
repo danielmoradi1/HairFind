@@ -6,11 +6,9 @@ from flask import Flask, redirect, url_for, render_template, request, flash, ses
 from db_connection import get_salon_data
 
 webApp = Flask(__name__)
-
 # Database connection function
 db_connection = database_connection()
 cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
-
 
 # Home page
 @webApp.route('/')
@@ -117,8 +115,6 @@ def user_profile():
         return render_template('login_customer.html')
 
 
-
-
 # Log in salon account
 @webApp.route('/salon_login', methods=['GET', 'POST'])
 def salon_login():
@@ -158,9 +154,6 @@ def salon_login():
             return "Error occurred while logging in"
 
     return render_template('salon_login.html')
-
-
-
 
 # Sign up salon account
 @webApp.route('/register_salon', methods=['GET', 'POST'])
@@ -210,8 +203,6 @@ def register_salon():
         return render_template('register_salon.html')
     
 
-
-
 # Salon dashboard login
 @webApp.route('/salon_dashboard')
 def salon_dashboard():
@@ -230,8 +221,6 @@ def salon_logout():
     return redirect(url_for('salon_login'))
 
 
-
-
 # define route for logout
 @webApp.route('/logout')
 def logout():
@@ -248,8 +237,6 @@ def about():
     return render_template('about.html')
 
 # Contact page
-
-
 @webApp.route('/contactUs')
 def contactUs():
     return render_template('contactUs.html')
