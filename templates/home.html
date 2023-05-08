@@ -28,15 +28,16 @@
                     <a class="btn btn-primary" href="{{url_for('salon_login')}}">Frisör</a>
                 </div>
             </header>
-            <nav>
+
+            <nav class="navbar">
                 <div class="listFilter">
                     <ul>
-                        <li><button type="button" class="btn btn-secondary">Klippning</button></li>
-                        <li><button type="button" class="btn btn-secondary">Färgning</button></li>
-                        <li><button type="button" class="btn btn-secondary">Skägg</button></li>
-                        <li><button type="button" class="btn btn-secondary">Långt hår</button></li>
-                        <li><button type="button" class="btn btn-secondary">Lockar</button></li>
-                        <li><button type="button" class="btn btn-secondary">Afro</button></li>
+                        <li><button type="button" class="tag_btn">Klippning</button></li>
+                        <li><button type="button" class="tag_btn">Färgning</button></li>
+                        <li><button type="button" class="tag_btn">Skägg</button></li>
+                        <li><button type="button" class="tag_btn">Långt hår</button></li>
+                        <li><button type="button" class="tag_btn">Lockar</button></li>
+                        <li><button type="button" class="tag_btn">Afro</button></li>
                     </ul>
                 </div>
 
@@ -48,6 +49,11 @@
 
             <!-- 
                 Hare starts the card component -->
+            <main>
+                <div class="salon_discription">
+                    <h2>Top salong</h2>
+                </div>
+            
             <div class="cards">
                 <article class="card">
                     <div class="image">
@@ -121,6 +127,7 @@
                     </div>
                 </article>
             </div>
+        </main>
 
             <footer class="footer-distributed">
                 <div class="footer-right">

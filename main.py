@@ -11,6 +11,8 @@ db_connection = database_connection()
 cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 # Home page
+
+
 @webApp.route('/')
 def home():
     return render_template('home.html')
@@ -70,9 +72,7 @@ def signUp():
         password = request.form['password']
 
         try:
-
             # Check if account already exists"select * from user_table where email = %s",
-
             cursor.execute(
                 "SELECT * FROM user_table WHERE username = %s", (username,))
             user = cursor.fetchone()
@@ -80,29 +80,29 @@ def signUp():
             if user:
                 flash(
                     'Username already exists. Please try a different username!', 'info')
-                return render_template('login_customer.html')
+                return render_template('register_customer.html')
 
             else:
                 if not full_name or not phone_number or not username or not password:
                     flash('Please fill out the form!', 'info')
-                    return render_template('login_customer.html')
+                    return render_template('register_customer.html')
 
                 elif len(password) >= 4:
                     hashed_password = generate_password_hash(
                         password, method='sha256')
                     register_user(full_name, phone_number,
-                            username, hashed_password)
+                                  username, hashed_password)
                     flash('Your account has been created successfully!', 'success')
-                    return redirect(url_for('login_customer'))
+                    return redirect(url_for('register_customer'))
                 else:
                     flash('Please insert 4 characters', 'info')
-                    return render_template('login_customer.html')
+                    return render_template('register_customer.html')
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             return "Error occurred while signing up"
     else:
-        return render_template('login_customer.html')
+        return render_template('register_customer.html')
 
 
 # Profile page
@@ -128,7 +128,7 @@ def salon_login():
                 "SELECT * FROM salon_user WHERE username = %s", (username,))
             user = cursor.fetchone()
 
-            if user:
+            if user is not None:
                 hashed_password = user['password']
                 print(hashed_password)
                 if check_password_hash(hashed_password, password):
@@ -147,7 +147,7 @@ def salon_login():
 
             else:
                 flash('Please insert your email and password', 'error')
-                #return render_template('salon_login.html')
+                # return render_template('salon_login.html')
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -156,6 +156,8 @@ def salon_login():
     return render_template('salon_login.html')
 
 # Sign up salon account
+
+
 @webApp.route('/register_salon', methods=['GET', 'POST'])
 def register_salon():
     if request.method == 'POST' and 'org_number' in request.form and 'username' in request.form and 'password' in request.form:
@@ -178,7 +180,7 @@ def register_salon():
                 flash(
                     'Username already exists. Please try a different username!', 'info')
                 return render_template('register_salon.html')
-            
+
             else:
                 if not org_number or not name or not username or not username or not phone_number or not address:
                     flash('Please fill out the form!', 'info')
@@ -186,12 +188,12 @@ def register_salon():
 
                 elif len(password) >= 4:
                     hashed_password = generate_password_hash(
-                    password, method='sha256')
+                        password, method='sha256')
                     register_salon_to_DB(
                         org_number, name, username, phone_number, address, hashed_password)
                     flash('Your account has been created successfully!', 'success')
                     return redirect(url_for('register_salon'))
-                
+
                 else:
                     flash('Please insert 4 characters', 'info')
                     return render_template('register_salon.html')
@@ -201,7 +203,7 @@ def register_salon():
             return "Error occurred while signing up"
     else:
         return render_template('register_salon.html')
-    
+
 
 # Salon dashboard login
 @webApp.route('/salon_dashboard')
@@ -213,7 +215,7 @@ def salon_dashboard():
         return render_template('salon_login.html')
 
 
-#Salon logout
+# Salon logout
 def salon_logout():
     session.pop('loggedin', None)
     session.pop('username', None)
@@ -231,12 +233,26 @@ def logout():
     return redirect('/login')
 
 
+# Reset password functionality
+@webApp.route('/reset_password', methods=['GET', 'POST'])
+def reset_password():
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        print(username, password)
+
+    return render_template('reset_password.html')
+
 # About page
+
+
 @webApp.route('/about')
 def about():
     return render_template('about.html')
 
 # Contact page
+
+
 @webApp.route('/contactUs')
 def contactUs():
     return render_template('contactUs.html')

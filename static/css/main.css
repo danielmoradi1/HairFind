@@ -8,16 +8,17 @@ body {
     min-height: 100vh;
 }
 
-
 .home-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1em 3em;
+    padding: 15px 100px;
+    padding-top: 20px;
 }
 
 header a,
-.signup_link a, .forgot_link a {
+.signup_link a,
+.forgot_link a {
     text-decoration: none;
 }
 

@@ -3,37 +3,46 @@ body {
     min-height: 100vh;
 }
 
-
-#main_container {
-    padding-bottom: 2.5rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    min-height: 100vh;
+.container{
+    min-width: 500px;
+    min-height: 100%;
+    margin-bottom: 10%;
 }
 
-#salon_form{
+
+.register_from_container{
     display: flex;
     flex-direction: column;
     width: 70%;
     margin: auto;
-    margin-bottom: 5%;
 }
 
 
-.from_container {
+.register_from_container {
     padding: 40px;
     height: 800px;
     background-color: #f2efee82;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
 }
 
-.from_container .title {
+.register_from_container .title {
     padding: 15px;
     text-align: center;
     font-size: 34px;
     font-weight: 600px;
 }
+
+
+.login_from_container{
+    margin: auto;
+    width: 500px;
+    padding: 40px;
+    padding-top:60px;
+    height: 700px;
+    background-color: #f2efee82;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+}
+
 
 form {
     display: grid;
@@ -81,12 +90,8 @@ form .user_details .input_pox {
 
 
 @media (max-width: 798px) {
-    #main_container {
-        flex-direction: column;
-        row-gap: 0;
-    }
 
-    #salon_form{
+    .register_from_container{
         width: 100%;
         min-height: 100vh;
     }

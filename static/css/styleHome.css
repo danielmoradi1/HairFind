@@ -1,31 +1,58 @@
 /* Header inkluderar "hairfind" h1 och login */
-body{
+body {
     min-height: 100vh;
     margin: 0;
-    
 }
 
-
-.wrapper{
-    min-height: 100%;
+.navbar {
+    background-image: url(/static/css/img/background.jpg);
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
+
 
 .listFilter {
     flex-wrap: wrap;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
 }
 
 .listFilter ul {
     padding: 0;
     list-style: none;
+    border-radius: 30px;
 }
 
 .listFilter li {
     display: inline-block;
     padding: 0.5rem;
+    padding-top: 50px;
     margin: 0.25rem;
+}
+
+.tag_btn {
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: lighter;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+
+
+    box-shadow: -1px 3px 3px 0 rgba(135, 135, 135, 0.2);
+    border-radius: 30px;
+    color: #505050;
+    flex: 0 0 auto;
+}
+
+.tag_btn:hover {
+    background: #747474;
+    box-shadow: none;
+    color: aliceblue;
+    transition: all 0.16s ease-in;
 }
 
 /**
@@ -41,6 +68,7 @@ body{
     left: 0;
     right: 0;
     margin: auto;
+    margin-top: 10%;
 }
 
 .search-input {
@@ -51,7 +79,7 @@ body{
     background-color: #e6e6e68f;
     color: #000000;
     border-radius: 6px;
-    border: none;
+    border: solid 0.5px #a4a4a48f;
     transition: all .4s;
 }
 
@@ -90,6 +118,16 @@ body{
 /**
     Cards
 **/
+
+.salon_discription{
+    text-align: center;
+    padding: 150px 0px 20px 0px;
+    text-transform: uppercase;
+}
+
+.salon_discription h2{
+    font-weight:300;
+}
 
 .cards {
     width: 90%;
