@@ -126,29 +126,38 @@ body {
     font-weight:300;
 }
 
+/**
 .cards {
     width: 90%;
     margin: 16px auto;
 }
+
 
 .title {
     font-weight: 700;
     font-size: 24px;
     text-transform: uppercase;
 }
+*/
 
 .image img {
     width: 100%;
     height: 200px;
+    border-radius: 1rem;
     object-fit: cover;
     object-position: 25% 50%;
 }
 
+.card-header {
+    border: none;
+}
+
+/*
 .content {
     background-color: #e6e6e68f;
     padding: 24px 32px;
 }
-
+*/
 .card {
     display: inline-block;
     width: 32%;
@@ -159,7 +168,7 @@ body {
 
 /* Grid with Flex */
 @supports (display: grid) {
-    .cards {
+    .card {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         grid-gap: 16px;
@@ -185,4 +194,8 @@ body {
     button {
         margin-top: auto;
     }
+}
+
+#cards_link {
+    text-decoration: none;
 }
