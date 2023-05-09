@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS User_table (
 CREATE TABLE IF NOT EXISTS Salon_user(
 	Org_number int PRIMARY KEY, 
 	SALON_NAME VARCHAR(50) NOT NULL,
-	Email_id VARCHAR(100) UNIQUE,
+	username VARCHAR(100) UNIQUE,
 	Telephone VARCHAR(50) NOT NULL,
 	Address VARCHAR(200) NOT NULL,
-	password VARCHAR(50) NOT NULL
+	password text NOT NULL
 );
 
 
@@ -36,3 +36,145 @@ CREATE TABLE IF NOT EXISTS BOOKING(
 	FOREIGN KEY(User_id) REFERENCES User_table(User_id),
 	FOREIGN KEY(Service_id) REFERENCES SERVICE(Service_id)
 );
+
+
+
+
+
+.salon_discription{
+    text-align: center;
+    padding: 150px 0px 20px 0px;
+    text-transform: uppercase;
+}
+
+.salon_discription h2{
+    font-weight:300;
+}
+
+.cards {
+    width: 90%;
+    margin: 16px auto;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: 25% 50%;
+}
+
+.content {
+    background-color: #e6e6e68f;
+    padding: 24px 32px;
+}
+
+.card {
+    display: inline-block;
+    width: 32%;
+    margin-right: 1%;
+    margin-bottom: 16px;
+    vertical-align: top;
+}
+
+/* Grid with Flex */
+@supports (display: grid) {
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 16px;
+        grid-auto-rows: 1fr;
+    }
+
+    /* to make background fill entire height */
+
+    .card {
+        width: auto;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Uncomment to make text same height */
+    .content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    button {
+        margin-top: auto;
+    }
+}
+
+
+
+
+
+"""
+# Reset password functionality for Salon
+@webApp.route('/reset_password', methods=['GET', 'POST'])
+def reset_password():
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        new_password = request.form['password']
+        try:
+            # Check if the user already has in the database
+            cursor.execute(
+                "SELECT * FROM salon_user WHERE username = %s", (username,))
+            salon = cursor.fetchone()
+
+            cursor.execute(
+                "SELECT * FROM user_table WHERE username = %s", (username,))
+            user = cursor.fetchone()
+
+            # reset password for the salon user
+            if salon is not None:
+                username_salon = salon["username"]
+                hashed_password = generate_password_hash(new_password)
+                if isinstance(hashed_password, bytes):
+                    hashed_password = hashed_password.decode('utf-8')
+                cursor.execute(
+                    "UPDATE salon_user SET password = %s WHERE username = %s", (
+                        hashed_password, username_salon)
+                )
+                db_connection.commit()
+                email = username_salon
+                send_new_password(email, new_password)
+                print("Ditt lösenord har återställts")
+                flash(
+                    'Ditt lösenord har återställts. Var god logga in med ditt nya lösenord.', 'success')
+                return redirect(url_for('reset_password'))
+            # else:flash('Felaktig användare', 'warning')
+
+            # Reset password for user
+            elif user is not None:
+                username_user = user["username"]
+                hashed_password = generate_password_hash(new_password)
+                if isinstance(hashed_password, bytes):
+                    hashed_password = hashed_password.decode('utf-8')
+                cursor.execute(
+                    "UPDATE user_table SET password = %s WHERE username = %s", (
+                        hashed_password, username_user)
+                )
+                db_connection.commit()
+                email = username_user
+                send_new_password(email, new_password)
+                print("Ditt lösenord har återställts")
+                flash(
+                    'Ditt lösenord har återställts. Var god logga in med ditt nya lösenord.', 'success')
+                return redirect(url_for('reset_password'))
+            else:
+                flash('Felaktig användare!', 'warning')
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            flash('Ett fel inträffade. Försök igen senare', 'error')
+    return render_template('reset_password.html')
+
+"""
