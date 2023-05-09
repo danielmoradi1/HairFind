@@ -11,17 +11,15 @@ db_connection = database_connection()
 cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 # Home page
-
-
 @webApp.route('/')
 def home():
-    return render_template('home.html')
-
+    cursor.execute("SELECT name, address, telephone FROM salon_user")
+    salon_data = cursor.fetchall()
+    return render_template('home.html', salon_data = salon_data)
 
 # Log In page for customer
 @webApp.route('/login_customer', methods=['GET', 'POST'])
 def login_customer():
-
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']

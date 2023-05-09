@@ -53,81 +53,36 @@
                 <div class="salon_discription">
                     <h2>Top salong</h2>
                 </div>
-            
-            <div class="cards">
-                <article class="card">
-                    <div class="image">
-                        <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                            alt="gallery" />
-                    </div>
-                    <div class="content">
-                        <div class="title">Frisörens namn</div>
-                        <p>Beskrivning</p>
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </article>
 
-                <article class="card">
-                    <div class="image">
-                        <img src="https://images.pexels.com/photos/11333874/pexels-photo-11333874.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                            alt="gallery" />
+                
+                {% block content %}
+                  <div class="card">
+                    {% for salon in salon_data %}
+                    <div class="col-md-4">
+                        
+                        <a id="cards_link" href="/salong.html/{{ salon.id }}" target="_blank">
+                            <div class="image">
+                                <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                                    alt="gallery" />
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{ salon.name }}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"> <strong>Adress</strong>: {{ salon.address }}</p>
+                                    <p class="card-text"><strong>Telefon</strong>: {{ salon.telephone }}</p>
+                                </div>
+                            </div>                       
+                        </a>
+                        
                     </div>
-                    <div class="content">
-                        <div class="title">Frisörens namn</div>
-                        <p>Beskrivning</p>
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </article>
+                    {% endfor %}
+                  </div>
+                {% endblock %}
+        
 
-                <article class="card">
-                    <div class="image">
-                        <img src="https://images.pexels.com/photos/2040189/pexels-photo-2040189.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                            alt="gallery" />
-                    </div>
-                    <div class="content">
-                        <div class="title">Frisörens namn</div>
-                        <p>Beskrivning</p>
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="image">
-                        <img src="https://images.pexels.com/photos/3993142/pexels-photo-3993142.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                            alt="gallery" />
-                    </div>
-                    <div class="content">
-                        <div class="title">Frisörens namn</div>
-                        <p>Beskrivning</p>
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="image">
-                        <img src="https://images.pexels.com/photos/3993442/pexels-photo-3993442.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                            alt="gallery" />
-                    </div>
-                    <div class="content">
-                        <div class="title">Frisörens namn</div>
-                        <p>Beskrivning</p>
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <div class="image">
-                        <img src="https://images.pexels.com/photos/3998427/pexels-photo-3998427.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                            alt="gallery" />
-                    </div>
-                    <div class="content">
-                        <div class="title">Frisörens namn</div>
-                        <p>Beskrivning</p>
-                        <button class="btn btn-primary">Learn More</button>
-                    </div>
-                </article>
-            </div>
-        </main>
+            </main>
 
             <footer class="footer-distributed">
                 <div class="footer-right">
