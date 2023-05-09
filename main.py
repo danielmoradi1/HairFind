@@ -43,7 +43,7 @@ def login_customer():
                     print(f"{username} Login Successfully")
                     # redirect to user profile page
                     flash("you are successfuly logged in")
-                    return redirect(url_for('user_profile', username=username))
+                    return redirect(url_for('customer_profile', username=username))
 
                 else:
                     flash(
@@ -91,7 +91,7 @@ def signUp():
                     hashed_password = generate_password_hash(
                         password, method='sha256')
                     register_user(full_name, phone_number,
-                                  username, hashed_password)
+                                username, hashed_password)
                     flash('Your account has been created successfully!', 'success')
                     return redirect(url_for('register_customer'))
                 else:
@@ -106,11 +106,11 @@ def signUp():
 
 
 # Profile page
-@webApp.route('/user_profile', )
-def user_profile():
+@webApp.route('/customer_profile', )
+def customer_profile():
     username = request.args.get('username')
     if 'loggedin' in session:
-        return render_template('user_profile.html', username=username)
+        return render_template('customer_profile.html', username=username)
     else:
         return render_template('login_customer.html')
 
@@ -253,9 +253,9 @@ def about():
 # Contact page
 
 
-@webApp.route('/contactUs')
-def contactUs():
-    return render_template('contactUs.html')
+@webApp.route('/contact_us')
+def contact():
+    return render_template('contact_us.html')
 
 
 # Define  a dynamic route

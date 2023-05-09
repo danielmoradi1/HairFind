@@ -26,6 +26,11 @@ h1 {
     text-transform: uppercase;
 }
 
+.nav_btn .btn{
+    border: none;
+    margin: 1px 0px 0px 20px;
+}
+
 
 /* Style for Footer*/
 .footer-distributed {

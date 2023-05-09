@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="forgot_link">
-                        <a href="#">Glömt lösenord?</a>
+                        <a href="{{url_for('reset_password')}}">Glömt lösenord?</a>
                     </div>
                     <div class="signup_link">
                         Saknar du ett konto? <a href="{{url_for('signUp')}}">Skapa konto</a>
@@ -137,7 +137,7 @@
                 <ul class="footer-links">
                     <li><a href="{{url_for('home')}}">Start sidan</a></li>
                     <li><a href="{{url_for('about')}}">Om oss</a></li>
-                    <li><a href="{{url_for('contactUs')}}">Kontakta oss</a></li>
+                    <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
                 </ul>
             </div>
             <p>HairFind &copy; 2023</p>

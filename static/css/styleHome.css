@@ -61,7 +61,7 @@ body {
 
 
 .search-box {
-    width: 400px;
+    width: 600px;
     position: relative;
     display: flex;
     bottom: 0;
@@ -76,10 +76,9 @@ body {
     font-weight: lighter;
     font-size: 16px;
     padding: 10px 45px 10px 15px;
-    background-color: #e6e6e68f;
-    color: #000000;
+    background-color: #8f8f8f8f;
+    border: none;
     border-radius: 6px;
-    border: solid 0.5px #a4a4a48f;
     transition: all .4s;
 }
 
@@ -97,7 +96,7 @@ body {
     padding: 6px 9px;
     margin-left: -45px;
     border: none;
-    color: #6c6c6c;
+    color: #ffffff;
     transition: all .4s;
     z-index: 10;
 }
@@ -105,12 +104,10 @@ body {
 .search-btn:hover {
     transform: scale(1.2);
     cursor: pointer;
-    color: black;
 }
 
 .search-btn:focus {
     outline: none;
-    color: black;
 }
 
 
