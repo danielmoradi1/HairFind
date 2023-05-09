@@ -109,10 +109,17 @@ def signUp():
 @webApp.route('/customer_profile', )
 def customer_profile():
     username = request.args.get('username')
+    cursor.execute("SELECT fullname, telephone FROM user_table WHERE username = %s", (username,))
+    telephone = cursor.fetchall()
+    fullname = cursor.fetchall()
     if 'loggedin' in session:
-        return render_template('customer_profile.html', username=username)
+        return render_template('customer_profile.html', username=username, telephone=telephone, fullname=fullname)
     else:
         return render_template('login_customer.html')
+
+
+
+
 
 
 # Log in salon account
