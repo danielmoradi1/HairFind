@@ -1,7 +1,7 @@
 import psycopg2
 import psycopg2.extras
 
-
+#Database connection function
 def database_connection():
     # Information about the MAU database
     hostname = 'pgserver.mau.se'
@@ -25,6 +25,10 @@ def database_connection():
         print(error)
 
 
+db_connection = database_connection()
+cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
+
+
 # Function to register_salon
 def register_salon_to_DB(org_number, name, username, telephone, address, password):
     conn = None
@@ -36,7 +40,8 @@ def register_salon_to_DB(org_number, name, username, telephone, address, passwor
         cur = conn.cursor()
 
         insert_script = "INSERT INTO salon_user (org_number, name, username, telephone, address, password) VALUES(%s, %s, %s, %s, %s, %s)"
-        insert_value = (org_number, name, username, telephone, address, password)
+        insert_value = (org_number, name, username,
+                        telephone, address, password)
         cur.execute(insert_script, insert_value)
 
         # Commit the changes to the database
@@ -50,7 +55,7 @@ def register_salon_to_DB(org_number, name, username, telephone, address, passwor
         if cur is not None:
             cur.close()
 
-#register_salon(12, "John Doe", "johndoe@example.se", "123-456-7890", "123 Main St", "password123")
+# register_salon(12, "John Doe", "johndoe@example.se", "123-456-7890", "123 Main St", "password123")
 
 # Reads data from the table salon_user in database
 
@@ -74,7 +79,7 @@ def display_table_data(salon_user):
             conn.close()
 
 
-#display_table_data("salon_user")
+# display_table_data("salon_user")
 # Registers users into the database table "user_table"
 
 
@@ -166,6 +171,31 @@ def edit_user_data(username, new_first_name=None, new_last_name=None, new_teleph
 
 # edit_user_data('Roma', 'Sheeran', '0739548372', 'roma.sheeran@outlook.com', 'Roma123')
 
+"""
+def reset_salon_password(username, new_password):
+    try:
+        # Check if the user already has in the database
+        cursor.execute(
+            "SELECT * FROM salon_user WHERE username = %S", (username))
+        user = cursor.fetchone()
+        if user is not None:
+            username = username["username"]
+            hashed_password = generate_password_hash(new_password)
+            cursor.execute(
+                "UPDATE salon_user SET password = %s WHERE username = %s", (
+            hashed_password, username)
+            )
+            db_connection.commit()
+            send_new_password(username, new_password)
+            print("Ditt lösenord har återställts")
+
+        else:
+            print("Felaktig användare")
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+
+"""
+
 
 # Function to delete a user
 def delete_user(username):
@@ -189,7 +219,6 @@ def delete_user(username):
 # delete_user('johndoe@example.se')
 
 
-
 def get_salon_data(org_number):
     conn = None
     cur = None
@@ -197,7 +226,7 @@ def get_salon_data(org_number):
     try:
         conn = database_connection()
         cur = conn.cursor()
-        cur= conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         query = "SELECT * FROM salon_user WHERE id=%s"
         cur.execute(query, (org_number))
         row_data = cur.fetchone()
@@ -210,6 +239,3 @@ def get_salon_data(org_number):
             conn.close()
             if cur is not None:
                 cur.close()
-
-
-

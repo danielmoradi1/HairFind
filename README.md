@@ -31,6 +31,8 @@ To use the code, you need to follow the installation steps below:
 5. Flask
     - pip install Flask
 
+5. Mail
+    - pip install Mail
 
 ## Support
 If you encounter any issues while using the code, you can contact us.
