@@ -19,7 +19,7 @@ def home():
 
 
 # Log In page for customer
-@webApp.route('/login', methods=['GET', 'POST'])
+@webApp.route('/login_customer', methods=['GET', 'POST'])
 def login_customer():
 
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
@@ -62,8 +62,8 @@ def login_customer():
 
 
 # Sign up page for customer
-@webApp.route('/signup', methods=['GET', 'POST'])
-def signUp():
+@webApp.route('/register_customer', methods=['GET', 'POST'])
+def register_customer():
 
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         full_name = request.form['full_name']
