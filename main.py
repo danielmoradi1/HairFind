@@ -1,10 +1,11 @@
-from db_connection import database_connection, register_user, register_salon_to_DB
+from db_connection import database_connection, register_user, register_salon_to_DB, delete_user
 import psycopg2
 import secrets
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask import Flask, redirect, url_for, render_template, request, flash, session
 from db_connection import get_salon_data
 from flask_mail import Mail, Message
+
 
 webApp = Flask(__name__)
 # Database connection function
@@ -22,48 +23,60 @@ webApp.config['MAIL_PASSWORD'] = 'tynjvdeipkqpykgr'
 mail = Mail(webApp)
 
 
-
-
 # Function to send new password to user mail
 def send_new_password(email, new_password):
-    msg = Message("Nytt lösenord från HairFind", sender = "service.hairfind@gmail.com")
+    msg = Message("Nytt lösenord från HairFind",
+                  sender="service.hairfind@gmail.com")
     msg.recipients = [email]
     msg.body = f'Hej {email}\nHAIRFIND \nDitt nya lösenord är: {new_password}'
     mail.send(msg)
 
-#Welcome message function
+# Welcome message function
+
+
 def send_welcome_email(name, email):
-    msg = Message("Välkommen till HairFind", sender="service.hairfind@gmail.com")
+    msg = Message("Välkommen till HairFind",
+                  sender="service.hairfind@gmail.com")
     msg.recipients = [email]
     msg.body = f'HAIRFIND \nHej {name} \nVälkomen till vårtjänst \nVi är glada att ha dig som kund!'
     mail.send(msg)
 
 
+def delete_confirmation(username):
+    msg = Message("Raderat konto", sender="service.hairfind@gmail.com")
+    msg.recipients = [username]
+    msg.body = f'HAIRFIND \nDitt konto {username} har raderats nu.\nDu är välkomen tillbaka!'
+    mail.send(msg)
+
 # Home page
+
+
 @webApp.route('/')
 def home():
     cursor.execute("SELECT name, address, telephone FROM salon_user")
     salon_data = cursor.fetchall()
-    return render_template('home.html', salon_data = salon_data)
+    return render_template('home.html', salon_data=salon_data)
 
 ############################
 ####    User functions #####
 ############################
 
 # Log In page for customer
+
+
 @webApp.route('/login_customer', methods=['GET', 'POST'])
 def login_customer():
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        username = request.form['username']
-        password = request.form['password']
+        username = request.form['username'].lower()
+        password = request.form['password'].lower()
         print(password)
-
+        
         try:
             cursor.execute(
                 "SELECT * FROM user_table WHERE username = %s", (username,))
             user = cursor.fetchone()
 
-            if user:
+            if user is not None:
                 hashed_password = user['password']
                 print(hashed_password)
                 if check_password_hash(hashed_password, password):
@@ -73,17 +86,17 @@ def login_customer():
                     session['username'] = user['username']
                     print(f"{username} Login Successfully")
                     # redirect to user profile page
-                    flash("you are successfuly logged in")
                     return redirect(url_for('customer_profile', username=username))
-
                 else:
                     flash(
-                        'Felaktigt användarnamn eller lösenord. Försök igen!', 'warning')
+                    'Felaktigt användarnamn eller lösenord. Försök igen!', 'warning')
                     return render_template('login_customer.html')
-
-            else:
-                flash('Please insert your email and password', 'error')
+                
+            elif not user or not check_password_hash:
+                flash('Vänligen fyll i formuläret!', 'info')
                 return render_template('login_customer.html')
+            
+
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -97,10 +110,10 @@ def login_customer():
 def register_customer():
 
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        full_name = request.form['full_name']
-        phone_number = request.form['phone_number']
-        username = request.form['username']
-        password = request.form['password']
+        full_name = request.form['full_name'].lower()
+        phone_number = request.form['phone_number'].lower()
+        username = request.form['username'].lower()
+        password = request.form['password'].lower()
 
         try:
             # Check if account already exists"select * from user_table where email = %s",
@@ -115,7 +128,7 @@ def register_customer():
 
             else:
                 if not full_name or not phone_number or not username or not password:
-                    flash('Please fill out the form!', 'info')
+                    flash('Vänligen fyll i formuläret!', 'info')
                     return render_template('register_customer.html')
 
                 elif len(password) >= 4:
@@ -123,11 +136,11 @@ def register_customer():
                         password, method='sha256')
                     register_user(full_name, phone_number,
                                   username, hashed_password)
-                    flash('Your account has been created successfully!', 'success')
+                    flash('Ditt konto har skapats!', 'success')
                     send_welcome_email(full_name, username)
                     return redirect(url_for('register_customer'))
                 else:
-                    flash('Please insert 4 characters', 'info')
+                    flash('Vänligen ange lösenord större än 4 siffror!', 'info')
                     return render_template('register_customer.html')
 
         except (Exception, psycopg2.DatabaseError) as error:
@@ -141,13 +154,28 @@ def register_customer():
 @webApp.route('/customer_profile', )
 def customer_profile():
     username = request.args.get('username')
-    cursor.execute("SELECT fullname, telephone FROM user_table WHERE username = %s", (username,))
-    telephone = cursor.fetchall()
-    fullname = cursor.fetchall()
     if 'loggedin' in session:
-        return render_template('customer_profile.html', username=username, telephone=telephone, fullname=fullname)
+        cursor.execute(
+            "SELECT fullname, telephone FROM user_table WHERE username = %s", (username,))
+        user_info = cursor.fetchall()
+        print(user_info)
+        fullname = user_info[0][0]
+        telephone = user_info[0][1]
+        return render_template('customer_profile.html', username=username, fullname=fullname, telephone=telephone)
     else:
         return render_template('login_customer.html')
+
+
+# Delete user account
+@webApp.route('/delete_user/<username>', methods=['GET'])
+def delete_user_account(username):
+    if 'loggedin' in session:
+        delete_user(username)
+        delete_confirmation(username)
+        return redirect(url_for('logout'))
+    else:
+        return render_template('login_customer.html')
+
 
 # function to check if salon_user already exists
 def user_exists(username):
@@ -326,15 +354,12 @@ def reset_password():
     return render_template('reset_password.html')
 
 
-
 # define route for logout
 @webApp.route('/logout')
 def logout():
-    # clear session variables and redirect to login page
     session.pop('loggedin', None)
-    session.pop('user_id', None)
     session.pop('username', None)
-    return redirect('/login')
+    return redirect(url_for('login_customer'))
 
 
 ################################

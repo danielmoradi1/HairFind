@@ -14,7 +14,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>Hairfind</title>
     </head>
-    
+
     <body>
         <div class="wrapper">
             <header class="home-header">
@@ -54,12 +54,11 @@
                     <h2>Top salong</h2>
                 </div>
 
-                
+
                 {% block content %}
-                  <div class="card">
+                <div class="card">
                     {% for salon in salon_data %}
                     <div class="col-md-4">
-                        
                         <a id="cards_link" href="/salong.html/{{ salon.id }}" target="_blank">
                             <div class="image">
                                 <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
@@ -73,14 +72,14 @@
                                     <p class="card-text"> <strong>Adress</strong>: {{ salon.address }}</p>
                                     <p class="card-text"><strong>Telefon</strong>: {{ salon.telephone }}</p>
                                 </div>
-                            </div>                       
+                            </div>
                         </a>
-                        
+
                     </div>
                     {% endfor %}
-                  </div>
+                </div>
                 {% endblock %}
-        
+
 
                 <article class="card">
                     <div class="image">
@@ -93,25 +92,25 @@
                         <button class="btn btn-primary">Learn More</button>
                     </div>
                 </article>
-            </div>
+        </div>
         </main>
 
-            <footer class="footer-distributed">
-                <div class="footer-right">
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
+        <footer class="footer-distributed">
+            <div class="footer-right">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
 
-                <div class="footer-left">
-                    <ul class="footer-links">
-                        <li><a href="{{url_for('home')}}">Start sidan</a></li>
-                        <li><a href="{{url_for('about')}}">Om oss</a></li>
-                        <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
-                    </ul>
-                </div>
-                <p>HairFind &copy; 2023</p>
-            </footer>
+            <div class="footer-left">
+                <ul class="footer-links">
+                    <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                    <li><a href="{{url_for('about')}}">Om oss</a></li>
+                    <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
+                </ul>
+            </div>
+            <p>HairFind &copy; 2023</p>
+        </footer>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"

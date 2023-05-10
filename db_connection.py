@@ -171,31 +171,6 @@ def edit_user_data(username, new_first_name=None, new_last_name=None, new_teleph
 
 # edit_user_data('Roma', 'Sheeran', '0739548372', 'roma.sheeran@outlook.com', 'Roma123')
 
-"""
-def reset_salon_password(username, new_password):
-    try:
-        # Check if the user already has in the database
-        cursor.execute(
-            "SELECT * FROM salon_user WHERE username = %S", (username))
-        user = cursor.fetchone()
-        if user is not None:
-            username = username["username"]
-            hashed_password = generate_password_hash(new_password)
-            cursor.execute(
-                "UPDATE salon_user SET password = %s WHERE username = %s", (
-            hashed_password, username)
-            )
-            db_connection.commit()
-            send_new_password(username, new_password)
-            print("Ditt lösenord har återställts")
-
-        else:
-            print("Felaktig användare")
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-
-"""
-
 
 # Function to delete a user
 def delete_user(username):
@@ -204,8 +179,7 @@ def delete_user(username):
     try:
         conn = database_connection()
         cur = conn.cursor()
-
-        delete_script = f"DELETE FROM user_table WHERE username = {username}"
+        delete_script = f"DELETE FROM user_table WHERE username = '{username}'"
         cur.execute(delete_script)
         conn.commit()
         print("User deleted successfully")
