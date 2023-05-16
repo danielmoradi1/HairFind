@@ -1,10 +1,20 @@
-from db_connection import database_connection, register_user, register_salon_to_DB, delete_user
+from db_connection import *
 import psycopg2
 import secrets
-from werkzeug.security import check_password_hash, generate_password_hash
-from flask import Flask, redirect, url_for, render_template, request, flash, session
-from db_connection import get_salon_data
-from flask_mail import Mail, Message
+import uuid
+from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash
+from flask import Flask
+from flask import redirect
+from flask import url_for
+from flask import render_template
+from flask import request
+from flask import flash
+from flask import session
+from flask_mail import Mail
+from flask_mail import Message
+from functools import wraps
+from wtforms import Form, StringField, TextAreaField, validators, IntegerField
 
 
 webApp = Flask(__name__)
@@ -12,7 +22,6 @@ webApp = Flask(__name__)
 db_connection = database_connection()
 cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-webApp = Flask(__name__)
 # Mail connection
 webApp.config['MAIL_SERVER'] = 'smtp.gmail.com'
 webApp.config['MAIL_PORT'] = 465
@@ -23,8 +32,14 @@ webApp.config['MAIL_PASSWORD'] = 'tynjvdeipkqpykgr'
 mail = Mail(webApp)
 
 
-# Function to send new password to user mail
 def send_new_password(email, new_password):
+    """
+        Arg:
+            email, new_password
+            The send_new_password() tags two parameters:
+            The user email and user new password.
+            Then it sends the new password to the user email with an email body
+    """
     msg = Message("Nytt lösenord från HairFind",
                   sender="service.hairfind@gmail.com")
     msg.recipients = [email]
@@ -70,7 +85,7 @@ def login_customer():
         username = request.form['username'].lower()
         password = request.form['password'].lower()
         print(password)
-        
+
         try:
             cursor.execute(
                 "SELECT * FROM user_table WHERE username = %s", (username,))
@@ -89,14 +104,12 @@ def login_customer():
                     return redirect(url_for('customer_profile', username=username))
                 else:
                     flash(
-                    'Felaktigt användarnamn eller lösenord. Försök igen!', 'warning')
+                        'Felaktigt användarnamn eller lösenord. Försök igen!', 'warning')
                     return render_template('login_customer.html')
-                
+
             elif not user or not check_password_hash:
                 flash('Vänligen fyll i formuläret!', 'info')
                 return render_template('login_customer.html')
-            
-
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -116,7 +129,7 @@ def register_customer():
         password = request.form['password'].lower()
 
         try:
-            # Check if account already exists"select * from user_table where email = %s",
+            # Check if account already exists
             cursor.execute(
                 "SELECT * FROM user_table WHERE username = %s", (username,))
             user = cursor.fetchone()
@@ -213,16 +226,15 @@ def salon_login():
                 if check_password_hash(hashed_password, password):
                     # set session variables
                     session['loggedin'] = True
+                    session['username'] = username
                     session['username'] = user['username']
                     print(f"{username} Login Successfully")
                     # redirect to user profile page
                     return redirect(url_for('salon_dashboard', username=username))
-
                 else:
                     flash(
                         'Felaktigt användarnamn eller lösenord. Försök igen!', 'warning')
                     return render_template('salon_login.html')
-
             else:
                 flash('Vänligen ange din e-postadress och ditt lösenord', 'error')
                 # return render_template('salon_login.html')
@@ -247,7 +259,7 @@ def register_salon():
         password = request.form['password']
 
         try:
-            # Check if account already exists"select * from user_table where email = %s",
+            # Check if account already exists
             cursor.execute(
                 "SELECT * FROM salon_user WHERE username = %s", (username,))
             user = cursor.fetchone()
@@ -285,23 +297,133 @@ def register_salon():
     else:
         return render_template('register_salon.html')
 
+# Check if user is logged in
 
-# Salon dashboard login
+
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'loggedin' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('salon_login'))
+    return wrap
+
+
+# Salon dashboard
 @webApp.route('/salon_dashboard')
+@is_logged_in
 def salon_dashboard():
-    username = request.args.get('username')
-    if 'loggedin' in session:
-        return render_template('salon_dashboard.html', username=username)
+    username = session['username']
+    cursor.execute(
+        "SELECT NAME FROM Salon_user WHERE username = %s", (username,))
+    user_info = cursor.fetchone()
+
+    if user_info:
+        fullname = user_info[0]
+        cursor.execute(
+            "SELECT * FROM service WHERE salon_username = %s", (username,))
+        services = cursor.fetchall()
+
+        return render_template('salon_dashboard.html', services=services, fullname=fullname)
+
+    return render_template('salon_login.html')
+
+
+# Service Form Class
+class ArticleForm(Form):
+    name = StringField('name', [validators.Length(min=1, max=50)])
+    price = StringField('price', [validators.Length(min=1, max=10)])
+    description = TextAreaField(
+        'description', [validators.Length(min=10, max=200)])
+
+# Add Service
+
+
+@webApp.route('/add_service', methods=['GET', 'POST'])
+@is_logged_in
+def add_service():
+    form = ArticleForm(request.form)
+    if request.method == 'POST' and form.validate():
+        name = form.name.data
+        price = int(form.price.data)  # Convert price to an integer
+        description = form.description.data
+        image = '121212'
+
+        try:
+            # Check if ID exists
+            cursor.execute("SELECT EXISTS(SELECT 1 FROM service)")
+            id_exists = cursor.fetchone()[0]
+
+            # Get the last ID or start from 1
+            if id_exists:
+                cursor.execute("SELECT MAX(service_id) FROM service")
+                last_id = cursor.fetchone()[0]
+                service_id = last_id + 1
+            else:
+                service_id = 1
+
+            # Execute the action
+            insert_script = "INSERT INTO service (service_id, service_name, price, description, image, salon_username) VALUES(%s, %s, %s, %s, %s, %s)"
+            insert_value = (service_id, name, price,
+                            description, image, session['username'])
+            cursor.execute(insert_script, insert_value)
+
+            db_connection.commit()
+            flash('Tjänsten är klar!', 'success')
+            return redirect(url_for('salon_dashboard'))
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            flash('Ett fel inträffade. Försök igen senare', 'error')
+    return render_template('add_service.html', form=form)
+
+
+@webApp.route('/edit_service/<string:id>', methods=['GET', 'POST'])
+@is_logged_in
+def edit_service(id):
+    # Get service by id
+    cursor.execute("SELECT * FROM service WHERE service_id = %s", [id])
+    service = cursor.fetchone()
+
+    if service is not None:
+
+        # Get form
+        form = ArticleForm(request.form)
+
+        # Populate service form fields
+        form.name.data = service[1]
+        form.price.data = str(service[2])
+        form.description.data = service[3]
+
+        if request.method == 'POST' and form.validate():
+            name = request.form['name']
+            price = request.form['price']
+            description = request.form['description']
+
+            # Execute
+            cursor.execute(
+                "UPDATE service SET service_name=%s, price=%s, description=%s WHERE service_id=%s", (name, price, description, id))
+            # Commit to DB
+            db_connection.commit()
+            flash('Ändringar är klara!', 'success')
+            return redirect(url_for('salon_dashboard'))
     else:
-        return render_template('salon_login.html')
+        flash('Service not found', 'error')
+        return redirect(url_for('salon_dashboard'))
+    return render_template('edit_service.html', form=form)
 
 
-# Salon logout
-def salon_logout():
-    session.pop('loggedin', None)
-    session.pop('username', None)
-    flash("You are successfully logged out.", "success")
-    return redirect(url_for('salon_login'))
+# Delete service
+@webApp.route('/delete_service/<string:id>', methods=['POST'])
+@is_logged_in
+def delete_service(id):
+    # Execute
+    cursor.execute("DELETE FROM service WHERE service_id = %s", [id])
+    # Commit to DB
+    db_connection.commit()
+    flash('Tjänsten har tagits bort!', 'success')
+    return redirect(url_for('salon_dashboard'))
 
 
 # Reset password function for both salon and user accounts
@@ -311,7 +433,7 @@ def reset_password():
         username = request.form['username']
         new_password = request.form['password']
         try:
-            # Check if the user already has in the database
+            # Check if the salon user already has in the database
             cursor.execute(
                 "SELECT * FROM salon_user WHERE username = %s", (username,))
             salon = cursor.fetchone()
@@ -354,11 +476,14 @@ def reset_password():
     return render_template('reset_password.html')
 
 
-# define route for logout
+# Log out function
 @webApp.route('/logout')
+@is_logged_in
 def logout():
-    session.pop('loggedin', None)
-    session.pop('username', None)
+    session.clear()
+    flash('Ditt är Utloggad nu!', 'success')
+    # session.pop('loggedin', None)
+    # session.pop('username', None)
     return redirect(url_for('login_customer'))
 
 
@@ -366,6 +491,8 @@ def logout():
 ####    Content pages      #####
 ################################
 # About page
+
+
 @webApp.route('/about')
 def about():
     return render_template('about.html')

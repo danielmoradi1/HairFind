@@ -13,11 +13,11 @@ def database_connection():
 
     try:
         with psycopg2.connect(
-            database=database_name,
-            user=usernames,
-            password=password,
-            host=hostname,
-            port=port_id
+            database = database_name,
+            user = usernames,
+            password = password,
+            host = hostname,
+            port = port_id
         ) as connection:
             print('connection successfully!')
         return connection
@@ -55,10 +55,6 @@ def register_salon_to_DB(org_number, name, username, telephone, address, passwor
         if cur is not None:
             cur.close()
 
-# register_salon(12, "John Doe", "johndoe@example.se", "123-456-7890", "123 Main St", "password123")
-
-# Reads data from the table salon_user in database
-
 
 def display_table_data(salon_user):
     conn = None
@@ -79,10 +75,7 @@ def display_table_data(salon_user):
             conn.close()
 
 
-# display_table_data("salon_user")
 # Registers users into the database table "user_table"
-
-
 def register_user(fullname, telephone, username, password):
     conn = None
     cur = None
@@ -109,8 +102,6 @@ def register_user(fullname, telephone, username, password):
         if cur is not None:
             cur.close()
 
-# register_user(145, "Alex","Dahlberg", "07294556621", "johndoe@example.se", "Alex223")
-
 
 # Reads data from the table user_table in database
 def display_table_data(user_table):
@@ -130,8 +121,6 @@ def display_table_data(user_table):
             cur.close()
         if conn is not None:
             conn.close()
-
-# display_table_data ("user_table")
 
 
 # Function to edit user data
@@ -169,8 +158,6 @@ def edit_user_data(username, new_first_name=None, new_last_name=None, new_teleph
             cur.close()
 
 
-# edit_user_data('Roma', 'Sheeran', '0739548372', 'roma.sheeran@outlook.com', 'Roma123')
-
 
 # Function to delete a user
 def delete_user(username):
@@ -190,7 +177,6 @@ def delete_user(username):
             conn.close()
             if cur is not None:
                 cur.close()
-# delete_user('johndoe@example.se')
 
 
 def get_salon_data(org_number):
