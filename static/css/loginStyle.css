@@ -10,7 +10,7 @@ body {
 }
 
 
-.register_from_container{
+.register_form_container {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -18,14 +18,14 @@ body {
 }
 
 
-.register_from_container {
+.register_form_container {
     padding: 40px;
     height: 800px;
     background-color: #f2efee82;
     box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
 }
 
-.register_from_container .title {
+.register_form_container .title {
     padding: 15px;
     text-align: center;
     font-size: 34px;
@@ -33,7 +33,7 @@ body {
 }
 
 
-.login_from_container{
+.login_form_container{
     margin: auto;
     width: 500px;
     padding: 40px;
@@ -65,6 +65,7 @@ input {
     width: 100%;
     padding: 1.2rem;
     border-radius: 9px;
+    background-color: rgb(222, 222, 222);
     border: none;
 }
 
@@ -74,7 +75,7 @@ label {
 
 input:focus {
     outline: none;
-    box-shadow: 0 0 0 1px rgba(249, 249, 249, 0.792);
+    box-shadow: 0 0 0 1px rgba(201, 201, 201, 0.792);
 }
 
 
@@ -91,7 +92,7 @@ form .user_details .input_pox {
 
 @media (max-width: 798px) {
 
-    .register_from_container{
+    .register_form_container{
         width: 100%;
         min-height: 100vh;
     }

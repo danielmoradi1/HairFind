@@ -17,7 +17,7 @@
     </head>
 
     <body>
-        <header class="home-header">
+        <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
                     <h1>HairFind</h1>
@@ -28,7 +28,7 @@
             </div>
         </header>
         <main class="container">
-            <div class="register_from_container">
+            <div class="register_form_container">
                 <h2 class="title">Skapa ett konto</h2>
                 <h4>Saknar du ett konto?</h4>
                 <p>Ange dina personliga uppgifter och börja resan med oss</p>
@@ -41,7 +41,7 @@
                 </div>
                 {% elif category == 'info' %}
                 <div class="alert alert-info" role="alert">
-                    {{ message }}
+                    {{ message }}from_container
                 </div>
                 {% elif category == 'warning' %}
                 <div class="alert alert-warning" role="alert">
@@ -55,26 +55,26 @@
                 {% endfor %}
                 {% endwith %}
 
-                <form class="singup" id="signUp" action="{{ url_for('register_customer')}}" method="post">
+                <form class="singup" action="{{ url_for('register_customer')}}" method="post">
                     <div class="user_details">
                         <div class="input_pox">
                             <label class="datails" for="full_name">Fullständigt namn</label>
-                            <input type="text" id="full_name" name="full_name" placeholder="Fyll i ditt namn">
+                            <input type="text" id="full_name" name="full_name" placeholder="Ange namn">
                         </div>
                         <div class="input_pox">
                             <label class="datails" for="phone_number">Telefonnummer</label>
                             <input type="text" id="phone_number" name="phone_number"
-                                placeholder="Fyll i din telefonnummer">
+                                placeholder="Ange telefonnummer">
                         </div>
 
                         <div class="input_pox">
-                            <label class="datails" for="email">e-post</label>
-                            <input type="text" id="email" name="username" placeholder="Fyll i din e-postadress">
+                            <label class="datails" for="email">E-post</label>
+                            <input type="text" id="email" name="username" placeholder="Ange E-post">
                         </div>
 
                         <div class="input_pox">
                             <label class="datails" for="password">Lösenord</label>
-                            <input type="password" id="password" name="password" placeholder="Välj ett lösenord">
+                            <input type="password" id="password" name="password" placeholder="Ange lösenord">
                         </div>
 
                         <div>
@@ -95,7 +95,7 @@
 
             <div class="footer-left">
                 <ul class="footer-links">
-                    <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                    <li><a href="{{url_for('home')}}">Startsida</a></li>
                     <li><a href="{{url_for('about')}}">Om oss</a></li>
                     <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
                 </ul>

@@ -16,8 +16,8 @@
     </head>
 
     <body>
-        <div class="wrapper">
-            <header class="home-header">
+        <div class="container-fluid">
+            <header class="header">
                 <div class="title">
                     <a href="{{url_for ('home')}}">
                         <h1>HairFind</h1>
@@ -60,7 +60,7 @@
                         <a id="cards_link" href="/salong.html/{{ salon.id }}" target="_blank">
                             <div class="image">
                                 <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                                    alt="gallery" />
+                                    alt="Photo" />
                             </div>
                             <div class="card">
                                 <div class="card-header">
@@ -89,7 +89,7 @@
 
             <div class="footer-left">
                 <ul class="footer-links">
-                    <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                    <li><a href="{{url_for('home')}}">Startsida</a></li>
                     <li><a href="{{url_for('about')}}">Om oss</a></li>
                     <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
                 </ul>

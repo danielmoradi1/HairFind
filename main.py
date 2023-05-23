@@ -1,7 +1,6 @@
 from db_connection import *
 import psycopg2
 import secrets
-import uuid
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
 from flask import Flask
@@ -14,7 +13,10 @@ from flask import session
 from flask_mail import Mail
 from flask_mail import Message
 from functools import wraps
-from wtforms import Form, StringField, TextAreaField, validators, IntegerField
+from wtforms import Form
+from wtforms import StringField
+from wtforms import TextAreaField
+from wtforms import validators
 
 
 webApp = Flask(__name__)
@@ -38,23 +40,34 @@ def send_new_password(email, new_password):
             email, new_password
             The send_new_password() tags two parameters:
             The user email and user new password.
+            Email = username
             Then it sends the new password to the user email with an email body
     """
     msg = Message("Nytt lösenord från HairFind",
-                  sender="service.hairfind@gmail.com")
+                sender="service.hairfind@gmail.com")
     msg.recipients = [email]
     msg.body = f'Hej {email}\nHAIRFIND \nDitt nya lösenord är: {new_password}'
     mail.send(msg)
 
+
+
 # Welcome message function
-
-
 def send_welcome_email(name, email):
+    """
+        Arg:
+            name, email
+            The send_welcome_email() tags two parameters:
+            The user name and user email.
+            Email = username
+            Then it sends a welcome text to the user
+    """
     msg = Message("Välkommen till HairFind",
-                  sender="service.hairfind@gmail.com")
+                sender="service.hairfind@gmail.com")
     msg.recipients = [email]
     msg.body = f'HAIRFIND \nHej {name} \nVälkomen till vårtjänst \nVi är glada att ha dig som kund!'
     mail.send(msg)
+
+
 
 
 def delete_confirmation(username):
@@ -63,21 +76,22 @@ def delete_confirmation(username):
     msg.body = f'HAIRFIND \nDitt konto {username} har raderats nu.\nDu är välkomen tillbaka!'
     mail.send(msg)
 
+
+
 # Home page
-
-
 @webApp.route('/')
 def home():
     cursor.execute("SELECT name, address, telephone FROM salon_user")
     salon_data = cursor.fetchall()
     return render_template('home.html', salon_data=salon_data)
 
+
+
 ############################
 ####    User functions #####
 ############################
 
 # Log In page for customer
-
 
 @webApp.route('/login_customer', methods=['GET', 'POST'])
 def login_customer():
@@ -237,7 +251,6 @@ def salon_login():
                     return render_template('salon_login.html')
             else:
                 flash('Vänligen ange din e-postadress och ditt lösenord', 'error')
-                # return render_template('salon_login.html')
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
@@ -297,9 +310,9 @@ def register_salon():
     else:
         return render_template('register_salon.html')
 
+
+
 # Check if user is logged in
-
-
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -309,6 +322,7 @@ def is_logged_in(f):
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('salon_login'))
     return wrap
+
 
 
 # Salon dashboard
@@ -333,14 +347,13 @@ def salon_dashboard():
 
 # Service Form Class
 class ArticleForm(Form):
-    name = StringField('name', [validators.Length(min=1, max=50)])
-    price = StringField('price', [validators.Length(min=1, max=10)])
+    name = StringField('Tjänstnamn', [validators.Length(min=1, max=50)])
+    price = StringField('Pris', [validators.Length(min=1, max=10)])
     description = TextAreaField(
-        'description', [validators.Length(min=10, max=200)])
+        'Beskrivning', [validators.Length(min=10, max=200)])
+
 
 # Add Service
-
-
 @webApp.route('/add_service', methods=['GET', 'POST'])
 @is_logged_in
 def add_service():
@@ -426,6 +439,7 @@ def delete_service(id):
     return redirect(url_for('salon_dashboard'))
 
 
+
 # Reset password function for both salon and user accounts
 @webApp.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
@@ -490,9 +504,9 @@ def logout():
 ################################
 ####    Content pages      #####
 ################################
+
+
 # About page
-
-
 @webApp.route('/about')
 def about():
     return render_template('about.html')

@@ -10,19 +10,19 @@
     </head>
 
     <body class="container">
-        <header class="">
+        <header>
             {% block body %}
             <h1>Dashboard <small>Välkommen {{fullname}}</small></h1>
         </header>
 
-        <main class="">
+        <main>
             <hr>
             <a class="btn btn-primary" href="{{url_for('add_service')}}">Lägga till tjänst</a>
             <hr>
 
             <table class="table table-striped">
                 <tr>
-                    <th>Tjänstnamn</th>
+                    <th>Tjänst</th>
                     <th>Pris</th>
                     <th>Beskrivning</th>
                     <th></th>
@@ -45,7 +45,6 @@
             </table>
             {% endblock %}
         </main>
-
 
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
             integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"

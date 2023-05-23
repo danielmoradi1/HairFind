@@ -5,8 +5,8 @@ CREATE TABLE IF NOT EXISTS User_table (
     Email_id VARCHAR(100) PRIMARY KEY,
     password VARCHAR(50) NOT NULL
     );
-					
-					
+
+				
 CREATE TABLE IF NOT EXISTS Salon_user(
 	Org_number int PRIMARY KEY, 
 	NAME VARCHAR(50) NOT NULL,
@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS SERVICE(
     FOREIGN KEY(Salon_username) REFERENCES Salon_user(username)
 );
 
+
 CREATE TABLE IF NOT EXISTS BOOKING(
     User_id serial NOT NULL,
     Service_id serial NOT NULL,
@@ -36,9 +37,6 @@ CREATE TABLE IF NOT EXISTS BOOKING(
 	FOREIGN KEY(User_id) REFERENCES User_table(User_id),
 	FOREIGN KEY(Service_id) REFERENCES SERVICE(Service_id)
 );
-
-
-
 
 
 .salon_discription{
@@ -116,65 +114,27 @@ CREATE TABLE IF NOT EXISTS BOOKING(
 
 
 
-"""
-# Reset password functionality for Salon
-@webApp.route('/reset_password', methods=['GET', 'POST'])
-def reset_password():
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        username = request.form['username']
-        new_password = request.form['password']
-        try:
-            # Check if the user already has in the database
-            cursor.execute(
-                "SELECT * FROM salon_user WHERE username = %s", (username,))
-            salon = cursor.fetchone()
 
-            cursor.execute(
-                "SELECT * FROM user_table WHERE username = %s", (username,))
-            user = cursor.fetchone()
 
-            # reset password for the salon user
-            if salon is not None:
-                username_salon = salon["username"]
-                hashed_password = generate_password_hash(new_password)
-                if isinstance(hashed_password, bytes):
-                    hashed_password = hashed_password.decode('utf-8')
-                cursor.execute(
-                    "UPDATE salon_user SET password = %s WHERE username = %s", (
-                        hashed_password, username_salon)
-                )
-                db_connection.commit()
-                email = username_salon
-                send_new_password(email, new_password)
-                print("Ditt lösenord har återställts")
-                flash(
-                    'Ditt lösenord har återställts. Var god logga in med ditt nya lösenord.', 'success')
-                return redirect(url_for('reset_password'))
-            # else:flash('Felaktig användare', 'warning')
+DB_connection.py
+Extra function
 
-            # Reset password for user
-            elif user is not None:
-                username_user = user["username"]
-                hashed_password = generate_password_hash(new_password)
-                if isinstance(hashed_password, bytes):
-                    hashed_password = hashed_password.decode('utf-8')
-                cursor.execute(
-                    "UPDATE user_table SET password = %s WHERE username = %s", (
-                        hashed_password, username_user)
-                )
-                db_connection.commit()
-                email = username_user
-                send_new_password(email, new_password)
-                print("Ditt lösenord har återställts")
-                flash(
-                    'Ditt lösenord har återställts. Var god logga in med ditt nya lösenord.', 'success')
-                return redirect(url_for('reset_password'))
-            else:
-                flash('Felaktig användare!', 'warning')
 
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-            flash('Ett fel inträffade. Försök igen senare', 'error')
-    return render_template('reset_password.html')
-
-"""
+# Reads data from the table user_table in database
+def display_table_data(user_table):
+    conn = None
+    cur = None
+    try:
+        conn = database_connection()
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM user_table")
+        rows = cur.fetchall()
+        for row in rows:
+            print(row)
+    except (Exception, psycopg2.databaseError) as error:
+        print("Error while fetching data from user_table", error)
+    finally:
+        if cur is not None:
+            cur.close()
+        if conn is not None:
+            conn.close()

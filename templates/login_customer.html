@@ -13,12 +13,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <!--<script src="{{ url_for('static', filename='js/form.js') }}"></script> -->
         <title>Inloggning för kund</title>
     </head>
 
     <body>
-        <header class="home-header">
+        <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
                     <h1>HairFind</h1>
@@ -28,9 +27,10 @@
                 <a class="btn btn-primary" href="{{url_for('salon_login')}}">Frisör</a>
             </div>
         </header>
+        
         <main class="container">
-            <div class="login_from_container">
-                <h2 class="title">Logga in</h2>
+            <div class="login_form_container">
+                <h2 class="title">Kund inloggning</h2>
                 <h4>Välkommen tillbaka!</h4>
                 <p>För att hålla kontakten med oss vänligen logga in med din personliga information</p>
 
@@ -78,7 +78,7 @@
 
             <div class="footer-left">
                 <ul class="footer-links">
-                    <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                    <li><a href="{{url_for('home')}}">Startsida</a></li>
                     <li><a href="{{url_for('about')}}">Om oss</a></li>
                     <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
                 </ul>

@@ -17,7 +17,7 @@
 
     <body>
 
-        <header class="home-header">
+        <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
                     <h1>HairFind</h1>
@@ -29,8 +29,8 @@
         </header>
 
         <main class="container">
-            <div class="login_from_container">
-                <h2 class="title">Logga in</h2>
+            <div class="login_form_container">
+                <h2 class="title">Frisör inloggning</h2>
                 <h4>Välkommen tillbaka!</h4>
                 <p>För att hålla kontakten med oss vänligen logga in med din personliga information</p>
                 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -49,13 +49,13 @@
                 
                 <form class="login-form" id="salon_login" action="{{ url_for('salon_login') }}" method="post">
                     <div>
-                        <label for="username">Användarnamn </label>
-                        <input id="username" type="username" placeholder="Fyll i din e-postadress " name="username" />
+                        <label for="username">E-post </label>
+                        <input id="username" type="username" placeholder="Ange e-post " name="username" />
                     </div>
 
                     <div>
-                        <label for="password">Password </label>
-                        <input id="password" type="password" placeholder="Fyll i ditt lösenord" name="password" />
+                        <label for="password">Lösenord </label>
+                        <input id="password" type="password" placeholder="Ange lösenord" name="password" />
                     </div>
 
                     <div class="forgot_link">
@@ -80,7 +80,7 @@
 
             <div class="footer-left">
                 <ul class="footer-links">
-                    <li><a href="{{url_for('home')}}">Start sidan</a></li>
+                    <li><a href="{{url_for('home')}}">Startsida</a></li>
                     <li><a href="{{url_for('about')}}">Om oss</a></li>
                     <li><a href="{{url_for('contact')}}">Kontakta oss</a></li>
                 </ul>
