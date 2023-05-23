@@ -44,11 +44,10 @@ def send_new_password(email, new_password):
             Then it sends the new password to the user email with an email body
     """
     msg = Message("Nytt lösenord från HairFind",
-                sender="service.hairfind@gmail.com")
+                  sender="service.hairfind@gmail.com")
     msg.recipients = [email]
     msg.body = f'Hej {email}\nHAIRFIND \nDitt nya lösenord är: {new_password}'
     mail.send(msg)
-
 
 
 # Welcome message function
@@ -62,12 +61,10 @@ def send_welcome_email(name, email):
             Then it sends a welcome text to the user
     """
     msg = Message("Välkommen till HairFind",
-                sender="service.hairfind@gmail.com")
+                  sender="service.hairfind@gmail.com")
     msg.recipients = [email]
     msg.body = f'HAIRFIND \nHej {name} \nVälkomen till vårtjänst \nVi är glada att ha dig som kund!'
     mail.send(msg)
-
-
 
 
 def delete_confirmation(username):
@@ -77,14 +74,13 @@ def delete_confirmation(username):
     mail.send(msg)
 
 
-
 # Home page
 @webApp.route('/')
 def home():
-    cursor.execute("SELECT name, address, telephone FROM salon_user")
+    cursor.execute(
+        "SELECT org_number, name, address, telephone FROM salon_user")
     salon_data = cursor.fetchall()
     return render_template('home.html', salon_data=salon_data)
-
 
 
 ############################
@@ -311,7 +307,6 @@ def register_salon():
         return render_template('register_salon.html')
 
 
-
 # Check if user is logged in
 def is_logged_in(f):
     @wraps(f)
@@ -322,7 +317,6 @@ def is_logged_in(f):
             flash('Unauthorized, Please login', 'danger')
             return redirect(url_for('salon_login'))
     return wrap
-
 
 
 # Salon dashboard
@@ -362,7 +356,6 @@ def add_service():
         name = form.name.data
         price = int(form.price.data)  # Convert price to an integer
         description = form.description.data
-        image = '121212'
 
         try:
             # Check if ID exists
@@ -378,9 +371,9 @@ def add_service():
                 service_id = 1
 
             # Execute the action
-            insert_script = "INSERT INTO service (service_id, service_name, price, description, image, salon_username) VALUES(%s, %s, %s, %s, %s, %s)"
+            insert_script = "INSERT INTO service (service_id, service_name, price, description, salon_username) VALUES(%s, %s, %s, %s, %s)"
             insert_value = (service_id, name, price,
-                            description, image, session['username'])
+                            description, session['username'])
             cursor.execute(insert_script, insert_value)
 
             db_connection.commit()
@@ -437,7 +430,6 @@ def delete_service(id):
     db_connection.commit()
     flash('Tjänsten har tagits bort!', 'success')
     return redirect(url_for('salon_dashboard'))
-
 
 
 # Reset password function for both salon and user accounts
@@ -518,11 +510,17 @@ def contact():
     return render_template('contact_us.html')
 
 
-# Define  a dynamic route
-@webApp.route('/salon/<int:org_number>')
-def display_salon(org_number):
-    row_data = get_salon_data(org_number)
-    return render_template('salon.html', row_data=row_data)
+@webApp.route('/salon/<int:salon_id>')
+def salon_page(salon_id):
+    salon_data = get_salon_data(salon_id)
+    if not salon_data:
+        return "Salon not found"
+
+    username = salon_data[1]
+    service_info = get_service_info(username)
+
+    return render_template('salon.html', salon_data=salon_data, service_info=service_info)
+
 
 
 if __name__ == "__main__":

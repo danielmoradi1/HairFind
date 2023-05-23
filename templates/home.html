@@ -16,7 +16,7 @@
     </head>
 
     <body>
-        <div class="container-fluid">
+        <div class="">
             <header class="header">
                 <div class="title">
                     <a href="{{url_for ('home')}}">
@@ -57,14 +57,14 @@
                 <div class="card">
                     {% for salon in salon_data %}
                     <div class="col-md-4">
-                        <a id="cards_link" href="/salong.html/{{ salon.id }}" target="_blank">
+                        <a id="cards_link" href="/salon/{{salon.org_number}}" target="_blank">
                             <div class="image">
                                 <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
                                     alt="Photo" />
                             </div>
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">{{ salon.name }}</h5>
+                                    <h5 class="card-title">{{salon.name}}</h5>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text"> <strong>Adress</strong>: {{ salon.address }}</p>
@@ -72,13 +72,12 @@
                                 </div>
                             </div>
                         </a>
-
                     </div>
                     {% endfor %}
                 </div>
                 {% endblock %}
+            </main>
         </div>
-        </main>
 
         <footer class="footer-distributed">
             <div class="footer-right">

@@ -138,3 +138,25 @@ def display_table_data(user_table):
             cur.close()
         if conn is not None:
             conn.close()
+
+
+
+
+
+@webApp.route('/salon/<int:salon_id>')
+def salon_page(salon_id):
+    # Retrieve salon data based on the salon_id
+    cursor.execute(
+        "SELECT name, username, telephone, address FROM salon_user WHERE org_number = %s", (salon_id,))
+    salon_data = cursor.fetchone()
+    if not salon_data:
+    # Handle case where salon ID is not found
+        return "Salon not found"
+    username = salon_data[1] 
+    cursor.execute(
+        "SELECT service_name, price, description FROM service WHERE salon_username = %s", (username,))
+    service_info = cursor.fetchall()
+    if not service_info: 
+        return "Service not found"
+    # Pass the salon data to the template for rendering
+    return render_template('salon.html', salon_data = salon_data, service_info = service_info)

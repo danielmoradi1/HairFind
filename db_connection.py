@@ -35,7 +35,6 @@ def database_connection():
 db_connection = database_connection()
 cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
-
 # Function to register_salon
 def register_salon_to_DB(org_number, name, username, telephone, address, password):
     """
@@ -174,25 +173,23 @@ def delete_user(username):
             if cur is not None:
                 cur.close()
 
+def get_salon_data(salon_id):
+    cursor.execute(
+        "SELECT name, username, telephone, address FROM salon_user WHERE org_number = %s", (salon_id,))
+    salon_data = cursor.fetchone()
+    
+    if not salon_data:
+        # Handle case where salon ID is not found
+        return None
+    return salon_data
 
 
-def get_salon_data(org_number):
-    conn = None
-    cur = None
+def get_service_info(username):
+    cursor.execute(
+        "SELECT service_name, price, description FROM service WHERE salon_username = %s", (username,))
+    service_info = cursor.fetchall()
 
-    try:
-        conn = database_connection()
-        cur = conn.cursor()
-        cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        query = "SELECT * FROM salon_user WHERE id=%s"
-        cur.execute(query, (org_number))
-        row_data = cur.fetchone()
-        conn.close()
-        return row_data
-    except (Exception, psycopg2.DatabaseError) as error:
-        print("Error while loading a salon from the salon_user")
-    finally:
-        if conn is not None:
-            conn.close()
-            if cur is not None:
-                cur.close()
+    if not service_info:
+        # Handle case where no services are found
+        return None
+    return service_info

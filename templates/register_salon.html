@@ -77,8 +77,7 @@
 
                         <div class="input_pox">
                             <label class="datails" for="phone_number">Telefonnummer</label>
-                            <input type="text" id="phone_number" name="phone_number"
-                                placeholder="Ange telefonnummer">
+                            <input type="text" id="phone_number" name="phone_number" placeholder="Ange telefonnummer">
                         </div>
 
                         <div class="input_pox">
@@ -91,6 +90,13 @@
                             <input type="password" id="password" name="password"
                                 placeholder="Ange ett lösenord (minst 4 tecken)">
                         </div>
+
+                        <div class="input_pox">
+                            <label for="url">länk till foto</label>
+                            <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*"
+                                size="50">
+                        </div>
+
                         <div>
                             <button id="singIn_btn" class="btn btn-primary" type="submit" value="Log in">Skapa ett
                                 konto</button>
