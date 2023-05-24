@@ -42,9 +42,25 @@
                 </div>
 
                 <div class="search-box">
-                    <form action ="/search" method="GET">
-                        <input class="search-input" type="text" placeholder="Sök">
-                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    <form action="/search" method="GET">
+                        <input type="text" name="query" placeholder="Enter your search query">
+                        <select name="category">
+                            <option value="">All Categories</option>
+                            <option value="category1">Afro</option>
+                            <option value="category2">Spiky</option>
+                            <option value="category2">Shaved</option>
+                            <option value="category2">Crewcut</option>
+                            <option value="category2">Curly</option>
+                            <!-- Add more options for categories -->
+                        </select>
+                        <select name="price_range">
+                            <option value="">All Prices</option>
+                            <option value="0-100">Sek0 - Sek100</option>
+                            <option value="100-200">Sek100 - Sek200</option>
+                            <option value="300-500">Sek300 - Sek500</option>
+                            <!-- Add more options for price ranges -->
+                        </select>
+                        <button type="submit">Search</button>
                     </form>
                 </div>
             </nav>

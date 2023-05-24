@@ -524,8 +524,25 @@ def salon_page(salon_id):
 @webApp.route('/search')
 def search():
     query = request.args.get('query') #Get the search query from the request arguments
-    cursor.execute("SELECT * FROM salon_user WHERE username LIKE %S", ('%' + query + '%',)) #Perform a case-insensitive search
-    results = cursor.fetchall() #Retrieve the search results
+    category = request.args.get('category')
+    price_range = request.args.get('price_range')
+
+
+    # Construct 
+    sql_query = "SELECT * FROM salon_user WHERE NAME ILIKE '%{}%'".format(query)
+
+    if category:
+        sql_query += "AND category = '{}'".format(category)
+    
+    if price_range:
+        min_price, max_price = price_range.splite('-')
+        sql_query += "AND price >= {} AND price <= {}".format(min_price, max_price)
+
+
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
+
+    
     return render_template('Results.html', results=results)
 
 if __name__ == "__main__":

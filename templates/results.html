@@ -33,9 +33,23 @@
                 <h2 class="title">Sökning</h2>
                 <h4>Välkommen tillbaka!</h4>
                 <p>
-                    {% for result in results %}
-                        {{result}}
-                    {% endfor %}
+                    {% if results %}
+                        <p>Showing results for: {{ query }}</p>
+                        {% if category %} 
+                            <p>Category: {{ category }}</p>
+                        {% endif %} 
+                        {% if price_range %} 
+                            <p>Price range: {{ price_range }}</p>
+                        {% endid %} 
+
+                        {% for result in results %} 
+                            <p>{{ result }}</p>
+
+                        {% endfor %} 
+
+                    {% else %} 
+                        <p> No results found.</p>
+                    {% endif %}    
                 </p>
                 
             </div>
