@@ -521,7 +521,12 @@ def salon_page(salon_id):
 
     return render_template('salon.html', salon_data=salon_data, service_info=service_info)
 
-
+@webApp.route('/search')
+def search():
+    query = request.args.get('query') #Get the search query from the request arguments
+    cursor.execute("SELECT * FROM salon_user WHERE username LIKE %S", ('%' + query + '%',)) #Perform a case-insensitive search
+    results = cursor.fetchall() #Retrieve the search results
+    return render_template('Results.html', results=results)
 
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)
