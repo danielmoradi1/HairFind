@@ -325,18 +325,72 @@ def is_logged_in(f):
 def salon_dashboard():
     username = session['username']
     cursor.execute(
-        "SELECT NAME FROM Salon_user WHERE username = %s", (username,))
+        "SELECT org_number, name FROM Salon_user WHERE username = %s", (username,))
     user_info = cursor.fetchone()
 
     if user_info:
-        fullname = user_info[0]
+        salon_id = user_info[0]
+        fullname = user_info[1]
         cursor.execute(
             "SELECT * FROM service WHERE salon_username = %s", (username,))
         services = cursor.fetchall()
 
-        return render_template('salon_dashboard.html', services=services, fullname=fullname)
+        return render_template('salon_dashboard.html', services=services, fullname=fullname, salon_id=salon_id)
 
     return render_template('salon_login.html')
+
+
+# route for salon profile
+@webApp.route('/salon_profile')
+def salon_profile():
+    salon_id = request.args.get('salon_id')
+
+    cursor.execute(
+        "SELECT * FROM salon_user WHERE org_number = %s", (salon_id,))
+    salon_info = cursor.fetchall()
+
+    if salon_info:
+        return render_template('salon_profile.html', salon_info=salon_info)
+
+    return render_template('salon_profile.html')
+
+
+
+
+# username = session['username']
+# Route for handling the form submission
+@webApp.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        description = 'Hej'
+        image = request.files['image'].read()
+        salon_username = request.form['salon_username']
+
+        try:
+            # Check if an image already exists
+            cursor.execute(
+                "SELECT id FROM salon_info WHERE salon_username = %s", (salon_username,))
+            result = cursor.fetchone()
+
+            if result:
+                cursor.execute(
+                    "DELETE FROM salon_info WHERE salon_username = %s", (salon_username,))
+                
+            # Inserting the data into the database
+                cursor.execute("INSERT INTO salon_info (description, image, salon_username) VALUES (%s, %s, %s) RETURNING id",
+                           (description, psycopg2.Binary(image), salon_username))
+                db_connection.commit()
+                flash('Image uploaded and saved to the database.', 'success')
+                return redirect(url_for('salon_profile'))
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            flash('An error occurred. Please try again later.', 'error')
+
+    return redirect(url_for('salon_profile'))
+
+
+
 
 
 # Service Form Class
@@ -510,7 +564,7 @@ def contact():
     return render_template('contact_us.html')
 
 
-@webApp.route('/salon/<int:salon_id>')
+@webApp.route('/salon_page/<int:salon_id>')
 def salon_page(salon_id):
     salon_data = get_salon_data(salon_id)
     if not salon_data:
@@ -519,8 +573,7 @@ def salon_page(salon_id):
     username = salon_data[1]
     service_info = get_service_info(username)
 
-    return render_template('salon.html', salon_data=salon_data, service_info=service_info)
-
+    return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
 
 
 if __name__ == "__main__":

@@ -53,11 +53,11 @@
                 <div class="salon_discription">
                     <h2>Top salong</h2>
                 </div>
-                {% block content %}
-                <div class="card">
-                    {% for salon in salon_data %}
-                    <div class="col-md-4">
-                        <a id="cards_link" href="/salon/{{salon.org_number}}" target="_blank">
+                <div class="card" id="cards">
+                    {% if salon_data %}
+                        {% for salon in salon_data %}
+                    <div class="col-md-3">
+                        <a id="cards_link" href="/salon_page/{{salon.org_number}}" target="_blank">
                             <div class="image">
                                 <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
                                     alt="Photo" />
@@ -75,7 +75,9 @@
                     </div>
                     {% endfor %}
                 </div>
-                {% endblock %}
+                {% else %}
+                    <p>Inga salong!</p>
+                {% endif %}
             </main>
         </div>
 

@@ -1,0 +1,39 @@
+
+.navbar{
+    background-image: url(/static/css/img/salon_img.jpg);   
+    height: 50vh;
+    text-align: center;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.salon_information{
+    margin: 50px 0px;
+}
+
+
+.salon_information .title{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 50px;
+}
+
+
+/** Salon Dashboard Style **/
+.dashboard_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.profile_icon{
+    display: flex;
+    gap:2em;
+}
+
+.profile_icon a{
+    font-size: 25px;
+}

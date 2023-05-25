@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+.salon_profile_nav {
+    text-align: center;
+}
+
+.salon_profile_nav img {
+    width: 100%;
+    height: 50vh;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+.img {
+    position: relative;
+}
+
+
+.text-container {
+    background-color: rgba(0, 0, 0, 0.54);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    box-sizing: border-box;
+    line-height: 3em;
+}
+
+.navbar input {
+    color: rgb(44, 44, 44);
+    border: none;
+}
+
+.upload-icon {
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.upload-icon i {
+    font-size: 50px;
+}
+
+.dashboard_header {
+    padding: 5px 50px;
+}
+
+
+#container{
+    margin-top: 20px;
+}
+
+.salon_info_from_db{
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.info_box{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+p:first-child {
+    font-size: 16px;
+    font-weight: 600;
+}

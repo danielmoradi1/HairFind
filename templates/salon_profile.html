@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static/css/salon_profile.css">
+        <link rel="stylesheet" href="/static/css/salon_page.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% for info in salon_info %}
+        <title>{{info.name}}</title>
+    </head>
+
+    <body>
+        <header class="dashboard_header">
+            <div class="dashboard_title">
+                <h1>Min sida <br><small>{{info.name}}</small></h1>
+            </div>
+
+            <div class="profile_icon">
+                <a href="#"><i class="fa-solid fa-list"></i></i></a>
+                <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+            </div>
+        </header>
+
+        <nav class="salon_profile_nav">
+            <div class="img">
+                <img src="/static/css/img/salon_img.jpg" alt="Salong foto">
+                <div class="text-container">
+                    <form class="img_form" action="{{url_for('upload')}}" method="post" enctype="multipart/form-data">
+
+                        <div>
+                            <input type="hidden" name="salon_username" value="{{info.username}}">
+                        </div>
+
+                        <div>
+                            <label for="image-upload" class="upload-icon">
+                                <i class="fa-solid fa-file-arrow-up"></i>
+                                <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;">
+                            </label>
+                        </div>
+                        <h3>Ladda upp en bild</h3>
+                        <div>
+                            <button class="btn btn-primary" type="submit" value="change">Skicka</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+        <main class="container" id="container">
+
+            <div class="salon_info_from_db">
+                <h3>Information</h3>
+                <hr>
+                <div class="info_box">
+                    <p>Organisationsnummer:</p>
+                    <p>{{info.org_number}}</p>
+                </div>
+                <div class="info_box">
+                    <p>Namn:</p>
+                    <p>{{info.name}}</p>
+                </div>
+                <div class="info_box">
+                    <p>E-post:</å>
+                    <p>{{info.username}}</p>
+                </div>
+                <div class="info_box">
+                    <p>Mobilenummer:</p>
+                    <p>{{info.telephone}}</p>
+                </div>
+                <div class="info_box">
+                    <p>Adress:</p>
+                    <p>{{info.address}}</p>
+                </div>
+            </div>
+
+
+
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Redigera
+            </button>
+
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Ändra information</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <form>
+                                <!-- Form fields go here -->
+                                <div class="form-group">
+                                    <label for="name">Namn</label>
+                                    <input type="text" class="form-control" id="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Mobilenummer</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Adress</label>
+                                    <input type="email" class="form-control" id="email">
+                                </div>
+                                <!-- Add more form fields as needed -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Skicka</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+
+        {% endfor %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+
+</html>

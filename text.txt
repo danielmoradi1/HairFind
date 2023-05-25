@@ -39,6 +39,16 @@ CREATE TABLE IF NOT EXISTS BOOKING(
 );
 
 
+CREATE TABLE IF NOT EXISTS salon_info (
+    id SERIAL PRIMARY KEY,
+    DESCRIPTION VARCHAR(400) NOT NULL,
+    Image bytea,
+    Salon_username VARCHAR(50),
+    FOREIGN KEY(Salon_username) REFERENCES Salon_user(username)
+);
+
+
+
 .salon_discription{
     text-align: center;
     padding: 150px 0px 20px 0px;
@@ -160,3 +170,29 @@ def salon_page(salon_id):
         return "Service not found"
     # Pass the salon data to the template for rendering
     return render_template('salon.html', salon_data = salon_data, service_info = service_info)
+
+
+
+
+
+$(document).ready(function () {
+    $('form').on('submit', function (event) {
+        $.ajax({
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            },
+            type: 'POST',
+            url: '/login_customer'
+        })
+            .done(function (data) {
+                if (data.error) {
+                    $('#errorAlert').text(data.error).show();
+                    $('#successAlert').hide();
+                } else {
+                    $('#successAlert').text(data['you are successfuly logged in ']).show();
+                    $('#errorAlert').hide();
+                }
+            });
+    });
+});

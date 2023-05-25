@@ -56,7 +56,7 @@
                 {% endfor %}
                 {% endwith %}
 
-                <form class="singup" id="salonForm" action="{{ url_for('register_salon')}}" method="post">
+                <form class="singup" id="salonForm" action="{{ url_for('register_salon')}}" method="post" enctype="multipart/form-data">
                     <div class="user_details">
 
                         <div class="input_pox">
@@ -89,12 +89,6 @@
                             <label class="datails" for="password">Lösenord</label>
                             <input type="password" id="password" name="password"
                                 placeholder="Ange ett lösenord (minst 4 tecken)">
-                        </div>
-
-                        <div class="input_pox">
-                            <label for="url">länk till foto</label>
-                            <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*"
-                                size="50">
                         </div>
 
                         <div>
