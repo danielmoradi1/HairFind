@@ -43,9 +43,8 @@
 
             
                 <div>  
-                    <form>    
+                    <form action="{{ url_for('search') }}" method="GET">    
                         <select name="Type av Tjänst">
-                            <option value="">T</option>
                             <option value="Service1">Klippning</option>
                             <option value="Service2">Färgning</option>
                             <option value="Service3">Naglar</option>
@@ -56,12 +55,12 @@
                         </select>
                         <select name="Pris">
                             <option value="">All Prices</option>
-                            <option value="0-100">SEK0 - SEK100</option>
-                            <option value="100-200">SEK100 - SEK200</option>
-                            <option value="300-500">SEK300 - SEk500</option>
+                            <option value="0-100">0 kr - 200 kr</option>
+                            <option value="100-200">200 kr - 500 kr</option>
+                            <option value="300-500">500 kr - 1000 kr</option>
                             <!-- Add more options for price ranges -->
                         </select>
-                        <button type="submit">Search</button>
+                        <button type="submit" name="submit">Search</button>
                     </form>
                 </div>
             </nav>

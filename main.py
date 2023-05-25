@@ -19,6 +19,7 @@ from wtforms import TextAreaField
 from wtforms import validators
 
 
+
 webApp = Flask(__name__)
 # Database connection function
 db_connection = database_connection()
@@ -521,27 +522,33 @@ def salon_page(salon_id):
 
     return render_template('salon.html', salon_data=salon_data, service_info=service_info)
 
-@webApp.route('/search')
+@webApp.route('/search', methods=['GET', 'POST'])
 def search():
+    print('works fine till this point')
     query = request.args.get('query') #Get the search query from the request arguments
     service = request.args.get('service_name')
     price_range = request.args.get('price')
-    description = request.args.get('description')
-    salon_name = request.args.get('name')
-    salon_address = request.args.get('address')
-    salon_contact = request.args.get('telephone')
+    #description = request.args.get('description')
+    #salon_name = request.args.get('name')
+    #salon_address = request.args.get('address')
+    #salon_contact = request.args.get('telephone')
 
-
+    print("Query:", query)
+    print("Service:", service)
+    print("Price Range:", price_range)
     # Construct 
-    sql_query = "SELECT * FROM SERVICES_LIST WHERE NAME ILIKE '%{}%'".format(query)
+    sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"
+    
+    if query:
+        sql_query += "AND service_name LIKE '%{}%".format(query)
 
     if service:
-        sql_query += "AND service = '{}'".format(service)
+        sql_query += "AND service_name = '{}'".format(service)
     
     if price_range:
         min_price, max_price = price_range.splite('-')
         sql_query += "AND price >= {} AND price <= {}".format(min_price, max_price)
-
+    '''
     if description:
         sql_query += "AND description = '{}'".format(description)
 
@@ -553,13 +560,13 @@ def search():
 
     if salon_contact: 
         sql_query += "AND telephone = '{}'".format(salon_contact)
-
+    '''
 
     cursor.execute(sql_query)
     results = cursor.fetchall()
-
+    print(results)
     
-    return render_template('Results.html', results=results)
+    return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
 
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)
