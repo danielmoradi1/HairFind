@@ -10,7 +10,6 @@ from flask import render_template
 from flask import request
 from flask import flash
 from flask import session
-from flask_session import Session
 from flask_mail import Mail
 from flask_mail import Message
 from functools import wraps
