@@ -32,7 +32,7 @@
             <div class="login_form_container">
                 <h2 class="title">Sökning</h2>
                 <h4>Välkommen tillbaka!</h4>
-                <p>
+               
                     {% if results %}
                         <p>Showing results for: {{ query }}</p>
                         {% if category %} 
@@ -40,17 +40,15 @@
                         {% endif %} 
                         {% if price_range %} 
                             <p>Price range: {{ price_range }}</p>
-                        {% endid %} 
+                        {% endif %} 
 
                         {% for result in results %} 
                             <p>{{ result }}</p>
-
                         {% endfor %} 
-
                     {% else %} 
                         <p> No results found.</p>
                     {% endif %}    
-                </p>
+                
                 
             </div>
         </main>
