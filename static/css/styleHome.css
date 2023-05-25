@@ -112,58 +112,48 @@ body {
 
 
 
-
 /**
     Cards
 **/
 /** Service Information **/
-
-
 .cards_info {
     padding: 150px 0px 20px 0px;
     text-transform: uppercase;
     text-align: center;
 }
 
-.card-box{
+.card-box {
     display: flex;
     justify-content: center;
-    flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: 3em;
+    margin-bottom: 2em;
     gap: 2em;
 }
 
-.card-box :hover{
-    color:steelblue;
-    transition: calc(1 s);
-
+.card-box :hover {
+    color: steelblue;
+    transition: 1s;
 }
 
 .card {
+    width: 100%;
     max-width: 30em;
     background-color: #696969;
     border: none;
     box-shadow: 0 5px 5px rgba(108, 108, 108, 0.256);
-    margin: 2em auto;
 }
 
-.card-description a{
+.card-description a {
     color: #505050;
 }
 
 .card img {
-    max-width: 100%;
+    width: 100%;
 }
 
-.card-body {
-    display: flex;
-    justify-content: space-between;
-}
-
-@media screen and (max-width: 475px) {
-    .card {
-        font-size: 0.9em;
+@media screen and (max-width: 768px) {
+    .card-box {
+        background-color: rgb(178, 178, 178);
     }
 }
 

@@ -17,6 +17,7 @@ from wtforms import Form
 from wtforms import StringField
 from wtforms import TextAreaField
 from wtforms import validators
+from flask import jsonify
 
 
 webApp = Flask(__name__)
@@ -181,7 +182,6 @@ def customer_profile():
         cursor.execute(
             "SELECT fullname, telephone FROM user_table WHERE username = %s", (username,))
         user_info = cursor.fetchall()
-        print(user_info)
         fullname = user_info[0][0]
         telephone = user_info[0][1]
         return render_template('customer_profile.html', username=username, fullname=fullname, telephone=telephone)
@@ -189,15 +189,34 @@ def customer_profile():
         return render_template('login_customer.html')
 
 
-# Delete user account
-@webApp.route('/delete_user/<username>', methods=['GET'])
+# Check if user is logged in
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'loggedin' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorized, Please login', 'danger')
+            return redirect(url_for('salon_login'))
+    return wrap
+
+
+# Delete user account from the database
+@webApp.route('/delete_user/<username>', methods=['POST'])
 def delete_user_account(username):
     if 'loggedin' in session:
-        delete_user(username)
-        delete_confirmation(username)
-        return redirect(url_for('logout'))
+        if request.method == 'POST':
+            delete_user(username)
+            delete_confirmation(username)
+            return jsonify({'status': 'success', 'redirect': url_for('login_customer')})
+        else:
+            return render_template('customer_profile.html', username=username)
     else:
-        return render_template('login_customer.html')
+        flash('Unauthorized, Please login', 'danger')
+        return redirect(url_for('login_customer'))
+
+
+
 
 
 # function to check if salon_user already exists
@@ -307,18 +326,6 @@ def register_salon():
         return render_template('register_salon.html')
 
 
-# Check if user is logged in
-def is_logged_in(f):
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        if 'loggedin' in session:
-            return f(*args, **kwargs)
-        else:
-            flash('Unauthorized, Please login', 'danger')
-            return redirect(url_for('salon_login'))
-    return wrap
-
-
 # Salon dashboard
 @webApp.route('/salon_dashboard')
 @is_logged_in
@@ -355,8 +362,6 @@ def salon_profile():
     return render_template('salon_profile.html')
 
 
-
-
 # Route for handling the form submission
 @webApp.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -374,10 +379,10 @@ def upload():
             if result:
                 cursor.execute(
                     "DELETE FROM salon_info WHERE salon_username = %s", (salon_username,))
-                
+
             # Inserting the data into the database
                 cursor.execute("INSERT INTO salon_info (description, image, salon_username) VALUES (%s, %s, %s) RETURNING id",
-                           (description, psycopg2.Binary(image), salon_username))
+                               (description, psycopg2.Binary(image), salon_username))
                 db_connection.commit()
                 flash('Image uploaded and saved to the database.', 'success')
                 return redirect(url_for('salon_profile'))
@@ -388,6 +393,10 @@ def upload():
     return redirect(url_for('salon_profile'))
 
 
+@webApp.route('/edit_salon_profile/<string:salon_id>', methods=['POST', 'GET'])
+def edit_salon_profile(salon_id):
+    print(salon_id)
+    return 'Edit Profile'
 
 
 # Service Form Class
@@ -576,6 +585,3 @@ def salon_page(salon_id):
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)
     webApp.run(debug=True)
-
-
-

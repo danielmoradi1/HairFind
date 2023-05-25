@@ -2,6 +2,8 @@ import psycopg2
 import psycopg2.extras
 
 # Database connection function
+
+
 def database_connection():
     """
         The database_connection() function connects to the MAU database
@@ -9,7 +11,7 @@ def database_connection():
         return connection
     """
 
-#https://pgserver.mau.se:6502/kill.html
+# https://pgserver.mau.se:6502/kill.html
     # Information about the MAU database
     hostname = 'pgserver.mau.se'
     database_name = 'hairfind_db'
@@ -38,6 +40,8 @@ db_connection = database_connection()
 cursor = db_connection.cursor(cursor_factory=psycopg2.extras.DictCursor)
 
 # Function to register_salon
+
+
 def register_salon_to_DB(org_number, name, username, telephone, address, password):
     """
         Arg:
@@ -45,7 +49,7 @@ def register_salon_to_DB(org_number, name, username, telephone, address, passwor
         org_number, name, username, telephone, address, password
         The register_salon_to_DB() register salon to the database
     """
-        
+
     conn = None
     cur = None
 
@@ -167,19 +171,21 @@ def delete_user(username):
         delete_script = f"DELETE FROM user_table WHERE username = '{username}'"
         cur.execute(delete_script)
         conn.commit()
+        print('User deleted successfully!')
     except (Exception, psycopg2.DatabaseError) as error:
-        print("Error while deleting user form the table", error)
+        print("Error while deleting user from the table:", error)
     finally:
+        if cur is not None:
+            cur.close()
         if conn is not None:
             conn.close()
-            if cur is not None:
-                cur.close()
+
 
 def get_salon_data(salon_id):
     cursor.execute(
         "SELECT name, username, telephone, address FROM salon_user WHERE org_number = %s", (salon_id,))
     salon_data = cursor.fetchone()
-    
+
     if not salon_data:
         # Handle case where salon ID is not found
         return None
@@ -195,6 +201,4 @@ def get_service_info(username):
         # Handle case where no services are found
         return None
     return service_info
-
-
 
