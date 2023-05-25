@@ -16,70 +16,69 @@
     </head>
 
     <body>
-        <div class="">
-            <header class="header">
-                <div class="title">
-                    <a href="{{url_for ('home')}}">
-                        <h1>HairFind</h1>
-                    </a>
-                </div>
-                <div class="nav_btn">
-                    <a class="btn btn-primary" href="{{url_for('login_customer')}}">Kund</a>
-                    <a class="btn btn-primary" href="{{url_for('salon_login')}}">Frisör</a>
-                </div>
-            </header>
+        <header class="header">
+            <div class="title">
+                <a href="{{url_for ('home')}}">
+                    <h1>HairFind</h1>
+                </a>
+            </div>
+            <div class="nav_btn">
+                <a class="btn btn-primary" href="{{url_for('login_customer')}}">Kund</a>
+                <a class="btn btn-primary" href="{{url_for('salon_login')}}">Frisör</a>
+            </div>
+        </header>
 
-            <nav class="navbar">
-                <div class="listFilter">
-                    <ul>
-                        <li><button type="button" class="tag_btn">Klippning</button></li>
-                        <li><button type="button" class="tag_btn">Färgning</button></li>
-                        <li><button type="button" class="tag_btn">Skägg</button></li>
-                        <li><button type="button" class="tag_btn">Långt hår</button></li>
-                        <li><button type="button" class="tag_btn">Lockar</button></li>
-                        <li><button type="button" class="tag_btn">Afro</button></li>
-                    </ul>
-                </div>
+        <nav class="navbar">
+            <div class="listFilter">
+                <ul>
+                    <li><button type="button" class="tag_btn">Klippning</button></li>
+                    <li><button type="button" class="tag_btn">Färgning</button></li>
+                    <li><button type="button" class="tag_btn">Skägg</button></li>
+                    <li><button type="button" class="tag_btn">Långt hår</button></li>
+                    <li><button type="button" class="tag_btn">Lockar</button></li>
+                    <li><button type="button" class="tag_btn">Afro</button></li>
+                </ul>
+            </div>
 
-                <div class="search-box">
-                    <input class="search-input" type="text" placeholder="Sök">
-                    <button class="search-btn"><i class="fas fa-search"></i></button>
-                </div>
-            </nav>
+            <div class="search-box">
+                <input class="search-input" type="text" placeholder="Sök">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </nav>
 
-            <!-- 
+        <!-- 
                 Hare starts the card component -->
-            <main>
-                <div class="salon_discription">
-                    <h2>Top salong</h2>
-                </div>
-                <div class="card" id="cards">
-                    {% if salon_data %}
-                        {% for salon in salon_data %}
-                    <div class="col-md-3">
-                        <a id="cards_link" href="/salon_page/{{salon.org_number}}" target="_blank">
-                            <div class="image">
-                                <img src="https://images.pexels.com/photos/3993443/pexels-photo-3993443.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                                    alt="Photo" />
-                            </div>
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title">{{salon.name}}</h5>
-                                </div>
-                                <div class="card-body">
+        <main>
+            <div class="cards_info">
+                <h2>Top salong</h2>
+            </div>
+            {% if salon_data %}
+            {% for salon in salon_data %}
+
+            <div class="card-box">
+                <div class="card-description">
+                    <a id="cards_link" href="/salon_page/{{salon.org_number}}" target="_blank">
+                        <div class="card bg-light-subtle mt-4">
+                            <img src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="text-section">
+                                    <h5 class="card-title fw-bold">{{salon.name}}</h5>
                                     <p class="card-text"> <strong>Adress</strong>: {{ salon.address }}</p>
                                     <p class="card-text"><strong>Telefon</strong>: {{ salon.telephone }}</p>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-                    {% endfor %}
+                    </a>
                 </div>
-                {% else %}
-                    <p>Inga salong!</p>
-                {% endif %}
-            </main>
-        </div>
+            </div>
+            {% endfor %}
+            </div>
+            {% else %}
+            <p>Inga salong!</p>
+            {% endif %}
+        </main>
+
+
 
         <footer class="footer-distributed">
             <div class="footer-right">

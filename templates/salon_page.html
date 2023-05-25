@@ -48,26 +48,30 @@
                     </div>
                 </div>
 
+            
+                <h2>Våra tjänster</h2>
                 <div class="service_information">
-                    <h2>Våra tjänster</h2>
                     {% if service_info %}
-                    <div class="card-group">
-                        {% for service in service_info %}
-                        <div class="card" style="width: 18rem;">
-                            <div class="card-body">
-                                <h3 class="card-title">{{ service.service_name }}</h3>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">{{ service.price }} kr</h6>
+                    {% for service in service_info %}
+                    <div class="card bg-light-subtle mt-4">
+                        <div class="card-body">
+                            <img src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top"
+                                alt="...">
+                            <div class="text-section">
+                                <h5 class="card-title fw-bold">{{ service.service_name }}</h5>
                                 <p class="card-text">{{ service.description }}</p>
-                                <a href="#" class="card-link">Boka</a>
+                            </div>
+                            <div class="cta-section">
+                                <div>{{ service.price }} kr</div>
+                                <a href="#" class="btn btn-dark">Boka</a>
                             </div>
                         </div>
-                        {% endfor %}
                     </div>
+                    {% endfor %}
                     {% else %}
                     <p>Inga tjänster!</p>
                     {% endif %}
                 </div>
-            </div>
         </main>
 
         <footer class="footer-distributed">

@@ -8,6 +8,8 @@ def database_connection():
         it opens the database connection and prints the ('connection successfully')
         return connection
     """
+
+#https://pgserver.mau.se:6502/kill.html
     # Information about the MAU database
     hostname = 'pgserver.mau.se'
     database_name = 'hairfind_db'
@@ -193,3 +195,6 @@ def get_service_info(username):
         # Handle case where no services are found
         return None
     return service_info
+
+
+

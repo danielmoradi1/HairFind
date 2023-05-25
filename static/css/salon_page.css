@@ -1,6 +1,5 @@
-
-.navbar{
-    background-image: url(/static/css/img/salon_img.jpg);   
+.navbar {
+    background-image: url(/static/css/img/salon_img.jpg);
     height: 50vh;
     text-align: center;
     background-position: center;
@@ -9,12 +8,7 @@
 }
 
 
-.salon_information{
-    margin: 50px 0px;
-}
-
-
-.salon_information .title{
+.salon_information .title {
     text-align: center;
     text-transform: uppercase;
     font-size: 50px;
@@ -22,18 +16,85 @@
 
 
 /** Salon Dashboard Style **/
-.dashboard_header{
+.dashboard_header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.profile_icon{
+.profile_icon {
     display: flex;
-    gap:2em;
+    gap: 2em;
 }
 
-.profile_icon a{
+.profile_icon a {
     font-size: 25px;
+}
+
+
+
+/** Service Information **/
+.service_information{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.card {
+    max-width: 40em;
+    flex-direction: column;
+    background-color: #696969;
+    border: 0;
+    box-shadow: 0 5px 5px rgba(108, 108, 108, 0.256);
+    margin: 2em auto;
+}
+
+
+.card.dark {
+    color: #fff;
+}
+
+.card.card.bg-light-subtle .card-title {
+    color: dimgrey;
+}
+
+.card img {
+    max-width: 30%;
+    padding: 0.1em;
+    border-radius: 0.5em;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-section {
+    max-width: 60%;
+}
+
+.cta-section {
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.cta-section .btn {
+    padding: 0.3em 0.5em;
+    /* color: #696969; */
+}
+
+.card.bg-light-subtle .cta-section .btn {
+    background-color: #898989;
+    border-color: #898989;
+}
+
+@media screen and (max-width: 475px) {
+    .card {
+        font-size: 0.9em;
+    }
 }

@@ -10,6 +10,7 @@ from flask import render_template
 from flask import request
 from flask import flash
 from flask import session
+from flask_session import Session
 from flask_mail import Mail
 from flask_mail import Message
 from functools import wraps
@@ -357,7 +358,6 @@ def salon_profile():
 
 
 
-# username = session['username']
 # Route for handling the form submission
 @webApp.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -365,7 +365,7 @@ def upload():
         description = 'Hej'
         image = request.files['image'].read()
         salon_username = request.form['salon_username']
-
+        print(image)
         try:
             # Check if an image already exists
             cursor.execute(
@@ -386,9 +386,7 @@ def upload():
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
             flash('An error occurred. Please try again later.', 'error')
-
     return redirect(url_for('salon_profile'))
-
 
 
 
@@ -579,3 +577,6 @@ def salon_page(salon_id):
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)
     webApp.run(debug=True)
+
+
+
