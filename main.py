@@ -524,19 +524,35 @@ def salon_page(salon_id):
 @webApp.route('/search')
 def search():
     query = request.args.get('query') #Get the search query from the request arguments
-    category = request.args.get('category')
-    price_range = request.args.get('price_range')
+    service = request.args.get('service_name')
+    price_range = request.args.get('price')
+    description = request.args.get('description')
+    salon_name = request.args.get('name')
+    salon_address = request.args.get('address')
+    salon_contact = request.args.get('telephone')
 
 
     # Construct 
-    sql_query = "SELECT * FROM salon_user WHERE NAME ILIKE '%{}%'".format(query)
+    sql_query = "SELECT * FROM SERVICES_LIST WHERE NAME ILIKE '%{}%'".format(query)
 
-    if category:
-        sql_query += "AND category = '{}'".format(category)
+    if service:
+        sql_query += "AND service = '{}'".format(service)
     
     if price_range:
         min_price, max_price = price_range.splite('-')
         sql_query += "AND price >= {} AND price <= {}".format(min_price, max_price)
+
+    if description:
+        sql_query += "AND description = '{}'".format(description)
+
+    if salon_name:
+        sql_query += "AND name = '{}'".format(salon_name)
+    
+    if salon_address:
+        sql_query += "AND address = '{}'".format(salon_address)
+
+    if salon_contact: 
+        sql_query += "AND telephone = '{}'".format(salon_contact)
 
 
     cursor.execute(sql_query)

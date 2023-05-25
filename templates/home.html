@@ -34,31 +34,31 @@
                     <ul>
                         <li><button type="button" class="tag_btn">Klippning</button></li>
                         <li><button type="button" class="tag_btn">Färgning</button></li>
-                        <li><button type="button" class="tag_btn">Skägg</button></li>
+                        <li><button type="button" class="tag_btn">Skäggtrimning</button></li>
                         <li><button type="button" class="tag_btn">Långt hår</button></li>
                         <li><button type="button" class="tag_btn">Lockar</button></li>
                         <li><button type="button" class="tag_btn">Afro</button></li>
                     </ul>
                 </div>
 
-                <div class="search-box">
-                    <form action="/search" method="GET">
-                        <input class="search-input" type="text" placeholder="Sök">
-                        <button class="search-btn"><i class="fas fa-search"></i></button>
-                        <select name="category">
-                            <option value="">All Categories</option>
-                            <option value="category1">Afro</option>
-                            <option value="category2">Spiky</option>
-                            <option value="category2">Shaved</option>
-                            <option value="category2">Crewcut</option>
-                            <option value="category2">Curly</option>
+            
+                <div>  
+                    <form>    
+                        <select name="Type av Tjänst">
+                            <option value="">T</option>
+                            <option value="Service1">Klippning</option>
+                            <option value="Service2">Färgning</option>
+                            <option value="Service3">Naglar</option>
+                            <option value="Service4">Skägtrimning</option>
+                            <option value="Service5">Lockar</option>
+                            <option value="Service5">Afro</option>
                             <!-- Add more options for categories -->
                         </select>
-                        <select name="price_range">
+                        <select name="Pris">
                             <option value="">All Prices</option>
-                            <option value="0-100">Sek0 - Sek100</option>
-                            <option value="100-200">Sek100 - Sek200</option>
-                            <option value="300-500">Sek300 - Sek500</option>
+                            <option value="0-100">SEK0 - SEK100</option>
+                            <option value="100-200">SEK100 - SEK200</option>
+                            <option value="300-500">SEK300 - SEk500</option>
                             <!-- Add more options for price ranges -->
                         </select>
                         <button type="submit">Search</button>

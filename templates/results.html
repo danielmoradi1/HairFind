@@ -36,10 +36,10 @@
                     {% if results %}
                         <p>Showing results for: {{ query }}</p>
                         {% if category %} 
-                            <p>Category: {{ category }}</p>
+                            <p>Typ av tjänst: {{ service }}</p>
                         {% endif %} 
                         {% if price_range %} 
-                            <p>Price range: {{ price_range }}</p>
+                            <p>Pris interval: {{ price_range }}</p>
                         {% endif %} 
 
                         {% for result in results %} 
