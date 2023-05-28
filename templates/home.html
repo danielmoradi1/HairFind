@@ -44,7 +44,45 @@
                 <input class="search-input" type="text" placeholder="Sök">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
+
+            <div class="navbar">
+                <div class="listFilter">
+                    <ul>
+                        <li><button type="button" class="tag_btn">Klippning</button></li>
+                        <li><button type="button" class="tag_btn">Färgning</button></li>
+                        <li><button type="button" class="tag_btn">Skäggtrimning</button></li>
+                        <li><button type="button" class="tag_btn">Långt hår</button></li>
+                        <li><button type="button" class="tag_btn">Lockar</button></li>
+                        <li><button type="button" class="tag_btn">Afro</button></li>
+                    </ul>
+                </div>
+
+                <!--Filter-->
+                <div>
+                    <form action="{{ url_for('search') }}" method="GET">
+                        <select name="Type av Tjänst">
+                            <option value="Service1">Klippning</option>
+                            <option value="Service2">Färgning</option>
+                            <option value="Service3">Naglar</option>
+                            <option value="Service4">Skägtrimning</option>
+                            <option value="Service5">Lockar</option>
+                            <option value="Service5">Afro</option>
+                            <!-- Add more options for categories -->
+                        </select>
+                        <select name="Pris">
+                            <option value="">All Prices</option>
+                            <option value="0-100">0 kr - 200 kr</option>
+                            <option value="100-200">200 kr - 500 kr</option>
+                            <option value="300-500">500 kr - 1000 kr</option>
+                            <!-- Add more options for price ranges -->
+                        </select>
+                        <button type="submit" name="submit">Search</button>
+                    </form>
+                </div>
+            </div>
         </nav>
+
+
 
         <!-- 
                 Hare starts the card component -->

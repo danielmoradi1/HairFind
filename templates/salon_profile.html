@@ -14,19 +14,17 @@
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" type="text/css"
             href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
-
-        {% for info in salon_info %}
-        <title>{{info.name}}</title>
+        <title>{{salon_info.name}}</title>
     </head>
 
     <body>
         <header class="dashboard_header">
             <div class="dashboard_title">
-                <h1>Min sida <br><small>{{info.name}}</small></h1>
+                <h1>Min sida <br><small>{{salon_info.name}}</small></h1>
             </div>
 
             <div class="profile_icon">
-                <a href="#"><i class="fa-solid fa-list"></i></i></a>
+                <a href="{{url_for('salon_dashboard')}}"><i class="fa-solid fa-list"></i></i></a>
                 <a href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
             </div>
         </header>
@@ -36,11 +34,10 @@
                 <img src="/static/css/img/salon_img.jpg" alt="Salong foto">
                 <div class="text-container">
                     <form class="img_form" action="{{url_for('upload')}}" method="post" enctype="multipart/form-data">
-
                         <div>
-                            <input type="hidden" name="salon_username" value="{{info.username}}">
+                            <input type="hidden" name="salon_username" value="{{salon_info.username}}">
+                            <input type="hidden" name="salon_id" value="{{salon_info.org_number}}">
                         </div>
-
                         <div>
                             <label for="image-upload" class="upload-icon">
                                 <i class="fa-solid fa-file-arrow-up"></i>
@@ -58,33 +55,30 @@
         </nav>
 
         <main class="container" id="container">
-
             <div class="salon_info_from_db">
                 <h3>Information</h3>
                 <hr>
                 <div class="info_box">
                     <p>Organisationsnummer:</p>
-                    <p>{{info.org_number}}</p>
+                    <p>{{ salon_info.org_number }}</p>
                 </div>
                 <div class="info_box">
                     <p>Namn:</p>
-                    <p>{{info.name}}</p>
+                    <p>{{ salon_info.name }}</p>
                 </div>
                 <div class="info_box">
-                    <p>E-post:</å>
-                    <p>{{info.username}}</p>
+                    <p>E-post:</p>
+                    <p>{{ salon_info.username }}</p>
                 </div>
                 <div class="info_box">
                     <p>Mobilenummer:</p>
-                    <p>{{info.telephone}}</p>
+                    <p>{{ salon_info.telephone }}</p>
                 </div>
                 <div class="info_box">
                     <p>Adress:</p>
-                    <p>{{info.address}}</p>
+                    <p>{{ salon_info.address }}</p>
                 </div>
             </div>
-
-
 
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                 Redigera
@@ -101,19 +95,20 @@
 
                         <!-- Modal Body -->
                         <div class="modal-body">
-                            <form action="edit_salon_profile/{{info.org_number}}" , method="post">
+                            <form action="{{ url_for('edit_salon_profile', salon_id=salon_info.org_number) }}"
+                                method="post">
                                 <!-- Form fields go here -->
                                 <div class="form-group">
                                     <label for="name">Namn</label>
-                                    <input type="text" class="form-control" id="name">
+                                    <input type="text" name="name" class="form-control" id="name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Mobilenummer</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <label for="phone_number">Mobilenummer</label>
+                                    <input type="text" name="phone_number" class="form-control" id="email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Adress</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <label for="address">Adress</label>
+                                    <input type="text" name="address" class="form-control" id="email">
                                 </div>
                                 <!-- Add more form fields as needed -->
                                 <div class="modal-footer">
@@ -126,8 +121,6 @@
             </div>
         </main>
 
-
-        {% endfor %}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>

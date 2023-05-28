@@ -18,6 +18,8 @@ from wtforms import StringField
 from wtforms import TextAreaField
 from wtforms import validators
 from flask import jsonify
+from werkzeug.utils import secure_filename
+import os
 
 
 webApp = Flask(__name__)
@@ -216,9 +218,6 @@ def delete_user_account(username):
         return redirect(url_for('login_customer'))
 
 
-
-
-
 # function to check if salon_user already exists
 def user_exists(username):
     try:
@@ -348,55 +347,79 @@ def salon_dashboard():
 
 
 # route for salon profile
-@webApp.route('/salon_profile')
-def salon_profile():
-    salon_id = request.args.get('salon_id')
-
+@webApp.route('/salon_profile/<string:salon_id>')
+def salon_profile(salon_id):
     cursor.execute(
         "SELECT * FROM salon_user WHERE org_number = %s", (salon_id,))
-    salon_info = cursor.fetchall()
+    salon_info = cursor.fetchone()
 
     if salon_info:
         return render_template('salon_profile.html', salon_info=salon_info)
 
     return render_template('salon_profile.html')
 
-
-# Route for handling the form submission
-@webApp.route('/upload', methods=['GET', 'POST'])
-def upload():
-    if request.method == 'POST':
-        description = 'Hej'
-        image = request.files['image'].read()
-        salon_username = request.form['salon_username']
-        print(image)
-        try:
-            # Check if an image already exists
-            cursor.execute(
-                "SELECT id FROM salon_info WHERE salon_username = %s", (salon_username,))
-            result = cursor.fetchone()
-
-            if result:
-                cursor.execute(
-                    "DELETE FROM salon_info WHERE salon_username = %s", (salon_username,))
-
-            # Inserting the data into the database
-                cursor.execute("INSERT INTO salon_info (description, image, salon_username) VALUES (%s, %s, %s) RETURNING id",
-                               (description, psycopg2.Binary(image), salon_username))
-                db_connection.commit()
-                flash('Image uploaded and saved to the database.', 'success')
-                return redirect(url_for('salon_profile'))
-
-        except (Exception, psycopg2.DatabaseError) as error:
-            print(error)
-            flash('An error occurred. Please try again later.', 'error')
-    return redirect(url_for('salon_profile'))
+# edit solon profile
 
 
 @webApp.route('/edit_salon_profile/<string:salon_id>', methods=['POST', 'GET'])
 def edit_salon_profile(salon_id):
     print(salon_id)
-    return 'Edit Profile'
+    salon_info = None  # Set salon_info to None initially
+
+    if request.method == 'POST':
+        name = request.form['name']
+        phone_number = request.form['phone_number']
+        address = request.form['address']
+        edit_salon_info(salon_id, name, phone_number, address)
+        flash("Ändringar har gjorts!", 'success')
+
+    # Retrieve the updated salon information
+    cursor.execute(
+        "SELECT name, username, telephone, address FROM salon_user WHERE org_number = %s", (salon_id,))
+    salon_info = cursor.fetchone()
+
+    # Pass the salon_info to the template
+    return render_template('salon_profile.html', salon_info=salon_info)
+
+
+# Route for handling the form submission
+
+@webApp.route('/upload', methods=['POST'])
+def upload():
+    if request.method == 'POST':
+        image = request.files['image']
+        salon_username = request.form['salon_username']
+        salon_id = request.form['salon_id']
+
+        try:
+            # Check if a record already exists for the salon
+            cursor.execute(
+                "SELECT salon_username FROM salon_info WHERE salon_username = %s", (salon_username,))
+            result = cursor.fetchone()
+
+            if result:
+                cursor.execute(
+                    "Delete FROM salon_info where salon_username = %s", (salon_username,))
+
+            else:
+                # Save the image file to a directory
+                filename = secure_filename(image.filename)
+                image_path = os.path.join(
+                    webApp.config['UPLOAD_FOLDER'], filename)
+                image.save(image_path)
+
+                # Insert the new record into the salon_info table
+                cursor.execute(
+                    "INSERT INTO salon_info (image, salon_username) VALUES (%s, %s)",
+                    (image_path, salon_username))
+
+            db_connection.commit()
+            flash('Image uploaded and saved to the database.', 'success')
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+            flash('An error occurred. Please try again later.', 'error')
+
+    return redirect(url_for('salon_profile', salon_id=salon_id))
 
 
 # Service Form Class
@@ -576,10 +599,42 @@ def salon_page(salon_id):
     if not salon_data:
         return "Salon not found"
 
-    username = salon_data[1]
+    username = salon_data['username']
+    # username = salon_data[1]
     service_info = get_service_info(username)
+    return render_template('salon.html', salon_data=salon_data, service_info=service_info)
 
-    return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
+
+@webApp.route('/search', methods=['GET', 'POST'])
+def search():
+    print('works fine till this point')
+    # Get the search query from the request arguments
+    query = request.args.get('query')
+    service = request.args.get('service_name')
+    price_range = request.args.get('price')
+    # description = request.args.get('description')
+    # salon_name = request.args.get('name')
+    # salon_address = request.args.get('address')
+    # salon_contact = request.args.get('telephone')
+
+    # Construct
+    sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"
+
+    if query:
+        sql_query += "AND service_name LIKE '%{}%".format(query)
+
+    if service:
+        sql_query += "AND service_name = '{}'".format(service)
+
+    if price_range:
+        min_price, max_price = price_range.splite('-')
+        sql_query += "AND price >= {} AND price <= {}".format(
+            min_price, max_price)
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
+    print(results)
+    return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
+
 
 
 if __name__ == "__main__":

@@ -189,7 +189,14 @@ def get_salon_data(salon_id):
     if not salon_data:
         # Handle case where salon ID is not found
         return None
+    salon_data = {
+        'name': salon_data[0],
+        'username': salon_data[1],
+        'telephone': salon_data[2],
+        'address': salon_data[3]
+    }
     return salon_data
+
 
 
 def get_service_info(username):
@@ -202,3 +209,19 @@ def get_service_info(username):
         return None
     return service_info
 
+result = get_service_info('daniel.moradi15@gmail.com')
+print(result)
+
+# Edit salon Information
+def edit_salon_info(salon_id, name, phone_number, address):
+    print('salon information!')
+    
+    try:
+        cursor.execute(
+            "UPDATE salon_user SET name=%s, telephone=%s, address=%s WHERE org_number=%s",
+            (name, phone_number, address, salon_id))  # Updated column name
+        # Commit to DB
+        db_connection.commit()
+        print(salon_id, name, phone_number, address)
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
