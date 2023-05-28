@@ -580,7 +580,6 @@ def logout():
 ####    Content pages      #####
 ################################
 
-
 # About page
 @webApp.route('/about')
 def about():

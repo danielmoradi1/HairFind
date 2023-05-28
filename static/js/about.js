@@ -42,9 +42,4 @@ setTimeout(() => {
   renderCard();
 }, 1000);
 
-//Execute renderCard after the page loaded
-//window.addEventListener("load", () => {
-  //renderCard();
-//});
-
   
