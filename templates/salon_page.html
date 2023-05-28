@@ -48,15 +48,15 @@
                     </div>
                 </div>
 
-            
+
                 <h2>Våra tjänster</h2>
                 <div class="service_information">
                     {% if service_info %}
                     {% for service in service_info %}
                     <div class="card bg-light-subtle mt-4">
                         <div class="card-body">
-                            <img src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" class="card-img-top"
-                                alt="...">
+                            <img src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                class="card-img-top" alt="...">
                             <div class="text-section">
                                 <h5 class="card-title fw-bold">{{ service.service_name }}</h5>
                                 <p class="card-text">{{ service.description }}</p>
@@ -72,6 +72,7 @@
                     <p>Inga tjänster!</p>
                     {% endif %}
                 </div>
+            </div>
         </main>
 
         <footer class="footer-distributed">
