@@ -22,7 +22,6 @@ from werkzeug.utils import secure_filename
 import os
 
 
-
 webApp = Flask(__name__)
 # Database connection function
 db_connection = database_connection()
@@ -383,9 +382,8 @@ def edit_salon_profile(salon_id):
     return render_template('salon_profile.html', salon_info=salon_info)
 
 
-import os
-
 # Route for handling the form submission
+
 @webApp.route('/upload', methods=['POST'])
 def upload():
     if request.method == 'POST':
@@ -402,11 +400,12 @@ def upload():
             if result:
                 cursor.execute(
                     "Delete FROM salon_info where salon_username = %s", (salon_username,))
-            
+
             else:
                 # Save the image file to a directory
                 filename = secure_filename(image.filename)
-                image_path = os.path.join(webApp.config['UPLOAD_FOLDER'], filename)
+                image_path = os.path.join(
+                    webApp.config['UPLOAD_FOLDER'], filename)
                 image.save(image_path)
 
                 # Insert the new record into the salon_info table
@@ -421,8 +420,6 @@ def upload():
             flash('An error occurred. Please try again later.', 'error')
 
     return redirect(url_for('salon_profile', salon_id=salon_id))
-
-
 
 
 # Service Form Class
@@ -603,53 +600,42 @@ def salon_page(salon_id):
         return "Salon not found"
 
     username = salon_data['username']
-    #username = salon_data[1]
+    # username = salon_data[1]
     service_info = get_service_info(username)
     return render_template('salon.html', salon_data=salon_data, service_info=service_info)
+
 
 @webApp.route('/search', methods=['GET', 'POST'])
 def search():
     print('works fine till this point')
-    query = request.args.get('query') #Get the search query from the request arguments
+    # Get the search query from the request arguments
+    query = request.args.get('query')
     service = request.args.get('service_name')
     price_range = request.args.get('price')
-    #description = request.args.get('description')
-    #salon_name = request.args.get('name')
-    #salon_address = request.args.get('address')
-    #salon_contact = request.args.get('telephone')
+    # description = request.args.get('description')
+    # salon_name = request.args.get('name')
+    # salon_address = request.args.get('address')
+    # salon_contact = request.args.get('telephone')
 
->>>>>>> Search-Engine
-    # Construct 
+    # Construct
     sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"
-    
+
     if query:
         sql_query += "AND service_name LIKE '%{}%".format(query)
 
     if service:
         sql_query += "AND service_name = '{}'".format(service)
-    
+
     if price_range:
         min_price, max_price = price_range.splite('-')
-        sql_query += "AND price >= {} AND price <= {}".format(min_price, max_price)
-    '''
-    if description:
-        sql_query += "AND description = '{}'".format(description)
-
-    if salon_name:
-        sql_query += "AND name = '{}'".format(salon_name)
-    
-    if salon_address:
-        sql_query += "AND address = '{}'".format(salon_address)
-
-    if salon_contact: 
-        sql_query += "AND telephone = '{}'".format(salon_contact)
-    '''
-
+        sql_query += "AND price >= {} AND price <= {}".format(
+            min_price, max_price)
     cursor.execute(sql_query)
     results = cursor.fetchall()
     print(results)
-    
     return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
+
+
 
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)

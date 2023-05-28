@@ -28,7 +28,6 @@
             </div>
         </header>
 
-<<<<<<< HEAD
         <nav class="navbar">
             <div class="listFilter">
                 <ul>
@@ -45,9 +44,8 @@
                 <input class="search-input" type="text" placeholder="Sök">
                 <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
-        </nav>
-=======
-            <nav class="navbar">
+
+            <div class="navbar">
                 <div class="listFilter">
                     <ul>
                         <li><button type="button" class="tag_btn">Klippning</button></li>
@@ -59,9 +57,9 @@
                     </ul>
                 </div>
 
-            
-                <div>  
-                    <form action="{{ url_for('search') }}" method="GET">    
+                <!--Filter-->
+                <div>
+                    <form action="{{ url_for('search') }}" method="GET">
                         <select name="Type av Tjänst">
                             <option value="Service1">Klippning</option>
                             <option value="Service2">Färgning</option>
@@ -81,8 +79,10 @@
                         <button type="submit" name="submit">Search</button>
                     </form>
                 </div>
-            </nav>
->>>>>>> Search-Engine
+            </div>
+        </nav>
+
+
 
         <!-- 
                 Hare starts the card component -->
