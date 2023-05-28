@@ -20,6 +20,7 @@ from wtforms import validators
 from flask import jsonify
 
 
+
 webApp = Flask(__name__)
 # Database connection function
 db_connection = database_connection()
@@ -576,11 +577,53 @@ def salon_page(salon_id):
     if not salon_data:
         return "Salon not found"
 
-    username = salon_data[1]
+    username = salon_data['username']
     service_info = get_service_info(username)
+    return render_template('salon.html', salon_data=salon_data, service_info=service_info)
 
-    return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
+@webApp.route('/search', methods=['GET', 'POST'])
+def search():
+    print('works fine till this point')
+    query = request.args.get('query') #Get the search query from the request arguments
+    service = request.args.get('service_name')
+    price_range = request.args.get('price')
+    #description = request.args.get('description')
+    #salon_name = request.args.get('name')
+    #salon_address = request.args.get('address')
+    #salon_contact = request.args.get('telephone')
 
+>>>>>>> Search-Engine
+    # Construct 
+    sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"
+    
+    if query:
+        sql_query += "AND service_name LIKE '%{}%".format(query)
+
+    if service:
+        sql_query += "AND service_name = '{}'".format(service)
+    
+    if price_range:
+        min_price, max_price = price_range.splite('-')
+        sql_query += "AND price >= {} AND price <= {}".format(min_price, max_price)
+    '''
+    if description:
+        sql_query += "AND description = '{}'".format(description)
+
+    if salon_name:
+        sql_query += "AND name = '{}'".format(salon_name)
+    
+    if salon_address:
+        sql_query += "AND address = '{}'".format(salon_address)
+
+    if salon_contact: 
+        sql_query += "AND telephone = '{}'".format(salon_contact)
+    '''
+
+    cursor.execute(sql_query)
+    results = cursor.fetchall()
+    print(results)
+    
+    return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
 
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)
