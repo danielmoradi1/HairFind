@@ -358,9 +358,8 @@ def salon_profile(salon_id):
 
     return render_template('salon_profile.html')
 
+
 # edit solon profile
-
-
 @webApp.route('/edit_salon_profile/<string:salon_id>', methods=['POST', 'GET'])
 def edit_salon_profile(salon_id):
     print(salon_id)
@@ -383,7 +382,6 @@ def edit_salon_profile(salon_id):
 
 
 # Route for handling the form submission
-
 @webApp.route('/upload', methods=['POST'])
 def upload():
     if request.method == 'POST':
@@ -515,6 +513,36 @@ def delete_service(id):
     return redirect(url_for('salon_dashboard'))
 
 
+
+# Delete salon account from the database
+@webApp.route('/delete_salon_account', methods=['POST'])
+def delete_salon_account():
+    if 'loggedin' in session:
+        if request.method == 'POST':
+            org_number = request.form['org_number']
+            username = request.form['username']
+
+            cursor.execute(
+                "SELECT COUNT(*) FROM service WHERE salon_username = %s", (username,))
+            service_count = cursor.fetchone()[0]
+
+            # if there are services
+            if service_count > 0:
+                return 'error|The user is associated with services and cannot be deleted!', 400
+            
+            else:
+                delete_salon_user(org_number)
+                delete_confirmation(username)
+                return jsonify({'status': 'success', 'redirect': url_for('salon_login')})
+            
+        else:
+            org_number = session['org_number']
+            return render_template('salon_profile.html', org_number=org_number)
+    else:
+        flash('Unauthorized, Please login', 'danger')
+        return redirect(url_for('salon_login'))
+
+
 # Reset password function for both salon and user accounts
 @webApp.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
@@ -601,7 +629,7 @@ def salon_page(salon_id):
     username = salon_data['username']
     # username = salon_data[1]
     service_info = get_service_info(username)
-    return render_template('salon.html', salon_data=salon_data, service_info=service_info)
+    return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
 
 
 @webApp.route('/search', methods=['GET', 'POST'])
@@ -633,7 +661,6 @@ def search():
     results = cursor.fetchall()
     print(results)
     return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
-
 
 
 if __name__ == "__main__":

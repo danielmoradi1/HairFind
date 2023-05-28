@@ -181,6 +181,27 @@ def delete_user(username):
             conn.close()
 
 
+# Delete a user from the salon table
+def delete_salon_user(salon_id):
+    conn = None
+    cur = None
+    try:
+        conn = database_connection()
+        cur = conn.cursor()
+        cur.execute("DELETE FROM salon_user WHERE org_number = %s", (salon_id,))
+        conn.commit()
+        print('User deleted successfully!')
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while deleting user from the table:", error)
+    finally:
+        if cur is not None:
+            cur.close()
+        if conn is not None:
+            conn.close()
+
+
+
+#Get salon information
 def get_salon_data(salon_id):
     cursor.execute(
         "SELECT name, username, telephone, address FROM salon_user WHERE org_number = %s", (salon_id,))
@@ -198,7 +219,7 @@ def get_salon_data(salon_id):
     return salon_data
 
 
-
+#get service information
 def get_service_info(username):
     cursor.execute(
         "SELECT service_name, price, description FROM service WHERE salon_username = %s", (username,))
@@ -209,8 +230,6 @@ def get_service_info(username):
         return None
     return service_info
 
-result = get_service_info('daniel.moradi15@gmail.com')
-print(result)
 
 # Edit salon Information
 def edit_salon_info(salon_id, name, phone_number, address):

@@ -26,6 +26,7 @@ h1 {
     text-transform: uppercase;
 }
 
+
 .nav_btn .btn{
     border: none;
     margin: 1px 0px 0px 20px;
@@ -37,9 +38,11 @@ h1 {
     bottom: 0;
     width: 100%;
     background-color: #626262;
-    box-sizing: border-box;
-    text-align: left;
     padding: 45px 50px;
+}
+
+.footer-left{
+    margin-left: -2em;
 }
 
 .footer-distributed .footer-left ul {
@@ -101,10 +104,13 @@ h1 {
     color: #ffffff;
 }
 
+.footer-distributed p{
+    color: #bababa;
+}
+
 
 
 /* Media Queries */
-
 @media (max-width: 600px) {
     .footer-distributed {
         width: 100%;

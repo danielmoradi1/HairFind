@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     $('#deleteBtn').click(function () {
         Swal.fire({
@@ -30,7 +31,7 @@ $(document).ready(function () {
                     });
                 } else {
                     Swal.fire({
-                        title: 'Error',
+                        title: 'Fel',
                         text: response.message,
                         icon: 'error'
                     });

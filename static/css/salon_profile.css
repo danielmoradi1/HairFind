@@ -82,3 +82,8 @@ p:first-child {
     font-size: 16px;
     font-weight: 600;
 }
+
+.profile_btn{
+    display: flex;
+    justify-content: space-between;
+}
