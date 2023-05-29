@@ -229,14 +229,14 @@ def edit_salon_info(salon_id, name, phone_number, address):
 
 
 
-"""
+
 #Get services from database
 def service_type(service):
     cursor = db_connection.cursor()
-    query = "SELECT value FROM services WHERE name ILIKE '%{}%".format(service) 
+    query = "SELECT value FROM services WHERE name ILIKE '%{}%'".format(service) 
     cursor.execute(query)
     results = cursor.fetchall()
     services = [result[0] for result in results]
     return services 
 
-"""
+

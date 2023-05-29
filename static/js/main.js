@@ -15,6 +15,8 @@ function handleButtonClick(event) {
     const button = event.target
     const tags = button.getAttribute('data-tags');
 
+    const form = document.getElementById('tag_search_form');
+    form.action = form.action.slice(0, -1) + tags;
 
     fetch('/tag_buttons/${tags}')
         .then(response => response.json())
@@ -46,5 +48,5 @@ function handleButtonClick(event) {
 
 const buttons = document.querySelectorAll('.tag_btn');
 buttons.forEach(button => {
-    button.addEventListener('click', handleButtonClick);
+    button.addEventListener('click', event=>  handleButtonClick(event));
 });
