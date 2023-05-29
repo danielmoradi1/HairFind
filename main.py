@@ -646,14 +646,20 @@ def search_tags():
         print(result)
     return render_template('search_results.html', results=results)
 """
-
+"""
 #Dynamic route for the tags
 @webApp.route('/tag_buttons/<tags>', methods=['GET'])
 def search_tags(tags):
     print("Route called with tags:", tags)
     services = service_type(tags)
     return jsonify(services)  
+"""
 
+@webApp.route('/tag_buttons/<button_value>', methods=['GET', 'POST'])
+def tag_buttons(button_value):
+    print('cheeeeecking ***** ***** *********')
+    services = get_service_type(button_value)
+    return render_template('home.html', services=services)
 
 
 

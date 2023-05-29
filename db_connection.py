@@ -231,12 +231,13 @@ def edit_salon_info(salon_id, name, phone_number, address):
 
 
 #Get services from database
-def service_type(service):
+def get_service_type(button_value):
     cursor = db_connection.cursor()
-    query = "SELECT value FROM services WHERE name ILIKE '%{}%'".format(service) 
-    cursor.execute(query)
-    results = cursor.fetchall()
-    services = [result[0] for result in results]
-    return services 
-
+    query = "SELECT * FROM services WHERE button_value = '%s'" 
+    cursor.execute(query, (button_value,))
+    data = cursor.fetchall()
+    cursor.close()
+    db_connection.close()
+    return data
+   
 
