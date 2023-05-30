@@ -613,6 +613,28 @@ def logout():
 def about():
     return render_template('about.html')
 
+@webApp.route('/submit_form', methods=['POST'])
+def submit_form():
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+
+    # Sends the email to service.hairfind@gmail.com
+    msg = Message('Meddelande från Hairfind användare', sender=email, recipients=['service.hairfind@gmail.com'])
+    msg.body = f"Namn: {name}\nEpost: {email}\nMeddelande: {message}"
+    mail.send(msg)
+
+    return '''
+    <html>
+    <head>
+        <meta http-equiv="refresh" content="5;URL=/about">    </head>
+    <body>
+      <h2>Ditt meddelande har skickats!</h2>
+      <p>Du omdirigeras till föregående sida om 5 sekunder</p>
+    </body>
+    </html>
+    '''
+
 
 # Contact page
 @webApp.route('/contact_us')
