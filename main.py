@@ -632,6 +632,10 @@ def salon_page(salon_id):
     return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
 
 
+
+
+
+
 @webApp.route('/search', methods=['GET', 'POST'])
 def search():
     
@@ -655,7 +659,7 @@ def search():
             min_price, max_price)
     cursor.execute(sql_query)
     results = cursor.fetchall()
-    print(results)
+    
     return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
 
 """
