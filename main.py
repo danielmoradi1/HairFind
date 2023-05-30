@@ -598,7 +598,7 @@ def reset_password():
 @is_logged_in
 def logout():
     session.clear()
-    flash('Ditt är Utloggad nu!', 'success')
+    flash('Du är Utloggad nu!', 'succes')
     # session.pop('loggedin', None)
     # session.pop('username', None)
     return redirect(url_for('login_customer'))
@@ -692,6 +692,12 @@ def tag_buttons(button_value):
     services = get_service_type(button_value)
     return render_template('home.html', services=services)
 
+@webApp.route('/salon_logout', methods=['POST'])
+@is_logged_in
+def salon_logout():
+    session.clear()
+    flash('Du är Utloggad nu!', 'succe')
+    return redirect(url_for('salon_login'))
 
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)
