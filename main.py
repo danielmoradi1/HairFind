@@ -639,7 +639,6 @@ def search():
     query = request.args.get('query')
     service = request.args.get('service_name')
     price_range = request.args.get('price')
-  
 
     # Construct
     sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"

@@ -1,23 +1,20 @@
 /* Header inkluderar "hairfind" h1 och login */
 body {
-    min-height: 100vh;
     margin: 0;
+    padding: 0px;
 }
 
 .navbar {
-    background-image: url(/static/css/img/background.jpg);
-    height: 92vh;
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
-
 .listFilter {
-    flex-wrap: wrap;
+    padding: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .listFilter ul {
@@ -29,9 +26,16 @@ body {
 .listFilter li {
     display: inline-block;
     padding: 0.5rem;
-    padding-top: 50px;
     margin: 0.25rem;
 }
+
+.select_filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
 
 .tag_btn {
     border-radius: 30px;
@@ -59,55 +63,11 @@ body {
     Search
 **/
 
-
-.search-box {
-    width: 600px;
-    position: relative;
+.filter_form {
     display: flex;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    margin-top: 10%;
-}
-
-.search-input {
-    width: 100%;
-    font-weight: lighter;
-    font-size: 16px;
-    padding: 10px 45px 10px 15px;
-    background-color: #8f8f8f8f;
-    border: none;
-    border-radius: 6px;
-    transition: all .4s;
-}
-
-.search-input:focus {
-    border: none;
-    outline: none;
-    box-shadow: 0 1px 12px #bac7db;
-    -moz-box-shadow: 0 1px 12px #bac7db;
-    -webkit-box-shadow: 0 1px 12px #bac7db;
-}
-
-.search-btn {
-    background-color: transparent;
-    font-size: 18px;
-    padding: 6px 9px;
-    margin-left: -45px;
-    border: none;
-    color: #ffffff;
-    transition: all .4s;
-    z-index: 10;
-}
-
-.search-btn:hover {
-    transform: scale(1.2);
-    cursor: pointer;
-}
-
-.search-btn:focus {
-    outline: none;
+    flex-direction: row;
+    gap: 2em;
+    position: relative;
 }
 
 
@@ -115,7 +75,6 @@ body {
 /**
     Cards
 **/
-/** Service Information **/
 .cards_info {
     padding: 150px 0px 20px 0px;
     text-transform: uppercase;
@@ -130,14 +89,9 @@ body {
     gap: 2em;
 }
 
-.card-box :hover {
-    color: steelblue;
-    transition: 1s;
-}
-
 .card {
     width: 100%;
-    max-width: 30em;
+    max-width: 20em;
     background-color: #696969;
     border: none;
     box-shadow: 0 5px 5px rgba(108, 108, 108, 0.256);
@@ -145,6 +99,8 @@ body {
 
 .card-description a {
     color: #505050;
+    text-decoration: none;
+    
 }
 
 .card img {
@@ -153,64 +109,34 @@ body {
 
 @media screen and (max-width: 768px) {
     .card-box {
-        background-color: rgb(178, 178, 178);
+        background-color: rgb(216, 216, 216);
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-/*
-.content {
-    background-color: #e6e6e68f;
-    padding: 24px 32px;
-}
-*/
-.card {
-    display: inline-block;
-    width: 32%;
-    margin-right: 1%;
-    margin-bottom: 16px;
-    vertical-align: top;
-}
-
-/* Grid with Flex */
-@supports (display: grid) {
     .card {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        grid-gap: 16px;
-        grid-auto-rows: 1fr;
-    }
-
-    /* to make background fill entire height */
-
-    .card {
-        width: auto;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Uncomment to make text same height */
-    .content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    button {
-        margin-top: auto;
+        width: 100%;
+        max-width: 25em;
     }
 }
 
-#cards_link {
-    text-decoration: none;
+.hidden {
+    display: none;
+}
+
+.show-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.show-buttons button {
+    padding: 0.5em 1em;
+    font-size: 14px;
+    background-color: #696969;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.show-buttons button:hover {
+    background-color: #505050;
 }
