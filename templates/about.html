@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!------HEAD------>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <title>Om oss</title>
 </head>
-
+<!------BODY------>
 <body>
     <header class="header">
         <div class="title">
@@ -30,13 +30,14 @@
         </div>
     </header>
     <div class="container">
-        <!-------------------------------------------------company------------------------------------------------>
+        <!-------------------COMPANY------------------->
         <div class="company">
             <div class="img"> <img src="/static/css/img/about.jpg" alt="team"/>
                 <img  />
             </div>
             <div class="company-info">
                 <span>Discover your best<span class="our"> hair day with HairFind</span></span>
+                <!-------HairFindbeskrivning ------>
                 <p>
                     <b>HairFind</b> är en webbapplikation som fungerar som en plattform där frisörsalonger kan
                     registrera sig och lägga upp profiler med information om sina tjänster, priser och bilder som visar
@@ -48,15 +49,16 @@
                 </p>
             </div>
         </div>
-        <!---------------------------------------team-------------------------------------------->
+        <!---------------------------------------TEAM-------------------------------------------->
         <div class="team"><span>TEAM 15</span></div>
         <div class="container">
             <!---------------------------------------Daniel-------------------------------------->
-            <div class="card">
+            <div class="card"> <!----Picture---->
                 <div class="card-image loading"><img
                         src="https://images.pexels.com/photos/39866/entrepreneur-startup-start-up-man-39866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         alt="Profilbild Daniel"/>
                 </div>
+                <!--------Personuppgifter------------>
                 <div class="card-info">
                     <h3 class="card-title loading"><span>Daniel <span class="yellow-surname">Moradi</span></span></h3>
                     <p class="card-description loading">
@@ -65,6 +67,7 @@
                             <a href="mailto:'daniel.moradi15@gmail.com'">daniel.moradi15@gmail.com</a>
                         </span>
                     </p>
+                    <!-------Socialmedia------>
                     <div class="card-mediaIcons">
                         <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="loading" target="on_blank"><i
@@ -77,6 +80,7 @@
                 <div class="card-image loading"><img
                         src="https://images.pexels.com/photos/39866/entrepreneur-startup-start-up-man-39866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                         alt="Profilbild Tarik"></div>
+                <!--------Personuppgifter------------>
                 <div class="card-info">
                     <h3 class="card-title loading"><span>Tarik <span class="yellow-surname">Serezlic</span></span></h3>
                     <p class="card-description loading">
@@ -85,6 +89,7 @@
                             <a href="mailto:'daniel.moradi15@gmail.com'">tarikserez@gmail.com</a>
                         </span>
                     </p>
+                    <!-------Socialmedia------>
                     <div class="card-mediaIcons">
                         <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="loading" target="on_blank"><i
@@ -97,6 +102,7 @@
                 <div class="card-image loading"><img
                         src="https://media.istockphoto.com/photos/portrait-of-handsome-latino-african-man-picture-id1007763808?k=20&m=1007763808&s=612x612&w=0&h=q4qlV-99EK1VHePL1-Xon4gpdpK7kz3631XK4Hgr1ls="
                         alt="Profilbild Nadir"/></div>
+                <!--------Personuppgifter------------>
                 <div class="card-info">
                     <h3 class="card-title loading"><span>Nadir <span class="yellow-surname">Ali Hussaini</span></span>
                     </h3>
@@ -106,6 +112,7 @@
                             <a href="mailto:'nadirali342@gmail.com'">nadirali342@gmail.com</a>
                         </span>
                     </p>
+                    <!-------Socialmedia------>
                     <div class="card-mediaIcons">
                         <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="loading" target="on_blank"><i
@@ -118,6 +125,7 @@
                 <div class="card-image loading"><img
                         src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=600"
                         alt="Profilbild Oswaldo" /></div>
+                <!--------Personuppgifter------------>
                 <div class="card-info">
                     <h3 class="card-title loading"><span>Oswaldo <span class="yellow-surname">Quijada</span></span></h3>
                     <p class="card-description loading">
@@ -126,6 +134,7 @@
                             <a href="mailto:'quijada.oswaldo@hotmail.com'">quijada.oswaldo@hotmail.com</a>
                         </span>
                     </p>
+                    <!-------Socialmedia------>
                     <div class="card-mediaIcons">
                         <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="loading" target="on_blank"><i class="fab fa-instagram"></i></a>
@@ -134,7 +143,7 @@
             </div>
         </div>
     </div>
-    <!----------------------------------------footer------------------------------------------ -->
+    <!----------------------------------------FOOTER------------------------------------------ -->
     <footer class="footer-distributed">
         <div class="footer-right">
             <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -144,13 +153,14 @@
 
         <div class="footer-left">
             <ul class="footer-links">
+                <!-------Länkar till andra sidor--------->
                 <li><a href="{{url_for('home')}}">Startsida</a></li>
                 <li><a href="{{url_for('about')}}">Om oss</a></li>
             </ul>
         </div>
         <p>HairFind &copy; 2023</p>
     </footer>
-
+    <!------JS Scripts------->
     <script src="/static/js/about.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
