@@ -634,15 +634,12 @@ def salon_page(salon_id):
 
 @webApp.route('/search', methods=['GET', 'POST'])
 def search():
-    print('works fine till this point')
+    
     # Get the search query from the request arguments
     query = request.args.get('query')
     service = request.args.get('service_name')
     price_range = request.args.get('price')
-    # description = request.args.get('description')
-    # salon_name = request.args.get('name')
-    # salon_address = request.args.get('address')
-    # salon_contact = request.args.get('telephone')
+  
 
     # Construct
     sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"
