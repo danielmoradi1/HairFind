@@ -52,7 +52,7 @@ h1 {
     gap: 3em;
 }
 
-/* Footer links */
+/* Style for footer links/icons */
 
 .footer-distributed .footer-links li {
     font-size: 18px;
@@ -134,9 +134,8 @@ h1 {
 
 
 
-/**
-    flash messages
-**/
+/* flash messages */
+
 .flash-messages {
     list-style-type: none;
     margin: 0;

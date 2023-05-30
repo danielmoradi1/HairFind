@@ -634,7 +634,7 @@ def salon_page(salon_id):
 
 @webApp.route('/search', methods=['GET', 'POST'])
 def search():
-    print('works fine till this point')
+    
     # Get the search query from the request arguments
     query = request.args.get('query')
     service = request.args.get('service_name')
