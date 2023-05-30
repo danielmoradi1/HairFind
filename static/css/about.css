@@ -222,6 +222,11 @@ header a,
   padding: 45px 50px;
 }
 
+.contactForm {
+  border: 1px solid red;
+  display: flex;
+}
+
 .footer-distributed .footer-left ul {
   font-size: 14px;
   list-style: none;
