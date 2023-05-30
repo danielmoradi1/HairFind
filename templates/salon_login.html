@@ -17,18 +17,23 @@
 
     <body>
 
+        <!--header-->
         <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
                     <h1>HairFind</h1>
                 </a>
             </div>
+            
+            <!--"kund" login button-->
             <div class="nav_btn">
                 <a class="btn btn-primary" href="{{url_for('login_customer')}}">Kund</a>
             </div>
         </header>
 
         <main class="container">
+
+            <!--login-card section-->
             <div class="login_form_container">
                 <h2 class="title">Frisör inloggning</h2>
                 <h4>Välkommen tillbaka!</h4>
@@ -71,6 +76,7 @@
             </div>
         </main>
 
+        <!--footer-->
         <footer class="footer-distributed">
             <div class="footer-right">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
