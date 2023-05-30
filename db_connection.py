@@ -244,3 +244,19 @@ def edit_salon_info(salon_id, name, phone_number, address):
         print(salon_id, name, phone_number, address)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
+
+
+
+
+
+#Get services from database
+def get_service_type(button_value):
+    cursor = db_connection.cursor()
+    query = "SELECT * FROM services_list WHERE button_value = '%s'" 
+    cursor.execute(query, (button_value,))
+    data = cursor.fetchall()
+    cursor.close()
+    db_connection.close()
+    return data
+   
+
