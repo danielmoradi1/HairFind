@@ -42,6 +42,51 @@ document.addEventListener('DOMContentLoaded', function () {
     showLessBtn.addEventListener('click', showLess);
 });
 
+<<<<<<< HEAD
+close.addEventListener('click', () => {
+    modal_container.classList.remove('show');
+});
+
+function handleButtonClick(event) {
+    const button = event.target
+    const tags = button.getAttribute('data-tags');
+
+    const form = document.getElementById('tag_search_form');
+    form.action = form.action.slice(0, -1) + tags;
+
+    fetch('/tag_buttons/${tags}')
+        .then(response => response.json())
+        .then(data =>{
+            const searchResultsDiv = document.getElementById('search-results');
+            searchResultsDiv.innerHTML = '';
+
+
+            if (data.length > 0) {
+                const resultsList = document.createElement('ul');
+
+
+                data.forEach(result => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = result;
+                    resultsList.appendChild(listItem);
+
+                });
+                searchResultsDiv.appendChild(resultsList);
+
+            } else {
+                searchResultsDiv.textContent = 'No matching services found';
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+const buttons = document.querySelectorAll('.tag_btn');
+buttons.forEach(button => {
+    button.addEventListener('click', event=>  handleButtonClick(event));
+});
+=======
 
 function showCards() {
     cards.forEach(function (card, index) {
@@ -52,3 +97,4 @@ function showCards() {
         }
     });
 }
+>>>>>>> dedfea2e7e284ada4c0fdccfcb624a60fe61e8f8
