@@ -621,7 +621,7 @@ def submit_form():
 
     # Sends the email to service.hairfind@gmail.com
     msg = Message('Meddelande från Hairfind användare', sender=email, recipients=['service.hairfind@gmail.com'])
-    msg.body = f"Namn: {name}\Epost: {email}\Meddelande: {message}"
+    msg.body = f"Namn: {name}\nEpost: {email}\nMeddelande: {message}"
     mail.send(msg)
 
     return '''
