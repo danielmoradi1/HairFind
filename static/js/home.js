@@ -39,27 +39,28 @@ function fetchSearchResults(event) {
 
                 for (const service of data.service_data) {
                     html += `
-
-            <div id="service-results" class="">
-                <div class="card-box">
-                    <div class="card">
-                        <div>
-                            <img src="https://images.pexels.com/photos/7755226/pexels-photo-7755226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                alt="">
-                        </div>
-                        <div class="card-info">
-                        <h5>${service[0]} kr</h5>
-                        <p>${service[1]} kr</p>
-                        <p>${service[2]}</p>
-                        <p>${service[3]}</p>
-                        <p>${service[4]}</p>
-                        <p>${service[5]}</p>
-                        </div>
-                        <div class="btn-section">
-                            <a href="#" class="btn btn-dark">Boka</a>
-                        </div>
+            <div class="search-result">
+                <div id="service-results" class="">
+                    <div class="card-box">
+                        <div class="card">
+                            <div>
+                                <img src="https://images.pexels.com/photos/7755226/pexels-photo-7755226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                    alt="">
+                            </div>
+                                <div class="card-info">
+                                <h5>${service[0]} kr</h5>
+                                <p>${service[1]} kr</p>
+                                <p>${service[2]}</p>
+                                <p>${service[3]}</p>
+                                <p>${service[4]}</p>
+                                <p>${service[5]}</p>
+                            </div>
+                            <div class="btn-section">
+                                <a href="#" class="btn btn-dark">Boka</a>
+                            </div>
                     </div>
             </div>
+        </div>
         </div>
 
             `;

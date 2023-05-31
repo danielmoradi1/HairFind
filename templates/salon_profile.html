@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/static/css/salon_page.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -89,7 +90,7 @@
 
                 <form id="deleteForm" method="POST" action="{{url_for('delete_salon_account')}}">
                     <input type="hidden" name="org_number" id="orgNumberInput" value="{{salon_info.org_number}}">
-                    <input type="hidden" name="username" id="usernameInput" value = "{{ salon_info.username }}">
+                    <input type="hidden" name="username" id="usernameInput" value="{{ salon_info.username }}">
                     <button type="submit" class="btn btn-danger" id="deleteBtn">Radera kontot</button>
                 </form>
             </div>
@@ -136,6 +137,7 @@
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
         <script src="/static/js/delete_salon_conf.js"></script>
     </body>
