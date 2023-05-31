@@ -42,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function () {
     showLessBtn.addEventListener('click', showLess);
 });
 
-<<<<<<< HEAD
 close.addEventListener('click', () => {
     modal_container.classList.remove('show');
 });
@@ -86,15 +85,3 @@ const buttons = document.querySelectorAll('.tag_btn');
 buttons.forEach(button => {
     button.addEventListener('click', event=>  handleButtonClick(event));
 });
-=======
-
-function showCards() {
-    cards.forEach(function (card, index) {
-        if (index < cardsToShow) {
-            card.classList.remove('hidden'); // Remove the 'hidden' class
-        } else {
-            card.classList.add('hidden'); // Add the 'hidden' class
-        }
-    });
-}
->>>>>>> dedfea2e7e284ada4c0fdccfcb624a60fe61e8f8

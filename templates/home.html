@@ -12,10 +12,13 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
         <title>Hairfind</title>
     </head>
 
     <body>
+        <!-- header -->
         <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
@@ -28,30 +31,6 @@
             </div>
         </header>
 
-<<<<<<< HEAD
-    <nav class="navbar">
-        <div class="listFilter">
-            <form id="tag_search_form" action="{{ url_for ('tag_buttons', button_value = button_value) }}" methods="GET">
-                <ul>
-                    <li><button type="submit" class="tag_btn" name="button_value" value="klippning" >Klippning</button></li>
-                    <li><button type="submit" class="tag_btn" name="button_value" value="färgning" >Färgning</button></li>
-                    <li><button type="submit" class="tag_btn" name="button_value" value="skägg" >Skägg</button></li>
-                    <li><button type="button" class="tag_btn" name="button_value" value="långt hår" >Långt hår</button></li>
-                    <li><button type="button" class="tag_btn" name="button_value" value="lockar" >Lockar</button></li>
-                    <li><button type="button" class="tag_btn" name="button_value" value="afro" >Afro</button></li>
-                </ul>
-            </form>
-        </div>
-            <div>
-                {% if services %}
-                    <ul>
-                    {% for service in services %}
-                    <li>{{ service }}</li>
-                    {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
-=======
         <nav class="navbar">
             <div class="listFilter">
                 <form id="tag_search_form" action="{{ url_for ('tag_buttons', button_value = button_value) }}"
@@ -70,125 +49,205 @@
                     </ul>
                 </form>
             </div>
-
->>>>>>> fb737c244c300e613c172dbe010338ef31b343b4
-            <div class="select_filter">
-                <!--Filter-->
-                <form class="filter_form" action="{{ url_for('search')}}" method="GET">
-                    <select class="form-select" name="Type av Tjänst">
-                        <option value="Service1">Klippning</option>
-                        <option value="Service2">Färgning</option>
-                        <option value="Service3">Naglar</option>
-                        <option value="Service4">Skägtrimning</option>
-                        <option value="Service5">Lockar</option>
-                        <option value="Service5">Afro</option>
-                        <!-- Add more options for categories -->
-                    </select>
-
-                    <select class="form-select" name="Pris">
-                        <option value="">All Prices</option>
-                        <option value="0-100">0 kr - 200 kr</option>
-                        <option value="100-200">200 kr - 500 kr</option>
-                        <option value="300-500">500 kr - 1000 kr</option>
-                        <!-- Add more options for price ranges -->
-                    </select>
-
-                    <button class="btn btn-primary" type="submit" name="submit">Sök</button>
-                </form>
-<<<<<<< HEAD
-            </div>   
-    </nav>
-            
-
-
-
-
-
-=======
+            <div>
+                {% if services %}
+                <ul>
+                    {% for service in services %}
+                    <li>{{ service }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
 
-        </nav>
-
-
->>>>>>> fb737c244c300e613c172dbe010338ef31b343b4
-        <!-- 
-                Hare starts the card component -->
-        <main class="cards_main">
-            <div class="cards_info">
-                <h2>Top salong</h2>
+            <!-- Salon img swiper -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img
+                            src="https://images.pexels.com/photos/3992875/pexels-photo-3992875.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Salon photo"></div>
+                    <div class="swiper-slide"><img
+                            src="https://images.pexels.com/photos/7697324/pexels-photo-7697324.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Salon photo"></div>
+                    <div class="swiper-slide"><img
+                            src="https://images.pexels.com/photos/7755223/pexels-photo-7755223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Salon photo"></div>
+                    <div class="swiper-slide"><img
+                            src="https://images.pexels.com/photos/3998405/pexels-photo-3998405.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="Salon photo"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
             </div>
-            {% if salon_data %}
-            {% for salon in salon_data %}
 
-            <div class="card-box" id="card-continer">
-                <div class="card-description">
-                    <a id="cards_link" href="/salon_page/{{salon.org_number}}" target="_blank">
-                        <div class="card bg-light-subtle mt-4">
-                            <img src="https://images.pexels.com/photos/1570807/pexels-photo-1570807.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                                class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="text-section">
-                                    <h5 class="card-title fw-bold">{{salon.name}}</h5>
-                                    <p class="card-text"><strong>Adress</strong>: {{ salon.address }}</p>
-                                    <p class="card-text"><strong>Telefon</strong>: {{ salon.telephone }}</p>
-                                </div>
+            <!--Tags and filter-->
+
+            <nav class="navbar">
+                <div class="listFilter">
+                    <form id="tag_search_form" action="{{ url_for ('tag_buttons', button_value = button_value) }}"
+                        methods="GET">
+                        <ul>
+                            <li><button type="submit" class="tag_btn" name="button_value"
+                                    value="klippning">Klippning</button></li>
+                            <li><button type="submit" class="tag_btn" name="button_value"
+                                    value="färgning">Färgning</button>
+                            </li>
+                            <li><button type="submit" class="tag_btn" name="button_value" value="skägg">Skägg</button>
+                            </li>
+                            <li><button type="button" class="tag_btn" name="button_value" value="långt hår">Långt
+                                    hår</button></li>
+                            <li><button type="button" class="tag_btn" name="button_value" value="lockar">Lockar</button>
+                            </li>
+                            <li><button type="button" class="tag_btn" name="button_value" value="afro">Afro</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+
+                <div class="select_filter">
+                    <!--Filter-->
+                    <form class="filter_form" action="{{ url_for('search')}}" method="GET">
+                        <select class="form-select" name="Type av Tjänst">
+                            <option value="Service1">Klippning</option>
+                            <option value="Service2">Färgning</option>
+                            <option value="Service3">Naglar</option>
+                            <option value="Service4">Skägtrimning</option>
+                            <option value="Service5">Lockar</option>
+                            <option value="Service5">Afro</option>
+                            <div>
+                                <form class="filter_form" id="search-form" action="/search-results" method="GET">
+                                    <select class="form-select" name="service-type">
+                                        <option value="">All Services</option>
+                                        <option value="Klippning">Klippning</option>
+                                        <option value="Färgning">Färgning</option>
+                                        <option value="Naglar">Naglar</option>
+                                        <option value="Skägtrimning">Skägtrimning</option>
+                                        <option value="Lockar">Lockar</option>
+                                        <option value="Afro">Afro</option>
+
+                                        <!-- Add more options for categories -->
+                                    </select>
+
+                                    <select class="form-select" name="price-range">
+                                        <option value="">All Prices</option>
+                                        <option value="0-100">0 kr - 200 kr</option>
+                                        <option value="100-200">200 kr - 500 kr</option>
+                                        <option value="300-500">500 kr - 1000 kr</option>
+                                        <!-- Add more options for price ranges -->
+                                    </select>
+
+                                    <button class="btn btn-primary" type="submit" name="submit">Sök</button>
+                                </form>
                             </div>
-                    </a>
+            </nav>
+
+
+
+            <!-- Search result -->
+            <div class="search-result">
+                <div class="cards_info">
+                    <h2>Tjänster</h2>
+                </div>
+                <div id="service-results" class="">
+                    <!-- The search results will be dynamically updated here -->
+                    {% if service_data %}
+                    <div class="card-box">
+                        {% for service in service_data %}
+                        <div class="card">
+                            <div>
+                                <img src="https://images.pexels.com/photos/7755226/pexels-photo-7755226.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                    alt="">
+                            </div>
+                            <div class="card-info">
+                                <h5>{{ service[0] }}</h5>
+                                <p>{{ service[1] }} kr</p>
+                                <p>{{ service[2] }}</p>
+                                <p>{{ service[3] }}</p>
+                                <p>{{ service[4] }}</p>
+                                <p>{{ service[5] }}</p>
+                            </div>
+                            <div class="btn-section">
+                                <a href="#" class="btn btn-dark">Boka</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>No matching services found.</p>
+                    {% endif %}
                 </div>
             </div>
-            {% endfor %}
-            </div>
-            {% else %}
-            <p>Inga salong!</p>
-            {% endif %}
-            <!--
+
+            <!-- 
+                Hare starts the card component -->
+            <main class="cards_main">
+
+
+                <!-- Hare starts the card component -->
+                <div>
+                    >>>>>>> show_filter_result
+                    <div class="cards_info">
+                        <h2>Top salong</h2>
+                    </div>
+                    <div class="cards_main">
+                        {% if salon_data %}
+                        {% for salon in salon_data %}
+                        <div class="card-box" id="card-continer">
+                            <div class="card-description">
+                                <a id="cards_link" href="/salon_page/{{salon.org_number}}" target="_blank">
+                                    <div class="card bg-light-subtle mt-4">
+                                        <img src="https://images.pexels.com/photos/4422102/pexels-photo-4422102.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+                                            class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="text-section">
+                                                <h5 class="card-title fw-bold">{{salon.name}}</h5>
+                                                <p class="card-text"><strong>Adress</strong>: {{ salon.address }}
+                                                </p>
+                                                <p class="card-text"><strong>Telefon</strong>: {{ salon.telephone }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>Inga salong!</p>
+                    {% endif %}
+                </div>
+                <!--
             <div class="show-buttons">
                 <button id="show-more-btn">Show More</button>
                 <button id="show-less-btn">Show Less</button>
             </div>
-
             -->
+            </main>
 
-        </main>
+            <footer class="footer-distributed">
+                <div class="footer-right">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
 
+                <div class="footer-left">
+                    <ul class="footer-links">
+                        <li><a href="{{url_for('home')}}">Startsida</a></li>
+                        <li><a href="{{url_for('about')}}">Om oss</a></li>
+                    </ul>
+                </div>
+                <p>HairFind &copy; 2023</p>
+            </footer>
 
-        <footer class="footer-distributed">
-            <div class="footer-right">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
-            </div>
-
-            <div class="footer-left">
-                <ul class="footer-links">
-                    <li><a href="{{url_for('home')}}">Startsida</a></li>
-                    <li><a href="{{url_for('about')}}">Om oss</a></li>
-                </ul>
-            </div>
-            <p>HairFind &copy; 2023</p>
-        </footer>
-
-<<<<<<< HEAD
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-        crossorigin="anonymous"></script>
-    
-    
-    <script src="/js/index.js"></script>
-</body>
-
-=======
->>>>>>> fb737c244c300e613c172dbe010338ef31b343b4
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous">
-            </script>
-        <script src="/js/index.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+                crossorigin="anonymous">
+                </script>
+            <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+            <script src="/js/index.js"></script>
+            <script src="/static/js/home.js"></script>
     </body>
-<<<<<<< HEAD
 
-
-=======
->>>>>>> fb737c244c300e613c172dbe010338ef31b343b4
 </html>

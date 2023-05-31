@@ -48,9 +48,10 @@
     max-width: 40em;
     flex-direction: column;
     background-color: #696969;
-    border: 0;
-    box-shadow: 0 5px 5px rgba(108, 108, 108, 0.256);
     margin:auto;
+    box-shadow: 28px 29px 35px -27px rgba(104,104,104,0.69);
+    -webkit-box-shadow: 28px 29px 35px -27px rgba(104,104,104,0.69);
+    -moz-box-shadow: 28px 29px 35px -27px rgba(104,104,104,0.69);
 }
 
 

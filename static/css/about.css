@@ -41,6 +41,7 @@ header a,
 .img {
   width: 100%;
   margin: 1rem 0rem 0rem 2rem;
+
 }
 
 .img img {
@@ -61,14 +62,16 @@ header a,
   color: #0e7eff;
 }
 
-.company-info p{
+.company-info p {
   font-size: 1.1rem;
 }
+
 /* ----------------------------------------------- */
 
 .team {
   display: flex;
   justify-content: center;
+  margin: 40px auto;
 }
 
 .team span {
@@ -79,19 +82,21 @@ header a,
 
 
 .container {
-  min-height: 60vh;
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 1em;
+  padding-bottom: 40px;
 }
+
 
 .card {
   background: #fff;
   max-width: 300px;
   max-height: 500px;
-  margin: auto;
+  text-align: center;
   border-radius: 2px;
   box-shadow: 0 5px 25px rgb(1 1 1 / 10%);
 }
@@ -101,11 +106,17 @@ header a,
   overflow: hidden;
 }
 
+
 .card-image img {
-  max-width: 100%;
-  height: 200px;
   object-fit: cover;
-  object-position: 25% 50%;
+  margin: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
 }
 
 .card-title span {
@@ -128,6 +139,9 @@ header a,
   position: relative;
   color: #222;
   padding: 20px;
+}
+.info-titel{
+  font-size: 18px;
 }
 
 .card-info h3 {
@@ -191,12 +205,10 @@ header a,
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
   transform: translateX(-100%);
   animation: loading 1.5s infinite;
 }
