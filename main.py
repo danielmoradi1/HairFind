@@ -619,6 +619,8 @@ def logout():
 def about():
     return render_template('about.html')
 
+
+#Contact us form
 @webApp.route('/submit_form', methods=['POST'])
 def submit_form():
     name = request.form['name']
@@ -626,29 +628,20 @@ def submit_form():
     message = request.form['message']
 
     # Sends the email to service.hairfind@gmail.com
-    msg = Message('Meddelande från Hairfind användare', sender=email, recipients=['service.hairfind@gmail.com'])
+    msg = Message('Meddelande från Hairfind användare',
+                sender=email, recipients=['service.hairfind@gmail.com'])
     msg.body = f"Namn: {name}\nEpost: {email}\nMeddelande: {message}"
     mail.send(msg)
 
-    return '''
-    <html>
-    <head>
-        <meta http-equiv="refresh" content="5;URL=/about">    </head>
-    <body>
-      <h2>Ditt meddelande har skickats!</h2>
-      <p>Du omdirigeras till föregående sida om 5 sekunder</p>
-    </body>
-    </html>
-    '''
+    response_data = {
+        'title': 'Meddelande skickat!',
+        'text': 'Ditt meddelande har skickats!',
+        'type': 'success'
+    }
+    return jsonify(response_data), 200
 
 
-# Contact page
-@webApp.route('/contact_us')
-def contact():
-    return render_template('contact_us.html')
-
-
-#Salon page
+# Salon page
 @webApp.route('/salon_page/<int:salon_id>')
 def salon_page(salon_id):
     salon_data = get_salon_data(salon_id)
@@ -661,9 +654,7 @@ def salon_page(salon_id):
     return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
 
 
-
-
-#search baset on filter
+# search baset on filter
 @webApp.route('/search-results', methods=['GET'])
 def search_results():
     type_of_service = request.args.get('service-type')
@@ -697,14 +688,12 @@ def search_results():
     return jsonify(service_data=search_results)
 
 
-
-
-
 @webApp.route('/tag_buttons/<button_value>', methods=['GET', 'POST'])
 def tag_buttons(button_value):
     print('cheeeeecking ***** ***** *********')
     services = get_service_type(button_value)
     return render_template('home.html', services=services)
+
 
 @webApp.route('/salon_logout', methods=['POST'])
 @is_logged_in
@@ -712,6 +701,7 @@ def salon_logout():
     session.clear()
     flash('Du är Utloggad nu!', 'succe')
     return redirect(url_for('salon_login'))
+
 
 if __name__ == "__main__":
     webApp.secret_key = secrets.token_hex(16)

@@ -218,6 +218,11 @@ header a,
   font-weight: 500;
 }
 
+#container{
+  max-width: 500px;
+  max-height: 50vh;
+}
+
 @keyframes loading {
   100% {
     transform: translateX(100%);

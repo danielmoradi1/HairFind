@@ -55,7 +55,7 @@ function handleButtonClick(event) {
 
     fetch('/tag_buttons/${tags}')
         .then(response => response.json())
-        .then(data =>{
+        .then(data => {
             const searchResultsDiv = document.getElementById('search-results');
             searchResultsDiv.innerHTML = '';
 
@@ -83,5 +83,6 @@ function handleButtonClick(event) {
 
 const buttons = document.querySelectorAll('.tag_btn');
 buttons.forEach(button => {
-    button.addEventListener('click', event=>  handleButtonClick(event));
+    button.addEventListener('click', event => handleButtonClick(event));
 });
+

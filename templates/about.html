@@ -1,190 +1,233 @@
 <!DOCTYPE html>
 <html lang="en">
-<!------HEAD------>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static//css/main.css">
-    <link rel="stylesheet" href="/static//css/about.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-    <title>Om oss</title>
-</head>
-<!------BODY------>
-<body>
-    <header class="header">
-        <div class="title">
-            <a href="{{url_for ('home')}}">
-                <h1>HairFind</h1>
-            </a>
-        </div>
-        <div class="nav_btn">
-            <a class="btn btn-primary" href="{{url_for('login_customer')}}">Kund</a>
-            <a class="btn btn-primary" href="{{url_for('salon_login')}}">Frisör</a>
-        </div>
-    </header>
-    <div class="container">
-        <!-------------------COMPANY------------------->
-        <div class="company">
-            <div class="img"> <img src="/static/css/img/about.jpg" alt="team"/>
-                <img  />
+    <!------HEAD------>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/static//css/main.css">
+        <link rel="stylesheet" href="/static//css/about.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+            integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+            crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css">
+        <title>Om oss</title>
+    </head>
+    <!------BODY------>
+
+    <body>
+        <header class="header">
+            <div class="title">
+                <a href="{{url_for ('home')}}">
+                    <h1>HairFind</h1>
+                </a>
             </div>
-            <div class="company-info">
-                <span>Discover your best<span class="our"> hair day with HairFind</span></span>
-                <!-------HairFindbeskrivning ------>
-                <p>
-                    <b>HairFind</b> är en webbapplikation som fungerar som en plattform där frisörsalonger kan
-                    registrera sig och lägga upp profiler med information om sina tjänster, priser och bilder som visar
-                    deras professionalitet. Kunden kan söka efter en frisör och boka en tid genom att skapa ett konto
-                    med personuppgifter som består av mail, namn, lösenord och mobilnummer. Dessutom kan kunden lämna en
-                    bedömning efter att ha besökt frisören. Målet med plattformen är att göra det lättare för kunden att
-                    hitta rätt frisörsalong och att skapa förtroende för frisören och dess kompetens. Plattformen liknar
-                    BokaDirekt som är en plattform för att boka tider för skönhetsvård och träningspass.
-                </p>
+            <div class="nav_btn">
+                <a class="btn btn-primary" href="{{url_for('login_customer')}}">Kund</a>
+                <a class="btn btn-primary" href="{{url_for('salon_login')}}">Frisör</a>
             </div>
-        </div>
-        <!---------------------------------------TEAM-------------------------------------------->
-        <div class="team"><span>HAIRFIND (15)</span></div>
-        <div class="container" id="img-container">
-            <!---------------------------------------Daniel-------------------------------------->
-            <div class="card"> <!----Picture---->
-                <div class="card-image loading"><img
-                        src="/static/css/img/Daniel.png"
-                        alt="Profilbild Daniel"/>
+        </header>
+        <div class="container">
+            <!-------------------COMPANY------------------->
+            <div class="company">
+                <div class="img"> <img src="/static/css/img/about.jpg" alt="team" />
+                    <img />
                 </div>
-                <!--------Personuppgifter------------>
-                <div class="card-info">
-                    <h3 class="card-title loading"><span>Daniel <span class="yellow-surname">Moradi</span></span></h3>
-                    <p class="card-description loading">
-                        <span class="personal-info">
-                            <span class="info-titel">Informationsarkitekt</span> <br>
-                            <a href="mailto:'daniel.moradi15@gmail.com'">daniel.moradi15@gmail.com</a>
-                        </span>
+                <div class="company-info">
+                    <span>Discover your best<span class="our"> hair day with HairFind</span></span>
+                    <!-------HairFindbeskrivning ------>
+                    <p>
+                        <b>HairFind</b> är en webbapplikation som fungerar som en plattform där frisörsalonger kan
+                        registrera sig och lägga upp profiler med information om sina tjänster, priser och bilder som
+                        visar
+                        deras professionalitet. Kunden kan söka efter en frisör och boka en tid genom att skapa ett
+                        konto
+                        med personuppgifter som består av mail, namn, lösenord och mobilnummer. Dessutom kan kunden
+                        lämna en
+                        bedömning efter att ha besökt frisören. Målet med plattformen är att göra det lättare för kunden
+                        att
+                        hitta rätt frisörsalong och att skapa förtroende för frisören och dess kompetens. Plattformen
+                        liknar
+                        BokaDirekt som är en plattform för att boka tider för skönhetsvård och träningspass.
                     </p>
-                    <!-------Socialmedia------>
-                    <div class="card-mediaIcons">
-                        <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="loading" target="on_blank"><i
-                                class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <!---------------------------------------TEAM-------------------------------------------->
+            <div class="team"><span>HAIRFIND (15)</span></div>
+            <div class="container" id="img-container">
+                <!---------------------------------------Daniel-------------------------------------->
+                <div class="card"> <!----Picture---->
+                    <div class="card-image loading"><img src="/static/css/img/Daniel.png" alt="Profilbild Daniel" />
+                    </div>
+                    <!--------Personuppgifter------------>
+                    <div class="card-info">
+                        <h3 class="card-title loading"><span>Daniel <span class="yellow-surname">Moradi</span></span>
+                        </h3>
+                        <p class="card-description loading">
+                            <span class="personal-info">
+                                <span class="info-titel">Informationsarkitekt</span> <br>
+                                <a href="mailto:'daniel.moradi15@gmail.com'">daniel.moradi15@gmail.com</a>
+                            </span>
+                        </p>
+                        <!-------Socialmedia------>
+                        <div class="card-mediaIcons">
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------Tarik-------------------------------------->
+                <div class="card">
+                    <div class="card-image loading"><img src="/static/css/img/Nadir.jpg" alt="Profilbild Tarik"></div>
+                    <!--------Personuppgifter------------>
+                    <div class="card-info">
+                        <h3 class="card-title loading"><span>Tarik <span class="yellow-surname">Serezlic</span></span>
+                        </h3>
+                        <p class="card-description loading">
+                            <span class="personal-info">
+                                <span class="info-titel">Informationsarkitekt</span> <br>
+                                <a href="mailto:'daniel.moradi15@gmail.com'">tarikserez@gmail.com</a>
+                            </span>
+                        </p>
+                        <!-------Socialmedia------>
+                        <div class="card-mediaIcons">
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------Nadir-------------------------------------->
+                <div class="card">
+                    <div class="card-image loading"><img
+                            src="https://media.istockphoto.com/photos/portrait-of-handsome-latino-african-man-picture-id1007763808?k=20&m=1007763808&s=612x612&w=0&h=q4qlV-99EK1VHePL1-Xon4gpdpK7kz3631XK4Hgr1ls="
+                            alt="Profilbild Nadir" /></div>
+                    <!--------Personuppgifter------------>
+                    <div class="card-info">
+                        <h3 class="card-title loading"><span>Nadir <span class="yellow-surname">Ali
+                                    Hussaini</span></span>
+                        </h3>
+                        <p class="card-description loading">
+                            <span class="personal-info">
+                                <span class="info-titel">Informationsarkitekt</span> <br>
+                                <a href="mailto:'nadirali342@gmail.com'">nadirali342@gmail.com</a>
+                            </span>
+                        </p>
+                        <!-------Socialmedia------>
+                        <div class="card-mediaIcons">
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!---------------------------------------Oswaldo-------------------------------------->
+                <div class="card">
+                    <div class="card-image loading"><img
+                            src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt="Profilbild Oswaldo" /></div>
+                    <!--------Personuppgifter------------>
+                    <div class="card-info">
+                        <h3 class="card-title loading"><span>Oswaldo <span class="yellow-surname">Quijada</span></span>
+                        </h3>
+                        <p class="card-description loading">
+                            <span class="personal-info">
+                                <span class="info-titel">Informationsarkitekt</span> <br>
+                                <a href="mailto:'quijada.oswaldo@hotmail.com'">quijada.oswaldo@hotmail.com</a>
+                            </span>
+                        </p>
+                        <!-------Socialmedia------>
+                        <div class="card-mediaIcons">
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="loading" target="on_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!---------------------------------------Tarik-------------------------------------->
-            <div class="card">
-                <div class="card-image loading"><img
-                        src="/static/css/img/Nadir.jpg"
-                        alt="Profilbild Tarik"></div>
-                <!--------Personuppgifter------------>
-                <div class="card-info">
-                    <h3 class="card-title loading"><span>Tarik <span class="yellow-surname">Serezlic</span></span></h3>
-                    <p class="card-description loading">
-                        <span class="personal-info">
-                            <span class="info-titel">Informationsarkitekt</span> <br>
-                            <a href="mailto:'daniel.moradi15@gmail.com'">tarikserez@gmail.com</a>
-                        </span>
-                    </p>
-                    <!-------Socialmedia------>
-                    <div class="card-mediaIcons">
-                        <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="loading" target="on_blank"><i
-                                class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!---------------------------------------Nadir-------------------------------------->
-            <div class="card">
-                <div class="card-image loading"><img
-                        src="https://media.istockphoto.com/photos/portrait-of-handsome-latino-african-man-picture-id1007763808?k=20&m=1007763808&s=612x612&w=0&h=q4qlV-99EK1VHePL1-Xon4gpdpK7kz3631XK4Hgr1ls="
-                        alt="Profilbild Nadir"/></div>
-                <!--------Personuppgifter------------>
-                <div class="card-info">
-                    <h3 class="card-title loading"><span>Nadir <span class="yellow-surname">Ali Hussaini</span></span>
-                    </h3>
-                    <p class="card-description loading">
-                        <span class="personal-info">
-                            <span class="info-titel">Informationsarkitekt</span> <br>
-                            <a href="mailto:'nadirali342@gmail.com'">nadirali342@gmail.com</a>
-                        </span>
-                    </p>
-                    <!-------Socialmedia------>
-                    <div class="card-mediaIcons">
-                        <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="loading" target="on_blank"><i
-                                class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <!---------------------------------------Oswaldo-------------------------------------->
-            <div class="card">
-                <div class="card-image loading"><img
-                        src="https://images.pexels.com/photos/837358/pexels-photo-837358.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        alt="Profilbild Oswaldo" /></div>
-                <!--------Personuppgifter------------>
-                <div class="card-info">
-                    <h3 class="card-title loading"><span>Oswaldo <span class="yellow-surname">Quijada</span></span></h3>
-                    <p class="card-description loading">
-                        <span class="personal-info">
-                            <span class="info-titel">Informationsarkitekt</span> <br>
-                            <a href="mailto:'quijada.oswaldo@hotmail.com'">quijada.oswaldo@hotmail.com</a>
-                        </span>
-                    </p>
-                    <!-------Socialmedia------>
-                    <div class="card-mediaIcons">
-                        <a href="#" class="loading" target="on_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="loading" target="on_blank"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!----------------------------------------FOOTER------------------------------------------ -->
-    <footer class="footer-distributed">
-        <div class="footer-right">
-            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
         </div>
 
         <!--Kontaktformulär-->
-        <div class="contactForm">
-            <form action="/submit_form" method="POST">
-                <fieldset>
-                    <legend>Kontakta oss!</legend>
-                    <label for="name">Namn:</label><br>
-                    <input type="text" id="name" name="name" required><br>
-                  
-                    <label for="email">Epost:</label><br>
-                    <input type="email" id="email" name="email" required><br>
-                  
-                    <label for="message">Meddelande:</label><br>
-                    <textarea id="message" name="message" rows="4" cols="50" required></textarea><br>
-                    
-                    <input type="submit" value="Skicka">
-                </fieldset>
-              </form>    
+        <div class="container" id="container">
+            <h3>Kontakta oss</h3>
+            <form id="contact_form" class="form-control" action="/submit_form" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="name" id="name" placeholder="Namn" required>
+                </div>
+
+                <div class="mb-3">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com"
+                        required>
+                </div>
+
+                <div class="mb-3">
+                    <textarea class="form-control" name="message" id="message" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Skicka</button>
+            </form>
         </div>
 
-        <div class="footer-left">
-            <ul class="footer-links">
-                <!-------Länkar till andra sidor--------->
-                <li><a href="{{url_for('home')}}">Startsida</a></li>
-                <li><a href="{{url_for('about')}}">Om oss</a></li>
-            </ul>
-        </div>
-        <p>HairFind &copy; 2023</p>
-    </footer>
-    <!------JS Scripts------->
-    <script src="/static/js/about.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
-        crossorigin="anonymous"></script>
-</body>
+        <!----------------------------------------FOOTER------------------------------------------ -->
+        <footer class="footer-distributed">
+            <div class="footer-right">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+            </div>
+
+            <div class="footer-left">
+                <ul class="footer-links">
+                    <!-------Länkar till andra sidor--------->
+                    <li><a href="{{url_for('home')}}">Startsida</a></li>
+                    <li><a href="{{url_for('about')}}">Om oss</a></li>
+                </ul>
+            </div>
+            <p>HairFind &copy; 2023</p>
+        </footer>
+        <!------JS Scripts------->
+        <script src="/static/js/about.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+
+            $(document).ready(function () {
+                $('#contact_form').on('submit', function (event) {
+                    event.preventDefault();
+                    var formData = $(this).serialize();
+                    $.ajax({
+                        type: 'POST',
+                        url: '/submit_form',
+                        data: formData,
+                        success: function (response) {
+                            Swal.fire({
+                                title: response.title,
+                                text: response.text,
+                                icon: response.type,
+                                timer: 5000, // Automatically close after 5 seconds
+                                showConfirmButton: false // Hide the "OK" button
+                            }).then(function () {
+                                window.location.href = '/about'; // Redirect after the alert is closed
+                            });
+                        },
+                        error: function (xhr) {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Something went wrong. Please try again.',
+                                icon: 'error',
+                            });
+                        },
+                        dataType: 'json' // Specify that the response is JSON
+                    });
+                });
+            });
+        </script>
+    </body>
 
 </html>
