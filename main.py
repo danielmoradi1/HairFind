@@ -1,3 +1,4 @@
+from flask import render_template, request, jsonify
 from db_connection import *
 import psycopg2
 import secrets
@@ -83,7 +84,13 @@ def home():
     cursor.execute(
         "SELECT org_number, name, address, telephone FROM salon_user")
     salon_data = cursor.fetchall()
-    return render_template('home.html', salon_data=salon_data)
+
+    # Fetch initial service data to display
+    cursor.execute(
+        "SELECT service_name, price, description, name, address, telephone FROM services_list")
+    service_data = cursor.fetchall()
+
+    return render_template('home.html', salon_data=salon_data, service_data=service_data)
 
 
 ############################
@@ -513,7 +520,6 @@ def delete_service(id):
     return redirect(url_for('salon_dashboard'))
 
 
-
 # Delete salon account from the database
 @webApp.route('/delete_salon_account', methods=['POST'])
 def delete_salon_account():
@@ -529,12 +535,12 @@ def delete_salon_account():
             # if there are services
             if service_count > 0:
                 return 'error|The user is associated with services and cannot be deleted!', 400
-            
+
             else:
                 delete_salon_user(org_number)
                 delete_confirmation(username)
                 return jsonify({'status': 'success', 'redirect': url_for('salon_login')})
-            
+
         else:
             org_number = session['org_number']
             return render_template('salon_profile.html', org_number=org_number)
@@ -620,6 +626,7 @@ def contact():
     return render_template('contact_us.html')
 
 
+#Salon page
 @webApp.route('/salon_page/<int:salon_id>')
 def salon_page(salon_id):
     salon_data = get_salon_data(salon_id)
@@ -634,33 +641,39 @@ def salon_page(salon_id):
 
 
 
+#search baset on filter
+@webApp.route('/search-results', methods=['GET'])
+def search_results():
+    type_of_service = request.args.get('service-type')
+    price_range = request.args.get('price-range')
 
+    # Database connection
+    connection = database_connection()
+    cursor = connection.cursor()
 
-@webApp.route('/search', methods=['GET', 'POST'])
-def search():
-    
-    # Get the search query from the request arguments
-    query = request.args.get('query')
-    service = request.args.get('service_name')
-    price_range = request.args.get('price')
+    # Construct the SQL query based on the filter parameters
+    query = "SELECT service_name, price, description, name, address, telephone FROM services_list WHERE 1=1"
 
-    # Construct
-    sql_query = "SELECT service_name, price, description, name, address, telephone FROM SERVICES_LIST WHERE 1=1"
-
-    if query:
-        sql_query += "AND service_name LIKE '%{}%".format(query)
-
-    if service:
-        sql_query += "AND service_name = '{}'".format(service)
+    if type_of_service:
+        query += f" AND service_name ILIKE '{type_of_service}'"
 
     if price_range:
-        min_price, max_price = price_range.splite('-')
-        sql_query += "AND price >= {} AND price <= {}".format(
-            min_price, max_price)
-    cursor.execute(sql_query)
-    results = cursor.fetchall()
-    
-    return render_template('Results.html', results=results, query=query, service=service, price_range=price_range)
+        price_range_values = price_range.split("-")
+        min_price = int(price_range_values[0])
+        max_price = int(price_range_values[1])
+        query += f" AND price >= {min_price} AND price <= {max_price}"
+
+    # Execute the query
+    cursor.execute(query)
+    search_results = cursor.fetchall()
+
+    # Close the cursor and database connection
+    cursor.close()
+    connection.close()
+
+    # Return JSON response with the search results
+    return jsonify(service_data=search_results)
+
 
 """
 @webApp.route('/search_tags', methods=['POST'])
@@ -682,6 +695,7 @@ def search_tags(tags):
     services = service_type(tags)
     return jsonify(services)  
 """
+
 
 @webApp.route('/tag_buttons/<button_value>', methods=['GET', 'POST'])
 def tag_buttons(button_value):

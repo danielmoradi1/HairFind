@@ -2,8 +2,35 @@
 body {
     margin: 0;
     padding: 0px;
+    min-height: 100vh;
 }
 
+/**Swiper**/
+.swiper {
+    width: auto;
+    max-height: 500px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    height: 50vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+}
+
+
+/*Navbar*/
 .navbar {
     display: flex;
     flex-direction: column;
@@ -60,14 +87,55 @@ body {
 }
 
 /**
-    Search
+    Search filter
 **/
-
 .filter_form {
     display: flex;
     flex-direction: row;
     gap: 2em;
     position: relative;
+}
+
+.search-result{
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+#service-results{
+    padding: 20px;
+}
+
+.search-result .card-box{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em;
+}
+
+.search-result .card{
+    width: 100%;
+    min-width: 15em;
+    height: auto;
+    display: flex;
+}
+
+.search-result .card-info{
+    padding: 20px 20px 0px 20px;
+}
+
+.search-result .btn-section{
+    position: relative;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.card img{
+    height: 20vh;
+    width: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
 }
 
 
@@ -76,31 +144,32 @@ body {
     Cards
 **/
 .cards_info {
-    padding: 150px 0px 20px 0px;
+    padding: 100px 0px 20px 0px;
     text-transform: uppercase;
     text-align: center;
 }
 
-.card-box {
+.cards_main {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     flex-wrap: wrap;
-    margin-bottom: 2em;
-    gap: 2em;
+    gap: 1.5em;
+    justify-content: center;
+    margin-bottom: 3em;
 }
 
 .card {
     width: 100%;
     max-width: 20em;
-    background-color: #696969;
-    border: none;
-    box-shadow: 0 5px 5px rgba(108, 108, 108, 0.256);
+    box-shadow: 28px 29px 35px -27px rgba(104, 104, 104, 0.69);
+    -webkit-box-shadow: 28px 29px 35px -27px rgba(104, 104, 104, 0.69);
+    -moz-box-shadow: 28px 29px 35px -27px rgba(104, 104, 104, 0.69);
 }
 
 .card-description a {
     color: #505050;
     text-decoration: none;
-    
+
 }
 
 .card img {
@@ -108,9 +177,7 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-    .card-box {
-        background-color: rgb(216, 216, 216);
-    }
+
     .card {
         width: 100%;
         max-width: 25em;

@@ -247,8 +247,6 @@ def edit_salon_info(salon_id, name, phone_number, address):
 
 
 
-
-
 #Get services from database
 def get_service_type(button_value):
     cursor = db_connection.cursor()
@@ -258,5 +256,4 @@ def get_service_type(button_value):
     cursor.close()
     db_connection.close()
     return data
-   
 
