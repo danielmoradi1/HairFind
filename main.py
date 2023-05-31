@@ -473,6 +473,8 @@ def add_service():
     return render_template('add_service.html', form=form)
 
 
+
+#edit service
 @webApp.route('/edit_service/<string:id>', methods=['GET', 'POST'])
 @is_logged_in
 def edit_service(id):
@@ -601,7 +603,6 @@ def reset_password():
 
 # Log out function
 @webApp.route('/logout')
-@is_logged_in
 def logout():
     session.clear()
     flash('Du är Utloggad nu!', 'succes')
