@@ -10,9 +10,6 @@ def database_connection():
         it opens the database connection and prints the ('connection successfully')
         return connection
     """
-
-# https://pgserver.mau.se:6502/kill.html
-    # Information about the MAU database
     hostname = 'pgserver.mau.se'
     database_name = 'hairfind_db'
     username = 'al0791'
@@ -74,33 +71,14 @@ def register_salon_to_DB(org_number, name, username, telephone, address, passwor
             cur.close()
 
 
-def display_table_data(salon_user):
-    """
-        Arg:
-        The function takes the following parameter:
-        salon_user
-    """
-
-    conn = None
-    cur = None
-    try:
-        conn = database_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM salon_user")
-        rows = cur.fetchall()
-        for row in rows:
-            print(row)
-    except (Exception, psycopg2.databaseError) as error:
-        print("Error while fetching data from the table salon_user", error)
-    finally:
-        if cur is not None:
-            cur.close()
-        if conn is not None:
-            conn.close()
-
-
 # Registers users into the database table "user_table"
 def register_user(fullname, telephone, username, password):
+    """
+        Arg:
+        fullname, telephone, username, password
+        The register_user() to register users into the database
+    """
+        
     conn = None
     cur = None
 
@@ -127,42 +105,14 @@ def register_user(fullname, telephone, username, password):
             cur.close()
 
 
-# Function to edit user data
-def edit_user_data(username, new_first_name=None, new_last_name=None, new_telephone=None, new_password=None):
-    conn = None
-    cur = None
-    try:
-        conn = database_connection()
-        cur = conn.cursor()
-
-        update_script = 'Update user_table SET'
-        updates = []
-        if new_first_name:
-            updates.append(f"first_name = '{new_first_name}'")
-        if new_last_name:
-            updates.append(f"last_name = '{new_last_name}'")
-        if new_telephone:
-            updates.append(f"telephone = '{new_telephone}'")
-        if new_password:
-            updates.append(f"password = ''{new_password}")
-        if not updates:
-            raise ValueError("At least one field must be updated")
-        update_script += ",".join(updates)
-        update_script += f"WHERE username = {username}"
-
-        cur.execute(update_script)
-        conn.commit()
-    except (Exception, psycopg2.DatabaseError) as error:
-        print("En error has occrured while updating user data in the user_table", error)
-    finally:
-        if conn is not None:
-            conn.close()
-        if cur is not None:
-            cur.close()
-
 
 # Function to delete a user
 def delete_user(username):
+    """
+        Arg:
+        username
+        The delete_user() function is used to delete a user from the database
+    """
     conn = None
     cur = None
     try:
@@ -181,8 +131,14 @@ def delete_user(username):
             conn.close()
 
 
+
 # Delete a user from the salon table
 def delete_salon_user(salon_id):
+    """
+        Arg:
+        salon_id
+        The delete_salon_user() function is used to delete a salon from the database
+    """
     conn = None
     cur = None
     try:
@@ -203,6 +159,11 @@ def delete_salon_user(salon_id):
 
 #Get salon information
 def get_salon_data(salon_id):
+    """
+        Arg:
+        Salon_id
+        The get_salon_data() function is used for getting salon information from the database
+    """
     cursor.execute(
         "SELECT name, username, telephone, address FROM salon_user WHERE org_number = %s", (salon_id,))
     salon_data = cursor.fetchone()
@@ -219,8 +180,15 @@ def get_salon_data(salon_id):
     return salon_data
 
 
+
+
 #get service information
 def get_service_info(username):
+    """
+        Arg:
+        username
+        The get_service_info() function is used for getting service information from the database
+    """
     cursor.execute(
         "SELECT service_name, price, description FROM service WHERE salon_username = %s", (username,))
     service_info = cursor.fetchall()
@@ -231,10 +199,15 @@ def get_service_info(username):
     return service_info
 
 
+
+
 # Edit salon Information
 def edit_salon_info(salon_id, name, phone_number, address):
-    print('salon information!')
-    
+    """
+        Arg:
+        salon_id, name, phone_number, address
+        The edit_salon_info() function is used to edit salon information
+    """
     try:
         cursor.execute(
             "UPDATE salon_user SET name=%s, telephone=%s, address=%s WHERE org_number=%s",

@@ -40,8 +40,7 @@ mail = Mail(webApp)
 
 def send_new_password(email, new_password):
     """
-        Arg:
-            email, new_password
+        Arg: email, new_password
             The send_new_password() tags two parameters:
             The user email and user new password.
             Email = username
@@ -57,8 +56,7 @@ def send_new_password(email, new_password):
 # Welcome message function
 def send_welcome_email(name, email):
     """
-        Arg:
-            name, email
+        Arg: name, email
             The send_welcome_email() tags two parameters:
             The user name and user email.
             Email = username
@@ -72,6 +70,11 @@ def send_welcome_email(name, email):
 
 
 def delete_confirmation(username):
+    """
+        Arg: username
+        the function send a confirmation to the user email
+    """
+
     msg = Message("Raderat konto", sender="service.hairfind@gmail.com")
     msg.recipients = [username]
     msg.body = f'HAIRFIND \nDitt konto {username} har raderats nu.\nDu är välkomen tillbaka!'
@@ -81,6 +84,9 @@ def delete_confirmation(username):
 # Home page
 @webApp.route('/')
 def home():
+    """
+        The home route for the website
+    """
     cursor.execute(
         "SELECT org_number, name, address, telephone FROM salon_user")
     salon_data = cursor.fetchall()
@@ -98,9 +104,11 @@ def home():
 ############################
 
 # Log In page for customer
-
 @webApp.route('/login_customer', methods=['GET', 'POST'])
 def login_customer():
+    """
+        login_customer() will login the customer it get the customer information from the form
+    """
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username'].lower()
         password = request.form['password'].lower()
@@ -141,7 +149,10 @@ def login_customer():
 # Sign up page for customer
 @webApp.route('/register_customer', methods=['GET', 'POST'])
 def register_customer():
-
+    """
+        The function register_customer() gets values from the form and send it to register_user()
+    """
+        
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         full_name = request.form['full_name'].lower()
         phone_number = request.form['phone_number'].lower()
@@ -213,6 +224,10 @@ def is_logged_in(f):
 # Delete user account from the database
 @webApp.route('/delete_user/<username>', methods=['POST'])
 def delete_user_account(username):
+    """
+        the route deletes the user account from the database by calling delete_user()
+        returns: the status to a js file 
+    """
     if 'loggedin' in session:
         if request.method == 'POST':
             delete_user(username)
@@ -225,18 +240,6 @@ def delete_user_account(username):
         return redirect(url_for('login_customer'))
 
 
-# function to check if salon_user already exists
-def user_exists(username):
-    try:
-        cursor.execute(
-            "SELECT * FROM salon_user WHERE username = %s", (username,))
-        user = cursor.fetchone()
-        if user is not None:
-            return True
-    except (Exception, psycopg2.DatabaseError) as error:
-        print(error)
-    return False
-
 
 ################################
 ####    Salon functions    #####
@@ -245,6 +248,9 @@ def user_exists(username):
 # Log in salon account
 @webApp.route('/salon_login', methods=['GET', 'POST'])
 def salon_login():
+    """
+        Log in salon account
+    """
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
@@ -391,6 +397,9 @@ def edit_salon_profile(salon_id):
 # Route for handling the form submission
 @webApp.route('/upload', methods=['POST'])
 def upload():
+    """
+        
+    """
     if request.method == 'POST':
         image = request.files['image']
         salon_username = request.form['salon_username']
@@ -427,7 +436,7 @@ def upload():
     return redirect(url_for('salon_profile', salon_id=salon_id))
 
 
-# Service Form Class
+# Service Form Class to handle submission and editing forms
 class ArticleForm(Form):
     name = StringField('Tjänstnamn', [validators.Length(min=1, max=50)])
     price = StringField('Pris', [validators.Length(min=1, max=10)])
@@ -473,8 +482,7 @@ def add_service():
     return render_template('add_service.html', form=form)
 
 
-
-#edit service
+# edit service
 @webApp.route('/edit_service/<string:id>', methods=['GET', 'POST'])
 @is_logged_in
 def edit_service(id):
@@ -614,14 +622,13 @@ def logout():
 ################################
 ####    Content pages      #####
 ################################
-
 # About page
 @webApp.route('/about')
 def about():
     return render_template('about.html')
 
 
-#Contact us form
+# Contact us form
 @webApp.route('/submit_form', methods=['POST'])
 def submit_form():
     name = request.form['name']
@@ -630,7 +637,7 @@ def submit_form():
 
     # Sends the email to service.hairfind@gmail.com
     msg = Message('Meddelande från Hairfind användare',
-                sender=email, recipients=['service.hairfind@gmail.com'])
+                  sender=email, recipients=['service.hairfind@gmail.com'])
     msg.body = f"Namn: {name}\nEpost: {email}\nMeddelande: {message}"
     mail.send(msg)
 
@@ -650,7 +657,6 @@ def salon_page(salon_id):
         return "Salon not found"
 
     username = salon_data['username']
-    # username = salon_data[1]
     service_info = get_service_info(username)
     return render_template('salon_page.html', salon_data=salon_data, service_info=service_info)
 
@@ -689,13 +695,7 @@ def search_results():
     return jsonify(service_data=search_results)
 
 
-@webApp.route('/tag_buttons/<button_value>', methods=['GET', 'POST'])
-def tag_buttons(button_value):
-    print('cheeeeecking ***** ***** *********')
-    services = get_service_type(button_value)
-    return render_template('home.html', services=services)
-
-
+#Salon logout
 @webApp.route('/salon_logout', methods=['POST'])
 @is_logged_in
 def salon_logout():
