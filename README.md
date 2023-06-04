@@ -1,5 +1,6 @@
 ### HairFind
 "HairFind" is a web application that presents hair salons and their services.
+https://github.com/danielmoradi1/HairFind.git
 
 # Readme File for Code
 This readme file provides information about the code and how to use it. The code is designed to perform school project. The sql.txt file contains code for sql tables. 
