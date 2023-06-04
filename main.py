@@ -1,4 +1,3 @@
-from flask import render_template, request, jsonify
 from db_connection import *
 import psycopg2
 import secrets
@@ -617,6 +616,7 @@ def logout():
     # session.pop('loggedin', None)
     # session.pop('username', None)
     return redirect(url_for('login_customer'))
+
 
 
 ################################

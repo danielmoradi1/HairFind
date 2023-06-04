@@ -2,7 +2,7 @@
 "HairFind" is a web application that presents hair salons and their services.
 
 # Readme File for Code
-This readme file provides information about the code and how to use it. The code is designed to perform school project.
+This readme file provides information about the code and how to use it. The code is designed to perform school project. The sql.txt file contains code for sql tables. 
 
 
 ## System Requirements
@@ -31,7 +31,13 @@ To use the code, you need to follow the installation steps below:
 5. Flask
     - pip install Flask
 
-5. Mail
+6. wtforms
+    - pip install wtforms
+
+7. werkzeug
+    - pip install werkzeug
+
+8. Mail
     - pip install Mail
 
 ## Support

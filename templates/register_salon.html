@@ -17,6 +17,8 @@
     </head>
 
     <body>
+        
+        <!------HEADER------>
         <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
@@ -28,12 +30,13 @@
             </div>
         </header>
 
+        <!-- main -->
         <main class="container">
             <div class="register_form_container">
                 <h2 class="title">Skapa ett konto</h2>
                 <h4>Är du frisör och vill skapa ett konto?</h4>
                 <p>Ange dina personliga uppgifter och börja resan med oss</p>
-
+                <!------Fel_meddelande------>
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% for category, message in messages %}
                 {% if category == 'success' %}
@@ -56,6 +59,7 @@
                 {% endfor %}
                 {% endwith %}
 
+                <!------Form to register salon user------>
                 <form class="singup" id="salonForm" action="{{ url_for('register_salon')}}" method="post" enctype="multipart/form-data">
                     <div class="user_details">
 
@@ -99,7 +103,8 @@
                 </form>
             </div>
         </main>
-
+        
+        <!------FOOTER------>
         <footer class="footer-distributed">
             <div class="footer-right">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>

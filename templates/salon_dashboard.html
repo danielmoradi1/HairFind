@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <!------HEAD------>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,8 +15,9 @@
         <title>{{fullname}}</title>
     </head>
 
+    <!------BODY------>
     <body>
-
+        <!------HEADER------>
         <header class="header" id="dashboard_header"> 
             <div class="title">
                 <a href="{{url_for ('home')}}">
@@ -34,12 +35,12 @@
         <div class="dashboard_title">
             <h2>Välkommen till din Dashboard</h2>
         </div>
-
+        <!------MAIN------>
         <main class="container">
             <hr>
             <a class="btn btn-primary" href="{{url_for('add_service')}}">Lägga till tjänst</a>
             <hr>
-
+            <!--- table for display the services --->
             <table class="table table-striped">
                 <tr>
                     <th>Tjänst</th>

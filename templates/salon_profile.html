@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    <!------HEAD------>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,6 +18,7 @@
         <title>{{salon_info.name}}</title>
     </head>
 
+    <!------BODY------>
     <body>
         <!--Header-->
         <header class="dashboard_header">
@@ -30,7 +31,7 @@
                 <a href="{{url_for('salon_login')}}"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
             </div>
         </header>
-
+        <!------Salon foto------>
         <nav class="salon_profile_nav">
             <div class="img">
                 <img src="/static/css/img/salon_img.jpg" alt="Salong foto">
@@ -82,7 +83,7 @@
                     <p>{{ salon_info.address }}</p>
                 </div>
             </div>
-
+            
             <div class="profile_btn">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                     Redigera

@@ -16,7 +16,7 @@
     </head>
 
     <body>
-
+        <!------HEADER------>
         <header class="header">
             <div class="title">
                 <a href="{{url_for ('home')}}">
@@ -27,12 +27,12 @@
                 <a class="btn btn-primary" href="{{url_for('login_customer')}}">Sökning</a>
             </div>
         </header>
-
+        <!------MAIN------>
         <main class="container">
             <div class="login_form_container">
                 <h2 class="title">Sökning</h2>
                 <h4>Välkommen tillbaka!</h4>
-               
+                <!------Fel_meddelande------>
                     {% if results %}
                         <p>Showing results for: {{ query }}</p>
                         {% if category %} 
@@ -50,7 +50,7 @@
                     {% endif %}
             </div>
         </main>
-
+        <!------FOOTER------>
         <footer class="footer-distributed">
             <div class="footer-right">
                 <a href="#"><i class="fa-brands fa-instagram"></i></a>
@@ -67,6 +67,7 @@
             <p>HairFind &copy; 2023</p>
         </footer>
 
+        <!------JS Scripts ------>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
             crossorigin="anonymous"></script>
