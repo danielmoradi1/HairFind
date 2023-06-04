@@ -5,26 +5,23 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=login_salon, initial-scale=1.0">
-        <link rel="stylesheet" href="/static/css/salon_page.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/dashboard.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="/static//css/main.css">
-        <link rel="stylesheet" href="/static//css/styleHome.css" type="text/css">
+    
         <title>{{fullname}}</title>
     </head>
 
-    <body class="container">
-        <header class="dashboard_header" class="header"> 
+    <body>
+
+        <header class="header" id="dashboard_header"> 
             <div class="title">
                 <a href="{{url_for ('home')}}">
                     <h1>HairFind</h1>
                 </a>
-            </div>
-            {% block body %}
-            <div class="dashboard_title">
-                <h2>Välkommen till din Dashboard</h2>
             </div>
 
             <div class="profile_icon">
@@ -33,7 +30,12 @@
             </div>
         </header>
 
-        <main>
+        {% block body %}
+        <div class="dashboard_title">
+            <h2>Välkommen till din Dashboard</h2>
+        </div>
+
+        <main class="container">
             <hr>
             <a class="btn btn-primary" href="{{url_for('add_service')}}">Lägga till tjänst</a>
             <hr>

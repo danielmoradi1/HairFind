@@ -1,0 +1,7 @@
+.title a{
+    text-decoration: none !important;
+}
+
+main{
+    min-height: 100vh;
+}
